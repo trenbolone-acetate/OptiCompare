@@ -1,144 +1,108 @@
 ﻿@model OptiCompare.Models.Phone
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Phone Details";
 }
+<head>
 
-<h1>Details</h1>
-
-<div>
-    <h4>Phone</h4>
+    <link rel="stylesheet" href="~/css/Details.css" asp-append-version="true" />
+</head>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.brandName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.brandName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.modelName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.modelName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.hasNetwork5GBands)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.hasNetwork5GBands)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyWidth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyWidth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyHeight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyHeight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyThickness)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyThickness)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyWeight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyWeight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.displayType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.displayType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.displaySize)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.displaySize)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.displayResolution)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.displayResolution)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gpu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gpu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Os)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Os)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RAM)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RAM)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.storage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.storage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.mainCameraDetails)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.mainCameraDetails)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.frontCameraDetails)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.frontCameraDetails)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batteryCapacity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batteryCapacity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.chargingSpeed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.chargingSpeed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batteryLifeTest)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batteryLifeTest)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.price)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="tg-wrap">
+        <table style="table-layout: fixed; width: 80%">
+            @*<colgroup>
+            <col style="width: 115.2px">
+            <col style="width: 110.4px">
+            <col style="width: 196.2px">
+        </colgroup>*@
+            <tbody>
+            <tr>
+                <td>Brand Name</td>
+                <td>@Html.DisplayFor(model => model.brandName)</td>
+                <td rowspan="6" colspan="2" style="border-left: 5px solid #ddd">
+                    <img src="@Model.image" alt="Thumbnail" width="100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Model Name</td>
+                <td>@Html.DisplayFor(model => model.modelName)</td>
+            </tr>
+            <tr>
+                <td>Has 5G?</td>
+                <td>@Html.DisplayFor(model => model.hasNetwork5GBands)</td>
+            </tr>
+            <tr>
+                <td>Body Width</td>
+                <td>@Html.DisplayFor(model => model.bodyWidth)</td>
+            </tr>
+            <tr>
+                <td>Body Heights</td>
+                <td>@Html.DisplayFor(model => model.bodyHeight)</td>
+            </tr>
+            <tr>
+                <td>Body Thickness</td>
+                <td>@Html.DisplayFor(model => model.bodyThickness)</td>
+            </tr>
+            <tr>
+                <td>Body Weight</td>
+                <td colspan="3">@Html.DisplayFor(model => model.bodyWeight)</td>
+            </tr>
+            <tr>
+                <td>Display Type</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displayType)</td>
+            </tr>
+            <tr>
+                <td>Display Size</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displaySize)</td>
+            </tr>
+            <tr>
+                <td>Display Resolution</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displayResolution)</td>
+            </tr>
+            <tr>
+                <td>CPU</td>
+                <td colspan="3">@Html.DisplayFor(model => model.Cpu)</td>
+            </tr>
+            <tr>
+                <td>GPU</td>
+                <td colspan="3">@Html.DisplayFor(model => model.Gpu)</td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td colspan="3">@Html.DisplayFor(model => model.Os)</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td colspan="3">@Html.DisplayFor(model => model.RAM)</td>
+            </tr>
+            <tr>
+                <td>Main Camera</td>
+                <td colspan="3">@Html.DisplayFor(model => model.mainCameraDetails)</td>
+            </tr>
+            <tr>
+                <td>Front Camera</td>
+                <td colspan="3">@Html.DisplayFor(model => model.frontCameraDetails)</td>
+            </tr>
+            <tr>
+                <td>Battery Capacity</td>
+                <td colspan="3">@Html.DisplayFor(model => model.batteryCapacity)</td>
+            </tr>
+            <tr>
+                <td>Charging speed</td>
+                <td colspan="3">@Html.DisplayFor(model => model.chargingSpeed)</td>
+            </tr>
+            <tr>
+                <td>Battery Life Test</td>
+                <td colspan="3">@Html.DisplayFor(model => model.batteryLifeTest)</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td colspan="3">@Html.DisplayFor(model => model.price)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="actions">
+        <a style="color:lightblue" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a asp-action="PhoneIndex">Back to List</a>
+    </div>

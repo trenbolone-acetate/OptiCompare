@@ -8,7 +8,6 @@ body {
     margin-bottom: 60px;
     font-family: Arial, sans-serif;
     padding: 0;
-    color: #333;
     background: linear-gradient(45deg, #41b1ff, #6000ab);
 }
 
@@ -21,13 +20,11 @@ footer{
     height:50px;
 }
 .container a {
-  text-decoration: underline;
-  color: #a3a3a3;
-  transition: 0.5s;
+    text-decoration: underline;
+    color: #b9b9b9;
+    transition: 0.5s;
 }
     .container a:hover {
-        transition: 0.5s;
-        font-size: large;
         color: #007200;
     }
 nav {
@@ -65,16 +62,13 @@ nav {
     }
 
 .container {
-  max-width: 960px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 footer {
   background-color: #333;
   color: #bdbdbd;
   text-align: center;
-  padding: 10px 0;
   position: absolute;
   bottom: 0;
   width: 100%;

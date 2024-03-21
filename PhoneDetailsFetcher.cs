@@ -19,6 +19,7 @@ public static class PhoneDetailsFetcher
         var design = jsonData["design"];
         var display = jsonData["display"];
         var camera = jsonData["camera"];
+        var thumbnail = jsonData["image"]?["large"];
         Phone phone = new Phone
             {
                 brandName = productData?["brand"]?.ToString() ?? "undefined",
@@ -41,7 +42,8 @@ public static class PhoneDetailsFetcher
                 batteryCapacity = inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
                 chargingSpeed = $"{inside?["battery"]?["charging_power"]} wired, {inside?["battery"]?["wireless_charging_power"]} wireless" ?? "undefined",
                 price = jsonData["price"]?["msrp"]?.ToString() ?? "undefined", 
-                batteryLifeTest = "not tested yet"
+                batteryLifeTest = "not tested yet",
+                image = thumbnail?.ToString()
             };
             return phone;
     }

@@ -30,4 +30,5 @@ public class Phone
     public string chargingSpeed{ get; set; }
     public string batteryLifeTest{ get; set; }
     public string price{ get; set; }
+    public string? image{ get; set; }
 }

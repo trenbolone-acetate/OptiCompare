@@ -1,0 +1,57 @@
+﻿body {
+    background: radial-gradient(at top center, #BBBED0, #250D37);
+    font-family: Arial, sans-serif;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 5%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr {
+    border-bottom: 5px solid #ddd;
+}
+
+td {
+    font-size: small;
+}
+
+tr > th:first-child {
+    text-align: center;
+    background-color: rgba(239, 239, 239, 0.4);
+    color: #ffe2e2;
+}
+.rise {
+    animation: rise 1s ease-in-out 0.5s forwards;
+}
+
+@keyframes rise {
+    25% {
+        color: #a000bd;
+    }
+
+    50% {
+        color: #ec82ff;
+    }
+
+    100% {
+        color: #000000;
+    }
+}
+
+.btn {
+    border: 1pt solid black;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .3);
+}
+    .btn:hover {
+        transition: 0.5s;
+        border: 1pt solid ivory;
+        color: ivory;
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .3);
+    }
+
+.form {
+    box-shadow: 0 6px 40px 0 rgba(0, 0, 0, .3);
+    padding:3%;
+}

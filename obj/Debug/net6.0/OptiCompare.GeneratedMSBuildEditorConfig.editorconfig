@@ -39,12 +39,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/PhoneExists.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXFBob25lRXhpc3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/PhoneIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXFBob25lSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/_FormFieldPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXF9Gb3JtRmllbGRQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [W:/OptiCompare/OptiCompare/OptiCompare/Views/Shared/Error.cshtml]

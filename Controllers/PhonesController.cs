@@ -20,7 +20,7 @@ namespace OptiCompare.Controllers
         }
 
         // GET: Phones
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> PhoneIndex()
         {
               return _context.Phone != null ? 
                           View(await _context.Phone.ToListAsync()) :
@@ -48,7 +48,8 @@ namespace OptiCompare.Controllers
         // GET: Phones/Create
         public IActionResult Create()
         {
-            return View();
+            var phone = new Phone();
+            return View(phone);
         }
 
         [HttpPost]
@@ -67,7 +68,7 @@ namespace OptiCompare.Controllers
             _context.Phone.Add(newPhone.Result);
             _context.SaveChanges();
             // Redirect to the index view
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(PhoneIndex));
         }
 
         // POST: Phones/Create
@@ -81,7 +82,7 @@ namespace OptiCompare.Controllers
             {
                 _context.Add(phone);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(PhoneIndex));
             }
             return View(phone);
         }
@@ -109,32 +110,30 @@ namespace OptiCompare.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,brandName,modelName,hasNetwork5GBands,bodyWidth,bodyHeight,bodyThickness,bodyWeight,displayType,displaySize,displayResolution,Cpu,Gpu,Os,RAM,storage,mainCameraDetails,frontCameraDetails,batteryCapacity,chargingSpeed,batteryLifeTest,price")] Phone phone)
         {
+            Console.WriteLine("Entered Edit");
             if (id != phone.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(phone);
+            try
             {
-                try
-                {
-                    _context.Update(phone);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PhoneExists(phone.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(phone);
+                await _context.SaveChangesAsync();
             }
-            return View(phone);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PhoneExists(phone.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(PhoneIndex));
         }
 
         // GET: Phones/Delete/5
@@ -162,7 +161,7 @@ namespace OptiCompare.Controllers
         {
             if (_context.Phone == null)
             {
-                return Problem("Entity set 'OptiCompareDbContext.Phone'  is null.");
+                return Problem("Cannot delete null object.");
             }
             var phone = await _context.Phone.FindAsync(id);
             if (phone != null)
@@ -171,7 +170,7 @@ namespace OptiCompare.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(PhoneIndex));
         }
 
         private bool PhoneExists(int id)

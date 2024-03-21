@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Uz5leWzc/7DMEguwwFSmH4J6jcKYWkKDT+QIHo2ok0U=",
+  "Hash": "mkBJWFavd7J5PFUf2Kwh15IYQj64DbWxivYZYXpFiCw=",
   "Source": "OptiCompare",
   "BasePath": "_content/OptiCompare",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\OptiCompare.bundle.scp.css"
+    },
+    {
+      "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\Create.css",
+      "SourceId": "OptiCompare",
+      "SourceType": "Discovered",
+      "ContentRoot": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\",
+      "BasePath": "_content/OptiCompare",
+      "RelativePath": "css/Create.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Create.css"
+    },
+    {
+      "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\Details.css",
+      "SourceId": "OptiCompare",
+      "SourceType": "Discovered",
+      "ContentRoot": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\",
+      "BasePath": "_content/OptiCompare",
+      "RelativePath": "css/Details.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Details.css"
     },
     {
       "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\HomeIndex.css",

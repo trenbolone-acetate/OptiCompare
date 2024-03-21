@@ -2,8 +2,34 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var formFields = new List<FormField>
+    {
+        new FormField { Label = "Brand Name", Value = Model.brandName },
+        new FormField { Label = "Model Name", Value = Model.modelName },
+        new FormField { Label = "Body Width", Value = Model.bodyWidth },
+        new FormField { Label = "Body Height", Value = Model.bodyHeight },
+        new FormField { Label = "Body Thickness", Value = Model.bodyThickness },
+        new FormField { Label = "Body Weight", Value = Model.bodyWeight },
+        new FormField { Label = "Display Type", Value = Model.displayType },
+        new FormField { Label = "Display Size", Value = Model.displaySize },
+        new FormField { Label = "Display Resolution", Value = Model.displayResolution },
+        new FormField { Label = "CPU", Value = Model.Cpu },
+        new FormField { Label = "GPU", Value = Model.Gpu },
+        new FormField { Label = "OS", Value = Model.Os },
+        new FormField { Label = "RAM", Value = Model.RAM },
+        new FormField { Label = "Storage", Value = Model.storage },
+        new FormField { Label = "Main Camera Specs", Value = Model.mainCameraDetails },
+        new FormField { Label = "Front Camera Specs", Value = Model.frontCameraDetails },
+        new FormField { Label = "Battery Capacity", Value = Model.batteryCapacity },
+        new FormField { Label = "Charging Speeds", Value = Model.chargingSpeed },
+        new FormField { Label = "Battery Life Expectancy", Value = Model.batteryLifeTest },
+        new FormField { Label = "Price", Value = Model.price },
+        new FormField { Label = "Does the phone have 5G?", Value = Model.hasNetwork5GBands ? "Yes" : "No" }
+    };
 }
-
+<head>
+    <link rel="stylesheet" href="~/css/PhoneIndex.css" asp-append-version="true" />
+</head>
 <h1>Edit</h1>
 
 <h4>Phone</h4>
@@ -13,111 +39,10 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="brandName" class="control-label"></label>
-                <input asp-for="brandName" class="form-control" />
-                <span asp-validation-for="brandName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="modelName" class="control-label"></label>
-                <input asp-for="modelName" class="form-control" />
-                <span asp-validation-for="modelName" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="hasNetwork5GBands" /> @Html.DisplayNameFor(model => model.hasNetwork5GBands)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="bodyWidth" class="control-label"></label>
-                <input asp-for="bodyWidth" class="form-control" />
-                <span asp-validation-for="bodyWidth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="bodyHeight" class="control-label"></label>
-                <input asp-for="bodyHeight" class="form-control" />
-                <span asp-validation-for="bodyHeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="bodyThickness" class="control-label"></label>
-                <input asp-for="bodyThickness" class="form-control" />
-                <span asp-validation-for="bodyThickness" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="bodyWeight" class="control-label"></label>
-                <input asp-for="bodyWeight" class="form-control" />
-                <span asp-validation-for="bodyWeight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="displayType" class="control-label"></label>
-                <input asp-for="displayType" class="form-control" />
-                <span asp-validation-for="displayType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="displaySize" class="control-label"></label>
-                <input asp-for="displaySize" class="form-control" />
-                <span asp-validation-for="displaySize" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="displayResolution" class="control-label"></label>
-                <input asp-for="displayResolution" class="form-control" />
-                <span asp-validation-for="displayResolution" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cpu" class="control-label"></label>
-                <input asp-for="Cpu" class="form-control" />
-                <span asp-validation-for="Cpu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gpu" class="control-label"></label>
-                <input asp-for="Gpu" class="form-control" />
-                <span asp-validation-for="Gpu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Os" class="control-label"></label>
-                <input asp-for="Os" class="form-control" />
-                <span asp-validation-for="Os" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RAM" class="control-label"></label>
-                <input asp-for="RAM" class="form-control" />
-                <span asp-validation-for="RAM" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="storage" class="control-label"></label>
-                <input asp-for="storage" class="form-control" />
-                <span asp-validation-for="storage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="mainCameraDetails" class="control-label"></label>
-                <input asp-for="mainCameraDetails" class="form-control" />
-                <span asp-validation-for="mainCameraDetails" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="frontCameraDetails" class="control-label"></label>
-                <input asp-for="frontCameraDetails" class="form-control" />
-                <span asp-validation-for="frontCameraDetails" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="batteryCapacity" class="control-label"></label>
-                <input asp-for="batteryCapacity" class="form-control" />
-                <span asp-validation-for="batteryCapacity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="chargingSpeed" class="control-label"></label>
-                <input asp-for="chargingSpeed" class="form-control" />
-                <span asp-validation-for="chargingSpeed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="batteryLifeTest" class="control-label"></label>
-                <input asp-for="batteryLifeTest" class="form-control" />
-                <span asp-validation-for="batteryLifeTest" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="price" class="control-label"></label>
-                <input asp-for="price" class="form-control" />
-                <span asp-validation-for="price" class="text-danger"></span>
-            </div>
+            @foreach (var formField in formFields)
+            {
+                @await Html.PartialAsync("_FormFieldPartial", formField)
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -126,7 +51,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="PhoneIndex">Back to List</a>
 </div>
 
 @section Scripts {

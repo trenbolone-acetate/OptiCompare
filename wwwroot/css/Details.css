@@ -1,0 +1,39 @@
+﻿body {
+    background: #BBBED0;
+    background: radial-gradient(at right center, #BBBED0, #250D37);
+    font-family: Arial, sans-serif;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    background-color: ivory;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .5);
+    font-size: medium;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 3%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr {
+    border-bottom: 5px solid #ddd;
+}
+
+tr > th:first-child {
+    text-align: center;
+    background-color: rgba(239, 239, 239, 0.4);
+    color: #ffe2e2;
+}
+.actions {
+    margin: auto;
+    margin-top: 1%;
+    padding:1%;
+    font-size: large;
+    border-radius: 5px;
+    background-color: #996095;
+    width: 13%;
+}
