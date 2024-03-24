@@ -90,7 +90,7 @@ namespace OptiCompare.Controllers
         // GET: Phones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Phone == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -115,11 +115,16 @@ namespace OptiCompare.Controllers
             {
                 return NotFound();
             }
-
             if (!ModelState.IsValid) return View(phone);
             try
             {
-                _context.Update(phone);
+                Phone? oldPhone = _context.Phone.FirstOrDefault(p => p.Id == id);
+                if (oldPhone == null)
+                {
+                    return NotFound();
+                }
+                _context.Remove(oldPhone);
+                _context.Add(phone);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -133,7 +138,7 @@ namespace OptiCompare.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(PhoneIndex));
+            return RedirectToAction("PhoneIndex");
         }
 
         // GET: Phones/Delete/5

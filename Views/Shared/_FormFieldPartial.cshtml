@@ -1,0 +1,111 @@
+﻿@model Phone
+<div class="form-group">
+    <label asp-for="@Model.brandName" class="control-label">Brand Name</label>
+    <input asp-for="@Model.brandName" class="form-control" />
+    <span asp-validation-for="@Model.brandName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.modelName" class="control-label">Model Name</label>
+    <input asp-for="@Model.modelName" class="form-control" />
+    <span asp-validation-for="@Model.modelName" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="@Model.hasNetwork5GBands" /> @Html.DisplayNameFor(model => model.hasNetwork5GBands)
+    </label>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.bodyWidth" class="control-label">Body Width</label>
+    <input asp-for="@Model.bodyWidth" class="form-control" />
+    <span asp-validation-for="@Model.bodyWidth" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.bodyHeight" class="control-label">Body Height</label>
+    <input asp-for="@Model.bodyHeight" class="form-control" />
+    <span asp-validation-for="@Model.bodyHeight" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.bodyThickness" class="control-label">Body Thickness</label>
+    <input asp-for="@Model.bodyThickness" class="form-control" />
+    <span asp-validation-for="@Model.bodyThickness" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.bodyWeight" class="control-label">Body Weight</label>
+    <input asp-for="@Model.bodyWeight" class="form-control" />
+    <span asp-validation-for="@Model.bodyWeight" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.displayType" class="control-label">Display Type</label>
+    <input asp-for="@Model.displayType" class="form-control" />
+    <span asp-validation-for="@Model.displayType" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.displaySize" class="control-label">Display Size</label>
+    <input asp-for="@Model.displaySize" class="form-control" />
+    <span asp-validation-for="@Model.displaySize" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.displayResolution" class="control-label">Display Resolution</label>
+    <input asp-for="@Model.displayResolution" class="form-control" />
+    <span asp-validation-for="@Model.displayResolution" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.Cpu" class="control-label">CPU</label>
+    <input asp-for="@Model.Cpu" class="form-control" />
+    <span asp-validation-for="@Model.Cpu" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.Gpu" class="control-label">GPU</label>
+    <input asp-for="@Model.Gpu" class="form-control" />
+    <span asp-validation-for="@Model.Gpu" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.Os" class="control-label">Operating System</label>
+    <input asp-for="@Model.Os" class="form-control" />
+    <span asp-validation-for="@Model.Os" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.RAM" class="control-label">RAM</label>
+    <input asp-for="@Model.RAM" class="form-control" />
+    <span asp-validation-for="@Model.RAM" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.storage" class="control-label">Storage</label>
+    <input asp-for="@Model.storage" class="form-control" />
+    <span asp-validation-for="@Model.storage" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.mainCameraDetails" class="control-label">Main Camera Specs</label>
+    <input asp-for="@Model.mainCameraDetails" class="form-control" />
+    <span asp-validation-for="@Model.mainCameraDetails" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.frontCameraDetails" class="control-label">Front Camera Specs</label>
+    <input asp-for="@Model.frontCameraDetails" class="form-control" />
+    <span asp-validation-for="@Model.frontCameraDetails" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.batteryCapacity" class="control-label">Battery Capacity</label>
+    <input asp-for="@Model.batteryCapacity" class="form-control" />
+    <span asp-validation-for="@Model.batteryCapacity" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.chargingSpeed" class="control-label">Charging Speed</label>
+    <input asp-for="@Model.chargingSpeed" class="form-control" />
+    <span asp-validation-for="@Model.chargingSpeed" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.batteryLifeTest" class="control-label">Battery Life Test</label>
+    <input asp-for="@Model.batteryLifeTest" class="form-control" />
+    <span asp-validation-for="@Model.batteryLifeTest" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.price" class="control-label">Price</label>
+    <input asp-for="@Model.price" class="form-control" />
+    <span asp-validation-for="@Model.price" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.image" class="control-label">Image URL</label>
+    <input asp-for="@Model.image" class="form-control" />
+    <span asp-validation-for="@Model.image" class="text-danger"></span>
+</div>

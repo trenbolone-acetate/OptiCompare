@@ -2,47 +2,18 @@
 
 @{
     ViewData["Title"] = "Edit";
-    var formFields = new List<FormField>
-    {
-        new FormField { Label = "Brand Name", Value = Model.brandName },
-        new FormField { Label = "Model Name", Value = Model.modelName },
-        new FormField { Label = "Body Width", Value = Model.bodyWidth },
-        new FormField { Label = "Body Height", Value = Model.bodyHeight },
-        new FormField { Label = "Body Thickness", Value = Model.bodyThickness },
-        new FormField { Label = "Body Weight", Value = Model.bodyWeight },
-        new FormField { Label = "Display Type", Value = Model.displayType },
-        new FormField { Label = "Display Size", Value = Model.displaySize },
-        new FormField { Label = "Display Resolution", Value = Model.displayResolution },
-        new FormField { Label = "CPU", Value = Model.Cpu },
-        new FormField { Label = "GPU", Value = Model.Gpu },
-        new FormField { Label = "OS", Value = Model.Os },
-        new FormField { Label = "RAM", Value = Model.RAM },
-        new FormField { Label = "Storage", Value = Model.storage },
-        new FormField { Label = "Main Camera Specs", Value = Model.mainCameraDetails },
-        new FormField { Label = "Front Camera Specs", Value = Model.frontCameraDetails },
-        new FormField { Label = "Battery Capacity", Value = Model.batteryCapacity },
-        new FormField { Label = "Charging Speeds", Value = Model.chargingSpeed },
-        new FormField { Label = "Battery Life Expectancy", Value = Model.batteryLifeTest },
-        new FormField { Label = "Price", Value = Model.price },
-        new FormField { Label = "Does the phone have 5G?", Value = Model.hasNetwork5GBands ? "Yes" : "No" }
-    };
 }
-<head>
-    <link rel="stylesheet" href="~/css/PhoneIndex.css" asp-append-version="true" />
-</head>
+
 <h1>Edit</h1>
 
-<h4>Phone</h4>
+<h4>@Model.brandName @Model.modelName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            @foreach (var formField in formFields)
-            {
-                @await Html.PartialAsync("_FormFieldPartial", formField)
-            }
+            @await Html.PartialAsync("_FormFieldPartial",Model)
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -55,5 +26,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

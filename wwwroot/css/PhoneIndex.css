@@ -37,11 +37,10 @@ tr > th:first-child {
 
 .large {
     font-size: large;
-    background-color: none;
 }
 
 .rise {
-    text-shadow: 2% -2% 2% #000;
+    text-shadow: 2pt 2pt -2pt 2pt #000;
     animation: rise 1s ease-in-out 0.5s forwards;
 }
 

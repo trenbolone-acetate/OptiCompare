@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OptiCompare;
 using OptiCompare.Data;
 
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration["phoneDB:ConStr"];
+PhoneDetailsFetcher.GetApiToken(builder.Configuration["phones:BearerToken"]);
 builder.Services.AddDbContext<OptiCompareDbContext>(options =>
 {
     options.UseMySQL(connectionString);
@@ -23,7 +25,6 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<OptiCompareDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("OptiCompareDbContext") ?? throw new InvalidOperationException("Connection string 'OptiCompareDbContext' not found.")));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,5 +46,4 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.Run();
