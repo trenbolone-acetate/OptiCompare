@@ -8,8 +8,8 @@ using OptiCompare.Data;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionString = builder.Configuration["phoneDB:ConStr"];
-PhoneDetailsFetcher.GetApiToken(builder.Configuration["phones:BearerToken"]);
+var connectionString = Utils.GetConnectionString(builder);
+PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones:BearerToken"]);
 builder.Services.AddDbContext<OptiCompareDbContext>(options =>
 {
     options.UseMySQL(connectionString);

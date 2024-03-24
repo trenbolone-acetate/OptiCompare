@@ -14,6 +14,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -29,6 +33,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.OptiCompare.executor": "Run",
+    ".NET Launch Settings Profile.OptiCompare: IIS Express.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
@@ -37,7 +42,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "HotReloadSettingsPage",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -52,7 +57,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.OptiCompare">
+  <component name="RunManager" selected=".NET Launch Settings Profile.OptiCompare: IIS Express">
     <configuration name="OptiCompare" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/OptiCompare.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -76,6 +81,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -85,8 +91,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue=".NET Launch Settings Profile.OptiCompare" />
       <item itemvalue=".NET Launch Settings Profile.OptiCompare: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.OptiCompare" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -104,6 +110,13 @@
       <workItem from="1705614529746" duration="1300000" />
       <workItem from="1705679996769" duration="245000" />
       <workItem from="1705863464087" duration="2415000" />
+      <workItem from="1711264492739" duration="82000" />
+      <workItem from="1711265033402" duration="7000" />
+      <workItem from="1711265468316" duration="61000" />
+      <workItem from="1711265728226" duration="1000" />
+      <workItem from="1711294511341" duration="124000" />
+      <workItem from="1711294649700" duration="12390000" />
+      <workItem from="1711307166921" duration="8604000" />
     </task>
     <servers />
   </component>

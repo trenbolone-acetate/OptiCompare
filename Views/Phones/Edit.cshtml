@@ -13,7 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            @await Html.PartialAsync("_FormFieldPartial",Model)
+            @await Html.PartialAsync("_CreateFormPartial",Model)
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

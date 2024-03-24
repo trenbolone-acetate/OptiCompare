@@ -30,70 +30,76 @@
             @Html.DisplayFor(model => model.hasNetwork5GBands)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyWidth)
+            @Html.DisplayNameFor(model => model.BodyDimensions.bodyWidth)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyWidth)
+            @Html.DisplayFor(model => model.BodyDimensions.bodyWidth)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyHeight)
+            @Html.DisplayNameFor(model => model.BodyDimensions.bodyHeight)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyHeight)
+            @Html.DisplayFor(model => model.BodyDimensions.bodyHeight)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyThickness)
+            @Html.DisplayNameFor(model => model.BodyDimensions.bodyThickness)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyThickness)
+            @Html.DisplayFor(model => model.BodyDimensions.bodyThickness)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bodyWeight)
+            @Html.DisplayNameFor(model => model.BodyDimensions.bodyWeight)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.bodyWeight)
+            @Html.DisplayFor(model => model.BodyDimensions.bodyWeight)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.displayType)
+            @Html.DisplayNameFor(model => model.DisplayDetails.displayType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.displayType)
+            @Html.DisplayFor(model => model.DisplayDetails.displayType)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.displaySize)
+            @Html.DisplayNameFor(model => model.DisplayDetails.displaySize)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.displaySize)
+            @Html.DisplayFor(model => model.DisplayDetails.displaySize)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.displayResolution)
+            @Html.DisplayNameFor(model => model.DisplayDetails.displayResolution)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.displayResolution)
+            @Html.DisplayFor(model => model.DisplayDetails.displayResolution)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpu)
+            @Html.DisplayNameFor(model => model.DisplayDetails.displayProtection)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpu)
+            @Html.DisplayFor(model => model.DisplayDetails.displayProtection)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gpu)
+            @Html.DisplayNameFor(model => model.PlatformDetails.Cpu)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gpu)
+            @Html.DisplayFor(model => model.PlatformDetails.Cpu)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Os)
+            @Html.DisplayNameFor(model => model.PlatformDetails.Gpu)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Os)
+            @Html.DisplayFor(model => model.PlatformDetails.Gpu)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RAM)
+            @Html.DisplayNameFor(model => model.PlatformDetails.Os)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RAM)
+            @Html.DisplayFor(model => model.PlatformDetails.Os)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlatformDetails.RAM)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlatformDetails.RAM)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.storage)
@@ -102,34 +108,34 @@
             @Html.DisplayFor(model => model.storage)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.mainCameraDetails)
+            @Html.DisplayNameFor(model => model.CameraDetails.mainCameraDetails)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.mainCameraDetails)
+            @Html.DisplayFor(model => model.CameraDetails.mainCameraDetails)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.frontCameraDetails)
+            @Html.DisplayNameFor(model => model.CameraDetails.frontCameraDetails)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.frontCameraDetails)
+            @Html.DisplayFor(model => model.CameraDetails.frontCameraDetails)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batteryCapacity)
+            @Html.DisplayNameFor(model => model.BatteryDetails.batteryCapacity)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batteryCapacity)
+            @Html.DisplayFor(model => model.BatteryDetails.batteryCapacity)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.chargingSpeed)
+            @Html.DisplayNameFor(model => model.BatteryDetails.chargingSpeed)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.chargingSpeed)
+            @Html.DisplayFor(model => model.BatteryDetails.chargingSpeed)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.batteryLifeTest)
+            @Html.DisplayNameFor(model => model.BatteryDetails.batteryLifeTest)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.batteryLifeTest)
+            @Html.DisplayFor(model => model.BatteryDetails.batteryLifeTest)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.price)

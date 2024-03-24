@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="RD-233.13135.100">
+  <component name="dataSourceStorageLocal" created-in="RD-233.14475.66">
     <data-source name="Microsoft SQL Server LocalDB (JetBrains)" uuid="869f77d1-5be4-4d43-9fa5-ed60b1cbfbc6">
       <database-info product="Microsoft SQL Server" version="16.00.1110" jdbc-version="4.2" driver-name="JetBrains JDBC Driver for SQL Server" driver-version="1.0" dbms="MSSQL" exact-version="16.0.1110" exact-driver-version="1.0">
         <extra-name-characters>$#@</extra-name-characters>
@@ -21,7 +21,6 @@
       <database-info product="MySQL" version="8.0.36" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" dbms="MYSQL" exact-version="8.0.36" exact-driver-version="8.0">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
-        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>

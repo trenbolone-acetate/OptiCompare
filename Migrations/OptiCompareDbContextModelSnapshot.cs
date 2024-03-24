@@ -24,62 +24,14 @@ namespace OptiCompare.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Cpu")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Gpu")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Os")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RAM")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("batteryCapacity")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("batteryLifeTest")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("bodyHeight")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("bodyThickness")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("bodyWeight")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("bodyWidth")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("brandName")
                         .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("chargingSpeed")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("displayResolution")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("displaySize")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("displayType")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("frontCameraDetails")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("hasNetwork5GBands")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("image")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("mainCameraDetails")
                         .HasColumnType("longtext");
 
                     b.Property<string>("modelName")
@@ -94,7 +46,149 @@ namespace OptiCompare.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phones");
+                });
+
+            modelBuilder.Entity("OptiCompare.Models.Phone", b =>
+                {
+                    b.OwnsOne("OptiCompare.Models.BatteryDetails", "BatteryDetails", b1 =>
+                        {
+                            b1.Property<int>("PhoneId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("batteryCapacity")
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("batteryLifeTest")
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("chargingSpeed")
+                                .HasColumnType("longtext");
+
+                            b1.HasKey("PhoneId");
+
+                            b1.ToTable("Phones");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhoneId");
+                        });
+
+                    b.OwnsOne("OptiCompare.Models.BodyDimensions", "BodyDimensions", b1 =>
+                        {
+                            b1.Property<int>("PhoneId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("bodyHeight")
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("bodyThickness")
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("bodyWeight")
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("bodyWidth")
+                                .HasColumnType("longtext");
+
+                            b1.HasKey("PhoneId");
+
+                            b1.ToTable("Phones");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhoneId");
+                        });
+
+                    b.OwnsOne("OptiCompare.Models.CameraDetails", "CameraDetails", b1 =>
+                        {
+                            b1.Property<int>("PhoneId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("frontCameraDetails")
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("mainCameraDetails")
+                                .HasColumnType("longtext");
+
+                            b1.HasKey("PhoneId");
+
+                            b1.ToTable("Phones");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhoneId");
+                        });
+
+                    b.OwnsOne("OptiCompare.Models.DisplayDetails", "DisplayDetails", b1 =>
+                        {
+                            b1.Property<int>("PhoneId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("displayProtection")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("displayResolution")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("displaySize")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("displayType")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.HasKey("PhoneId");
+
+                            b1.ToTable("Phones");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhoneId");
+                        });
+
+                    b.OwnsOne("OptiCompare.Models.PlatformDetails", "PlatformDetails", b1 =>
+                        {
+                            b1.Property<int>("PhoneId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Cpu")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("Gpu")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("Os")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.Property<string>("RAM")
+                                .IsRequired()
+                                .HasColumnType("longtext");
+
+                            b1.HasKey("PhoneId");
+
+                            b1.ToTable("Phones");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhoneId");
+                        });
+
+                    b.Navigation("BatteryDetails")
+                        .IsRequired();
+
+                    b.Navigation("BodyDimensions")
+                        .IsRequired();
+
+                    b.Navigation("CameraDetails")
+                        .IsRequired();
+
+                    b.Navigation("DisplayDetails")
+                        .IsRequired();
+
+                    b.Navigation("PlatformDetails")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

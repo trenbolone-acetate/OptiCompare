@@ -2,15 +2,14 @@
 using Newtonsoft.Json;
 using OptiCompare.Models;
 using System.Net;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace OptiCompare;
 
 public abstract class PhoneDetailsFetcher
 {
     private static string? _apiToken;
-
-    public static void GetApiToken(string? token) => _apiToken = token;
-
+    public static void SetApiToken(string? token) => _apiToken = token;
     public static async Task<Phone> CreateFromSearch(string searchedPhone)
     {
         var phoneId = await GetPhoneId(searchedPhone);
@@ -44,13 +43,22 @@ public abstract class PhoneDetailsFetcher
                 { "Authorization", $"Bearer {_apiToken}" },
             },
         };
-        using var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-        var body = await response.Content.ReadAsStringAsync();
-        JObject json = JObject.Parse(body);
-        JArray? items = (JArray)json["data"]?["items"]!;
-        string? firstId = (string)items[0]["product"]?["id"]!;
-        return firstId;
+        try
+        {
+            using var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+            JObject json = JObject.Parse(body);
+            JArray? items = (JArray)json["data"]?["items"]!;
+            string? firstId = (string)items[0]["product"]?["id"]!;
+            return firstId;
+
+        }
+        catch (HttpRequestException requestException)
+        {
+            Console.WriteLine(requestException);
+            throw;
+        }
     }
 
     private static async Task<string> GetPhoneDetailsById(string? phoneId)
@@ -90,35 +98,30 @@ public abstract class PhoneDetailsFetcher
             var display = jsonData["display"];
             var camera = jsonData["camera"];
             var thumbnail = jsonData["image"]?["large"];
-            Phone phone = new Phone
+            Phone phone = new Phone()
             {
                 brandName = productData?["brand"]?.ToString() ?? "undefined",
                 modelName = productData?["model"]?.ToString() ?? "undefined",
                 hasNetwork5GBands = keyAspects?["wireless_&_cellular"]?.ToString().Contains("5G") ?? false,
-                bodyWidth = design?["body"]?["width"]?.ToString() ?? "undefined",
-                bodyHeight = design?["body"]?["height"]?.ToString(),
-                bodyThickness = design?["body"]?["thickness"]?.ToString() ?? "undefined",
-                bodyWeight = design?["body"]?["weight"]?.ToString() ?? "undefined",
-                displayType = display?["type"]?.ToString() ?? "undefined",
-                displaySize = display?["diagonal"]?.ToString() ?? "undefined",
-                displayResolution = display?["resolution_(h_x_w)"]?.ToString() ?? "undefined",
-                Cpu = inside?["processor"]?["cpu"]?.ToString() ?? "undefined",
-                Gpu = inside?["processor"]?["gpu"]?.ToString() ?? "undefined",
-                Os = inside?["software"]?["os_version"]?.ToString() ?? "undefined",
-                RAM = inside?["ram"]?["capacity"]?.ToString() ?? "undefined",
+                BodyDimensions = new BodyDimensions(design?["body"]?["width"]?.ToString() ?? "undefined",
+                    design?["body"]?["height"]?.ToString(),
+                    design?["body"]?["thickness"]?.ToString() ?? "undefined",
+                    design?["body"]?["weight"]?.ToString() ?? "undefined"),
+                DisplayDetails = new DisplayDetails(display?["type"]?.ToString() ?? "undefined",
+                    display?["diagonal"]?.ToString() ?? "undefined",
+                    display?["resolution_(h_x_w)"]?.ToString() ?? "undefined",
+                    display?["glass"]?.ToString() ?? "undefined"),
+                PlatformDetails = new PlatformDetails(inside?["processor"]?["cpu"]?.ToString() ?? "undefined",
+                    inside?["processor"]?["gpu"]?.ToString() ?? "undefined",
+                    inside?["software"]?["os_version"]?.ToString() ?? "undefined",
+                    inside?["ram"]?["capacity"]?.ToString() ?? "undefined"),
                 storage = inside?["storage"]?["capacity"]?.ToString() ?? "undefined",
-                mainCameraDetails =
-                    $"{camera?["back_camera"]?["resolution"]}, {camera?["back_camera"]?["resolution_(h_x_w)"]} {camera?["back_camera"]?["aperture_(w)"]}" ??
-                    "undefined",
-                frontCameraDetails =
-                    $"{camera?[$"front_camera"]?["resolution"]}, {camera?["front_camera"]?["resolution_(h_x_w)"]} {camera?["front_camera"]?["aperture_(w)"]}" ??
-                    "undefined",
-                batteryCapacity = inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
-                chargingSpeed =
-                    $"{inside?["battery"]?["charging_power"]} wired, {inside?["battery"]?["wireless_charging_power"]} wireless" ??
-                    "undefined",
+                CameraDetails = new CameraDetails($"{camera?["back_camera"]?["resolution"]}, {camera?["back_camera"]?["resolution_(h_x_w)"]} {camera?["back_camera"]?["aperture_(w)"]}",
+                    $"{camera?[$"front_camera"]?["resolution"]}, {camera?["front_camera"]?["resolution_(h_x_w)"]} {camera?["front_camera"]?["aperture_(w)"]}"),
+                BatteryDetails = new BatteryDetails(inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
+                    $"{inside?["battery"]?["charging_power"]} wired, {inside?["battery"]?["wireless_charging_power"]} wireless",
+                    "not tested yet"),
                 price = jsonData["price"]?["msrp"]?.ToString() ?? "undefined",
-                batteryLifeTest = "not tested yet",
                 image = thumbnail?.ToString() ?? "https://cdn-icons-png.flaticon.com/512/244/244210.png"
             };
             return phone;

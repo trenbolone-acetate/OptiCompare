@@ -20,22 +20,28 @@ namespace OptiCompare.Controllers
         }
 
         // GET: Phones
-        public async Task<IActionResult> PhoneIndex()
+        public async Task<IActionResult> PhoneIndex(string searchString)
         {
-              return _context.Phone != null ? 
-                          View(await _context.Phone.ToListAsync()) :
-                          Problem("Entity set 'OptiCompareDbContext.Phone'  is null.");
+            ViewData["CurrentFilter"] = searchString;
+            var phones = from ps in _context.Phones
+                select ps;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                phones = phones.Where(ps => ps.brandName.Contains(searchString) || ps.modelName.Contains(searchString));
+                return View(phones);
+            }
+            return View(phones);
         }
 
         // GET: Phones/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Phone == null)
+            if (id == null || _context.Phones == null)
             {
                 return NotFound();
             }
 
-            var phone = await _context.Phone
+            var phone = await _context.Phones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (phone == null)
             {
@@ -48,8 +54,8 @@ namespace OptiCompare.Controllers
         // GET: Phones/Create
         public IActionResult Create()
         {
-            var phone = new Phone();
-            return View(phone);
+            var newPhone = new Phone();
+            return View(newPhone);
         }
 
         [HttpPost]
@@ -59,13 +65,13 @@ namespace OptiCompare.Controllers
             searchString = searchString.Replace(" ", "%20");
             var newPhone = PhoneDetailsFetcher.CreateFromSearch(searchString);
             // Check if the phone already exists in the database
-            if (_context.Phone.Any(p => p.modelName == newPhone.Result.modelName))
+            if (_context.Phones.Any(p => p.modelName == newPhone.Result.modelName))
             {
                 // If the phone already exists, return a view indicating this
                 return View("PhoneExists");
             }
             // If the phone does not exist, add it to the database and save changes
-            _context.Phone.Add(newPhone.Result);
+            _context.Phones.Add(newPhone.Result);
             _context.SaveChanges();
             // Redirect to the index view
             return RedirectToAction(nameof(PhoneIndex));
@@ -76,7 +82,9 @@ namespace OptiCompare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,brandName,modelName,hasNetwork5GBands,bodyWidth,bodyHeight,bodyThickness,bodyWeight,displayType,displaySize,displayResolution,Cpu,Gpu,Os,RAM,storage,mainCameraDetails,frontCameraDetails,batteryCapacity,chargingSpeed,batteryLifeTest,price")] Phone phone)
+        public async Task<IActionResult> Create([Bind("Id,brandName,modelName,hasNetwork5GBands," +
+                                                      "BodyDimensions,DisplayDetails,PlatformDetails,storage," +
+                                                      "CameraDetails,BatteryDetails,price,image")] Phone phone)
         {
             if (ModelState.IsValid)
             {
@@ -84,6 +92,8 @@ namespace OptiCompare.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(PhoneIndex));
             }
+
+            Console.WriteLine("Model is not valid!");
             return View(phone);
         }
 
@@ -95,7 +105,7 @@ namespace OptiCompare.Controllers
                 return NotFound();
             }
 
-            var phone = await _context.Phone.FindAsync(id);
+            var phone = await _context.Phones.FindAsync(id);
             if (phone == null)
             {
                 return NotFound();
@@ -108,48 +118,29 @@ namespace OptiCompare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,brandName,modelName,hasNetwork5GBands,bodyWidth,bodyHeight,bodyThickness,bodyWeight,displayType,displaySize,displayResolution,Cpu,Gpu,Os,RAM,storage,mainCameraDetails,frontCameraDetails,batteryCapacity,chargingSpeed,batteryLifeTest,price")] Phone phone)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,brandName,modelName,hasNetwork5GBands," +
+                                                             "BodyDimensions,DisplayDetails,PlatformDetails,storage," +
+                                                             "CameraDetails,BatteryDetails,price,image")] Phone phone)
         {
             Console.WriteLine("Entered Edit");
-            if (id != phone.Id)
-            {
-                return NotFound();
-            }
-            if (!ModelState.IsValid) return View(phone);
-            try
-            {
-                Phone? oldPhone = _context.Phone.FirstOrDefault(p => p.Id == id);
-                if (oldPhone == null)
-                {
-                    return NotFound();
-                }
-                _context.Remove(oldPhone);
-                _context.Add(phone);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PhoneExists(phone.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction("PhoneIndex");
+            var oldPhone = await _context.Phones.FindAsync(id);
+            
+            if (oldPhone == null) return RedirectToAction(nameof(PhoneIndex));
+            
+            _context.Entry(oldPhone).CurrentValues.SetValues(phone);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(PhoneIndex));
         }
 
         // GET: Phones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Phone == null)
+            if (id == null || _context.Phones == null)
             {
                 return NotFound();
             }
 
-            var phone = await _context.Phone
+            var phone = await _context.Phones
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (phone == null)
             {
@@ -164,14 +155,14 @@ namespace OptiCompare.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Phone == null)
+            if (_context.Phones == null)
             {
                 return Problem("Cannot delete null object.");
             }
-            var phone = await _context.Phone.FindAsync(id);
+            var phone = await _context.Phones.FindAsync(id);
             if (phone != null)
             {
-                _context.Phone.Remove(phone);
+                _context.Phones.Remove(phone);
             }
             
             await _context.SaveChangesAsync();
@@ -180,7 +171,7 @@ namespace OptiCompare.Controllers
 
         private bool PhoneExists(int id)
         {
-          return (_context.Phone?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Phones?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
     }

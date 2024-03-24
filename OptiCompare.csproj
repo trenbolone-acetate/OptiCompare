@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="jsons\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,12 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Phones\PhoneExists.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PhonesUpdated\PhoneUpdatedIndex.cshtml" />
   </ItemGroup>
 
 </Project>
