@@ -5,176 +5,61 @@
 <head>
     <link rel="stylesheet" href="~/css/PhoneIndex.css" asp-append-version="true" />
 </head>
-<h1>Phones list</h1>
-<a class="creation" style="width:20%;font-size:large;" asp-action="Create">Create New</a>
-<p class="large rise" style="float:right;">Add new phone just by typing it's brand and model names!</p><br/><br/>
-<form class="form" style="margin:0 0 2% 37%;font-size:large" asp-action="CreateFromSearch" method="post">
-    <input type="text" name="searchString" class="form__field" placeholder="Enter search string" />
-    <input type="submit" value="Add" class="btn btn--primary btn--inside uppercase" />
-</form>
+@if(TempData["Message"] != null){
+    <script>
+        alert("@TempData["Message"]?.ToString()");
+    </script>
+}
+<h1 class="phnsLstH1">Phones list</h1>
+<div class="search-create">
+    <a class="creation" asp-action="Create">Create New</a>
+    <form class="search-form" method="get" asp-controller="Phones" asp-action="Index" style="margin-left: auto;">
+        <input list="phones" autocomplete="on" class="form-control" type="text" placeholder="Search for..." name="SearchString" value="@ViewData["CurrentFilter"]" aria-label="Search" aria-describedby="btnNavbarSearch"/>
+        <input type="submit" value="Search" class="btn btn-secondary form-control-bttn"/>
+    </form>
+</div>
 <table class="table">
     <thead>
     <tr>
-        <th>Specification</th>
-        @foreach (var item in Model)
-        {
-            <th>@Html.DisplayFor(modelItem => item.brandName)</th>
-        }
+        <th>Phone</th>
+        <th>5G?</th>
+        <th>Display size</th>
+        <th>Display resolution</th>
+        <th>Display type</th>
+        <th>Operating System</th>
+        <th>Storage</th>
+        <th>Main Camera</th>
+        <th>Battery capacity</th>
+        <th>Price</th>
+        <th colspan="3">Utility</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>Brand</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.brandName)</td>
-        }
-    </tr>
-    <tr>
-        <td>Model</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.modelName)</td>
-        }
-    </tr>
-    <tr>
-        <td>Has 5G</td>
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.modelName</th>
             <td>@(item.hasNetwork5GBands ? "Yes" : "No")</td>
-        }
-    </tr>
-    <tr>
-        <td>Body Width</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.bodyWidth)</td>
-        }
-    </tr>
-    <tr>
-        <td>Body Height</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.bodyHeight)</td>
-        }
-    </tr>
-    <tr>
-        <td>Body Thickness</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.bodyThickness)</td>
-        }
-    </tr>
-    <tr>
-        <td>Body Weight</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.bodyWeight)</td>
-        }
-    </tr>
-    <tr>
-        <td>Display Type</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.displayType)</td>
-        }
-    </tr>
-    <tr>
-        <td>Display Size</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.displaySize)</td>
-        }
-    </tr>
-    <tr>
-        <td>Display Resolution</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.displayResolution)</td>
-        }
-    </tr>
-    <tr>
-        <td>CPU</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.Cpu)</td>
-        }
-    </tr>
-    <tr>
-        <td>GPU</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.Gpu)</td>
-        }
-    </tr>
-    <tr>
-        <td>Operating System</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.Os)</td>
-        }
-    </tr>
-    <tr>
-        <td>RAM</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.RAM)</td>
-        }
-    </tr>
-    <tr>
-        <td>Storage</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.storage)</td>
-        }
-    </tr>
-    <tr>
-        <td>Main Camera Details</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.mainCameraDetails)</td>
-        }
-    </tr>
-    <tr>
-        <td>Front Camera Details</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.frontCameraDetails)</td>
-        }
-    </tr>
-    <tr>
-        <td>Battery Capacity</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.batteryCapacity)</td>
-        }
-    </tr>
-    <tr>
-        <td>Charging Speed</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.chargingSpeed)</td>
-        }
-    </tr>
-    <tr>
-        <td>Battery Life</td>
-        @foreach (var item in Model)
-        {
-            <td>@Html.DisplayFor(modelItem => item.batteryLifeTest)</td>
-        }
-    </tr>
-    <tr>
-        <td class="bg-secondary">Edit</td>
-        @foreach (var item in Model)
-        {
-            <td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
-        }
-    </tr>
-    <tr>
-        <td class="bg-danger">Removal</td>
-        @foreach (var item in Model)
-        {
-                <td><a style="color:red" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
-        }
-    </tr>
+            <td>@item.DisplayDetails.displaySize</td>
+            <td>@item.DisplayDetails.displayResolution</td>
+            <td>@item.DisplayDetails.displayType</td>
+            <td>@item.PlatformDetails.Os</td>
+            <td>@item.storage</td>
+            <td>@item.CameraDetails.mainCameraDetails</td>
+            <td>@item.BatteryDetails.batteryCapacity</td>
+            <td>@item.price</td>
+            <td><a style="color:#f3f3f3" asp-controller="Compare" asp-action="Add" asp-route-id="@item.Id">Compare</a></td>
+            <td><a style="color:#f3f3f3" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+            <td style="background-color: #2455a7"><a style="color:lightblue" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+            <td style="background-color: #ffb3ba"><a style="color:red" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+        </tr>
+    }
+    </tbody>
 </table>
+
+<datalist id="phones">
+    @foreach (var phone in Model)
+    {
+        <option>@phone.modelName</option>
+    }
+</datalist>

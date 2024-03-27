@@ -20,7 +20,7 @@ namespace OptiCompare.Controllers
         }
 
         // GET: Phones
-        public async Task<IActionResult> PhoneIndex(string searchString)
+        public async Task<IActionResult> Index(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
             var phones = from ps in _context.Phones
@@ -74,7 +74,7 @@ namespace OptiCompare.Controllers
             _context.Phones.Add(newPhone.Result);
             _context.SaveChanges();
             // Redirect to the index view
-            return RedirectToAction(nameof(PhoneIndex));
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Phones/Create
@@ -90,7 +90,7 @@ namespace OptiCompare.Controllers
             {
                 _context.Add(phone);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(PhoneIndex));
+                return RedirectToAction(nameof(Index));
             }
 
             Console.WriteLine("Model is not valid!");
@@ -125,11 +125,11 @@ namespace OptiCompare.Controllers
             Console.WriteLine("Entered Edit");
             var oldPhone = await _context.Phones.FindAsync(id);
             
-            if (oldPhone == null) return RedirectToAction(nameof(PhoneIndex));
+            if (oldPhone == null) return RedirectToAction(nameof(Index));
             
             _context.Entry(oldPhone).CurrentValues.SetValues(phone);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(PhoneIndex));
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Phones/Delete/5
@@ -166,7 +166,7 @@ namespace OptiCompare.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(PhoneIndex));
+            return RedirectToAction(nameof(Index));
         }
 
         private bool PhoneExists(int id)

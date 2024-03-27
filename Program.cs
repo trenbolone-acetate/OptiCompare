@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OptiCompare;
 using OptiCompare.Data;
+using OptiCompare.Models;
+using OptiCompare.Utils;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,7 +28,10 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<OptiCompareDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("OptiCompareDbContext") ?? throw new InvalidOperationException("Connection string 'OptiCompareDbContext' not found.")));
+builder.Services.AddSession();
+builder.Services.AddSingleton<ITempDataProvider,SessionStateTempDataProvider>();
 var app = builder.Build();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

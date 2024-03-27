@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="jsons\" />
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,17 @@
     <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Views\PhonesUpdated\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\PhonesUpdated\PhoneUpdatedIndex.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="imgs\ComparisonViewDgrm.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="imgs\ComparisonViewDgrm.drawio">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

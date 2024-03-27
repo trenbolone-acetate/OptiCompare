@@ -6,16 +6,16 @@ public class PlatformDetails
     {
     }
 
-    public PlatformDetails(string ram, string cpu, string gpu, string os)
+    public PlatformDetails(string cpu, string gpu,  string os, string ram)
     {
-        RAM = ram;
         Cpu = cpu;
         Gpu = gpu;
         Os = os;
+        RAM = ram;
     }
 
-    public string RAM { get; set; }
     public string Cpu { get; set; }
     public string Gpu { get; set; }
     public string Os { get; set; }
+    public string RAM { get; set; }
 }

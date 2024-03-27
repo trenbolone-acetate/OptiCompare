@@ -1,0 +1,30 @@
+﻿table {
+    margin: 1% 0 1% 0;
+    width: 20%;
+    border-collapse: collapse;
+    background: darkgray;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .5);
+}
+.specName-table tr > td:first-child {
+    text-align: center;
+    background-color: rgba(239, 239, 239, 0.4);
+    color: rebeccapurple;
+}
+tbody > tr:first-child {
+    font-size: xx-large;
+    height: 100pt;
+    background-color: rgba(239, 239, 239, 0.4);
+    color: rebeccapurple;
+}
+tr{
+    font-size: medium;
+    height: 40pt;
+}
+td {
+    border: 1px solid black;
+    margin: 2%;
+    text-align: center;
+}
+img{
+    border:1px solid black;
+}

@@ -1,0 +1,174 @@
+﻿@model PhoneComparer?
+<head>
+  <link rel="stylesheet" href="~/css/ComparerIndex.css" asp-append-version="true" />
+</head>
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+  <table class="specName-table">
+    <tbody>
+    <tr>
+      <td rowspan="4">Phone</td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td>Brand Name</td>
+    </tr>
+    <tr>
+      <td>Model Name</td>
+    </tr>
+    <tr>
+      <td>Has 5G?</td>
+    </tr>
+    <tr>
+      <td>Body Width</td>
+    </tr>
+    <tr>
+      <td>Body Heights</td>
+    </tr>
+    <tr>
+      <td>Body Thickness</td>
+    </tr>
+    <tr>
+      <td>Body Weight</td>
+    </tr>
+    <tr>
+      <td>Display Type</td>
+    </tr>
+    <tr>
+      <td>Display Size</td>
+    </tr>
+    <tr>
+      <td>Display Resolution</td>
+    </tr>
+    <tr>
+      <td>Display Protection</td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+    </tr>
+    <tr>
+      <td>GPU</td>
+    </tr>
+    <tr>
+      <td>OS</td>
+    </tr>
+    <tr>
+      <td>RAM</td>
+    </tr>
+    <tr>
+      <td>Main Camera</td>
+    </tr>
+    <tr>
+      <td>Front Camera</td>
+    </tr>
+    <tr>
+      <td>Battery Capacity</td>
+    </tr>
+    <tr>
+      <td>Charging speed</td>
+    </tr>
+    <tr>
+      <td>Battery Life Test</td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+    </tr>
+    <tr>
+      <td>Price</td>
+    </tr>
+    </tbody>
+  </table>
+  @{
+    if (Model?.phones != null)
+    {
+      foreach (var phone in Model.phones)
+      {
+        <table>
+          <tbody>
+          <tr>
+            <td rowspan="4">
+              <img width="80%" src="@phone?.image" alt="phoneImg">
+            </td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.brandName)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.modelName)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.hasNetwork5GBands))</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyWidth)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyHeight)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyThickness)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyWeight)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displayType)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displaySize)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displayResolution)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displayProtection)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.Cpu)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.Gpu)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.Os)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.RAM)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.CameraDetails.mainCameraDetails)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.CameraDetails.frontCameraDetails)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BatteryDetails.batteryCapacity)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BatteryDetails.chargingSpeed)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.BatteryDetails.batteryLifeTest)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.storage)).</td>
+          </tr>
+          <tr>
+            <td>@(Html.DisplayFor(modelItem => phone!.price)).</td>
+          </tr>
+          </tbody>
+        </table>
+      }
+    }
+  }
+</div>
