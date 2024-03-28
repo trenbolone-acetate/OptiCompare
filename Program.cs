@@ -9,7 +9,6 @@ using OptiCompare.Utils;
 
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 var connectionString = Utils.GetConnectionString(builder);
 PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones:BearerToken"]);
@@ -22,7 +21,6 @@ builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization(options =>
 {
-    // By default, all incoming requests will be authorized according to the default policy.
     options.FallbackPolicy = options.DefaultPolicy;
 });
 builder.Services.AddRazorPages();
@@ -33,11 +31,9 @@ builder.Services.AddSingleton<ITempDataProvider,SessionStateTempDataProvider>();
 var app = builder.Build();
 app.UseSession();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

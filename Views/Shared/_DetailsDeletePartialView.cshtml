@@ -1,0 +1,98 @@
+﻿@model Phone
+<div class="tg-wrap">
+        <table>
+            <tbody>
+            <tr>
+                <td>Brand Name</td>
+                <td>@Html.DisplayFor(model => model.brandName)</td>
+                <td rowspan="6" colspan="2" style="border-left: 5px solid #ddd">
+                    <img src="@Model.image" alt="Thumbnail" width="100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Model Name</td>
+                <td>@Html.DisplayFor(model => model.modelName)</td>
+            </tr>
+            <tr>
+                <td>Has 5G?</td>
+                <td>@Html.DisplayFor(model => model.hasNetwork5GBands)</td>
+            </tr>
+            <tr>
+                <td>Body Width</td>
+                <td>@Html.DisplayFor(model => model.BodyDimensions.bodyWidth)</td>
+            </tr>
+            <tr>
+                <td>Body Heights</td>
+                <td>@Html.DisplayFor(model => model.BodyDimensions.bodyHeight)</td>
+            </tr>
+            <tr>
+                <td>Body Thickness</td>
+                <td>@Html.DisplayFor(model => model.BodyDimensions.bodyThickness)</td>
+            </tr>
+            <tr>
+                <td>Body Weight</td>
+                <td colspan="3">@Html.DisplayFor(model => model.BodyDimensions.bodyWeight)</td>
+            </tr>
+            <tr>
+                <td>Display Type</td>
+                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displayType)</td>
+            </tr>
+            <tr>
+                <td>Display Size</td>
+                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displaySize)</td>
+            </tr>
+            <tr>
+                <td>Display Resolution</td>
+                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displayResolution)</td>
+            </tr>
+            <tr>
+                <td>Display Protection</td>
+                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displayProtection)</td>
+            </tr>
+            <tr>
+                <td>CPU</td>
+                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.Cpu)</td>
+            </tr>
+            <tr>
+                <td>GPU</td>
+                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.Gpu)</td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.Os)</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.RAM)</td>
+            </tr>
+            <tr>
+                <td>Main Camera</td>
+                <td colspan="3">@Html.DisplayFor(model => model.CameraDetails.mainCameraDetails)</td>
+            </tr>
+            <tr>
+                <td>Front Camera</td>
+                <td colspan="3">@Html.DisplayFor(model => model.CameraDetails.frontCameraDetails)</td>
+            </tr>
+            <tr>
+                <td>Battery Capacity</td>
+                <td colspan="3">@Html.DisplayFor(model => model.BatteryDetails.batteryCapacity)</td>
+            </tr>
+            <tr>
+                <td>Charging speed</td>
+                <td colspan="3">@Html.DisplayFor(model => model.BatteryDetails.chargingSpeed)</td>
+            </tr>
+            <tr>
+                <td>Battery Life Test</td>
+                <td colspan="3">@Html.DisplayFor(model => model.BatteryDetails.batteryLifeTest)</td>
+            </tr>
+            <tr>
+                <td>Storage</td>
+                <td colspan="3">@Html.DisplayFor(model => model.storage)</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td colspan="3">@Html.DisplayFor(model => model.price)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>

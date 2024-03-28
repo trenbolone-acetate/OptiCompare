@@ -18,7 +18,7 @@
     
 
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-controller="Phones" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @await Html.PartialAsync("_CreateFormPartial",Model)
             <div class="form-group">

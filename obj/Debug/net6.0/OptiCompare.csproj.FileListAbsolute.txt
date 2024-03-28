@@ -33,7 +33,6 @@ W:\OptiCompare\OptiCompare\OptiCompare\obj\Debug\net6.0\refint\OptiCompare.dll
 W:\OptiCompare\OptiCompare\OptiCompare\obj\Debug\net6.0\OptiCompare.pdb
 W:\OptiCompare\OptiCompare\OptiCompare\obj\Debug\net6.0\OptiCompare.genruntimeconfig.cache
 W:\OptiCompare\OptiCompare\OptiCompare\obj\Debug\net6.0\ref\OptiCompare.dll
-W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\jsons\22ultra.json
 W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\Humanizer.dll
 W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\MessagePack.dll
 W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\MessagePack.Annotations.dll

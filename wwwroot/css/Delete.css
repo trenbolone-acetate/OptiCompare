@@ -1,0 +1,60 @@
+﻿body {
+    background: #BBBED0;
+    background: radial-gradient(at right center, #d0bbbc, #5e1222);
+    font-family: Arial, sans-serif;
+}
+h1 { 
+    margin: 1%;
+    padding: 1%;
+    border-radius: 50pt;
+    color: #d0bbbc;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #5e1222;
+    font-family: 'Helvetica Neue', sans-serif; 
+    font-size: xxx-large; 
+    font-weight: bold; 
+    letter-spacing: 2px; 
+    text-align: center; 
+}
+table {
+    margin: auto;
+    border-collapse: collapse;
+    background-color: ivory;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .5);
+    font-size: medium;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 3%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr {
+    border-bottom: 5px solid #ddd;
+}
+
+tr > th:first-child {
+    text-align: center;
+    background-color: rgba(239, 239, 239, 0.4);
+    color: #ffe2e2;
+}
+form {
+    margin:auto;
+    border-radius: 5px;
+}
+.bottom-actions{
+    border-radius: 5pt;
+    padding: 0.4%;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    flex-direction: row;
+    margin: 1% auto auto;
+}
+.bottom-actions *{
+    margin: 2%;
+    font-size: large;
+}

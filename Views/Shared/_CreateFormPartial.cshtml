@@ -1,117 +1,118 @@
 ﻿@model Phone
-       <div class="form-group">
-           <label asp-for="brandName" class="control-label">Brand Name</label>
-           <input asp-for="brandName" class="form-control" />
-           <span asp-validation-for="brandName" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="modelName" class="control-label">Model Name</label>
-           <input asp-for="modelName" class="form-control" />
-           <span asp-validation-for="modelName" class="text-danger"></span>
-       </div>
-       <div class="form-group form-check">
-           <label asp-for="hasNetwork5GBands" class="form-check-label">
-               Has 5G?
-           </label>
-           <input class="form-check-input" asp-for="hasNetwork5GBands"/>
-       </div>
-       <div class="form-group">
-           <label asp-for="BodyDimensions.bodyWidth" class="control-label">Body Width</label>
-           <input asp-for="BodyDimensions.bodyWidth" class="form-control" />
-           <span asp-validation-for="BodyDimensions.bodyWidth" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="BodyDimensions.bodyHeight" class="control-label">Body Height</label>
-           <input asp-for="BodyDimensions.bodyHeight" class="form-control" />
-           <span asp-validation-for="BodyDimensions.bodyHeight" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="BodyDimensions.bodyThickness" class="control-label">Body Thickness</label>
-           <input asp-for="BodyDimensions.bodyThickness" class="form-control" />
-           <span asp-validation-for="BodyDimensions.bodyThickness" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="BodyDimensions.bodyWeight" class="control-label">Body Weight</label>
-           <input asp-for="BodyDimensions.bodyWeight" class="form-control" />
-           <span asp-validation-for="BodyDimensions.bodyWeight" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="DisplayDetails.displayType" class="control-label">Display Type</label>
-           <input asp-for="DisplayDetails.displayType" class="form-control" />
-           <span asp-validation-for="DisplayDetails.displayType" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="DisplayDetails.displaySize" class="control-label">Display Size</label>
-           <input asp-for="DisplayDetails.displaySize" class="form-control" />
-           <span asp-validation-for="DisplayDetails.displaySize" class="text-danger"></span>
-       </div>
-        <div class="form-group">
-            <label asp-for="DisplayDetails.displayResolution" class="control-label">Display Resolution</label>
-            <input asp-for="DisplayDetails.displayResolution" class="form-control" />
-            <span asp-validation-for="DisplayDetails.displayResolution" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-           <label asp-for="DisplayDetails.displayProtection" class="control-label">Display Protection</label>
-           <input asp-for="DisplayDetails.displayProtection" class="form-control" />
-           <span asp-validation-for="DisplayDetails.displayProtection" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="PlatformDetails.Cpu" class="control-label">CPU</label>
-           <input asp-for="PlatformDetails.Cpu" class="form-control" />
-           <span asp-validation-for="PlatformDetails.Cpu" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="PlatformDetails.Gpu" class="control-label">GPU</label>
-           <input asp-for="PlatformDetails.Gpu" class="form-control" />
-           <span asp-validation-for="PlatformDetails.Gpu" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="PlatformDetails.Os" class="control-label">Operating System</label>
-           <input asp-for="PlatformDetails.Os" class="form-control" />
-           <span asp-validation-for="PlatformDetails.Os" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="PlatformDetails.RAM" class="control-label">RAM</label>
-           <input asp-for="PlatformDetails.RAM" class="form-control" />
-           <span asp-validation-for="PlatformDetails.RAM" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="storage" class="control-label">Storage</label>
-           <input asp-for="storage" class="form-control" />
-           <span asp-validation-for="storage" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="CameraDetails.mainCameraDetails" class="control-label">Main Camera Specs</label>
-           <input asp-for="CameraDetails.mainCameraDetails" class="form-control" />
-           <span asp-validation-for="CameraDetails.mainCameraDetails" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="CameraDetails.frontCameraDetails" class="control-label">Front Camera Specs</label>
-           <input asp-for="CameraDetails.frontCameraDetails" class="form-control" />
-           <span asp-validation-for="CameraDetails.frontCameraDetails" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="BatteryDetails.batteryCapacity" class="control-label">Battery Capacity</label>
-           <input asp-for="BatteryDetails.batteryCapacity" class="form-control" />
-           <span asp-validation-for="BatteryDetails.batteryCapacity" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="BatteryDetails.chargingSpeed" class="control-label">Charging Speed</label>
-           <input asp-for="BatteryDetails.chargingSpeed" class="form-control" />
-           <span asp-validation-for="BatteryDetails.chargingSpeed" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="BatteryDetails.batteryLifeTest" class="control-label">Battery Life Test</label>
-           <input asp-for="BatteryDetails.batteryLifeTest" class="form-control" />
-           <span asp-validation-for="BatteryDetails.batteryLifeTest" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="price" class="control-label">Price</label>
-           <input asp-for="price" class="form-control" />
-           <span asp-validation-for="price" class="text-danger"></span>
-       </div>
-       <div class="form-group">
-           <label asp-for="image" class="control-label">Image URL</label>
-           <input asp-for="image" class="form-control" />
-           <span asp-validation-for="image" class="text-danger"></span>
-       </div>
+
+<table>
+    <tr>
+        <td><label asp-for="brandName">Brand Name</label></td>
+        <td><input asp-for="brandName"/></td>
+        <td><span asp-validation-for="brandName" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="modelName">Model Name</label></td>
+        <td><input asp-for="modelName"/></td>
+        <td><span asp-validation-for="modelName" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="hasNetwork5GBands">Has 5G?</label></td>
+        <td><input class="no-style" asp-for="hasNetwork5GBands"/></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BodyDimensions.bodyWidth">Body Width</label></td>
+        <td><input asp-for="BodyDimensions.bodyWidth"/></td>
+        <td><span asp-validation-for="BodyDimensions.bodyWidth" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BodyDimensions.bodyHeight">Body Height</label></td>
+        <td><input asp-for="BodyDimensions.bodyHeight"/></td>
+        <td><span asp-validation-for="BodyDimensions.bodyHeight" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BodyDimensions.bodyWeight">Body Weight</label></td>
+        <td><input asp-for="BodyDimensions.bodyWeight"/></td>
+        <td><span asp-validation-for="BodyDimensions.bodyWeight" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BodyDimensions.bodyThickness">Body Thickness</label></td>
+        <td><input asp-for="BodyDimensions.bodyThickness"/></td>
+        <td><span asp-validation-for="BodyDimensions.bodyThickness" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="DisplayDetails.displayType">Display Type</label></td>
+        <td><input asp-for="DisplayDetails.displayType"/></td>
+        <td><span asp-validation-for="DisplayDetails.displayType" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="DisplayDetails.displaySize">Display Size</label></td>
+        <td><input asp-for="DisplayDetails.displaySize"/></td>
+        <td><span asp-validation-for="DisplayDetails.displaySize" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="DisplayDetails.displayResolution">Display Resolution</label></td>
+        <td><input asp-for="DisplayDetails.displayResolution"/></td>
+        <td><span asp-validation-for="DisplayDetails.displayResolution" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="DisplayDetails.displayProtection">Display Protection</label></td>
+        <td><input asp-for="DisplayDetails.displayProtection"/></td>
+        <td><span asp-validation-for="DisplayDetails.displayProtection" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="PlatformDetails.Cpu">CPU</label></td>
+        <td><input asp-for="PlatformDetails.Cpu"/></td>
+        <td><span asp-validation-for="PlatformDetails.Cpu" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="PlatformDetails.Gpu">GPU</label></td>
+        <td><input asp-for="PlatformDetails.Gpu"/></td>
+        <td><span asp-validation-for="PlatformDetails.Gpu" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="PlatformDetails.Os">Operating System</label></td>
+        <td><input asp-for="PlatformDetails.Os"/></td>
+        <td><span asp-validation-for="PlatformDetails.Os" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="PlatformDetails.RAM">RAM</label></td>
+        <td><input asp-for="PlatformDetails.RAM"/></td>
+        <td><span asp-validation-for="PlatformDetails.RAM" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="storage">Storage</label></td>
+        <td><input asp-for="storage"/></td>
+        <td><span asp-validation-for="storage" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="CameraDetails.mainCameraDetails">Main Camera Details</label></td>
+        <td><input asp-for="CameraDetails.mainCameraDetails"/></td>
+        <td><span asp-validation-for="CameraDetails.mainCameraDetails" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="CameraDetails.frontCameraDetails">Front Camera Details</label></td>
+        <td><input asp-for="CameraDetails.frontCameraDetails"/></td>
+        <td><span asp-validation-for="CameraDetails.frontCameraDetails" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BatteryDetails.batteryCapacity">Battery Capacity</label></td>
+        <td><input asp-for="BatteryDetails.batteryCapacity"/></td>
+        <td><span asp-validation-for="BatteryDetails.batteryCapacity" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BatteryDetails.chargingSpeed">Charging Speeds</label></td>
+        <td><input asp-for="BatteryDetails.chargingSpeed"/></td>
+        <td><span asp-validation-for="BatteryDetails.chargingSpeed" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="BatteryDetails.batteryLifeTest">Battery Life Test</label></td>
+        <td><input asp-for="BatteryDetails.batteryLifeTest"/></td>
+        <td><span asp-validation-for="BatteryDetails.batteryLifeTest" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="price">Price</label></td>
+        <td><input asp-for="price"/></td>
+        <td><span asp-validation-for="price" class="text-danger"></span></td>
+    </tr>
+    <tr>
+        <td><label asp-for="image">Image URL</label></td>
+        <td><input asp-for="image"/></td>
+        <td><span asp-validation-for="image" class="text-danger"></span></td>
+    </tr>
+</table>

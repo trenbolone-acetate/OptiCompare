@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YMDQrzED5wKnKQ6isALbXoRwfBjaab+nVPPG7hVP6Lc=",
+  "Hash": "bU5GMXa/gATSSVMQXeGumRHtjoPR/vKltq5PMlwCNII=",
   "Source": "OptiCompare",
   "BasePath": "_content/OptiCompare",
   "Mode": "Default",
@@ -119,6 +119,23 @@
       "OriginalItemSpec": "wwwroot\\css\\Create.css"
     },
     {
+      "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\Delete.css",
+      "SourceId": "OptiCompare",
+      "SourceType": "Discovered",
+      "ContentRoot": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\",
+      "BasePath": "_content/OptiCompare",
+      "RelativePath": "css/Delete.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Delete.css"
+    },
+    {
       "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\Details.css",
       "SourceId": "OptiCompare",
       "SourceType": "Discovered",
@@ -134,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Details.css"
+    },
+    {
+      "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\Edit.css",
+      "SourceId": "OptiCompare",
+      "SourceType": "Discovered",
+      "ContentRoot": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\",
+      "BasePath": "_content/OptiCompare",
+      "RelativePath": "css/Edit.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Edit.css"
     },
     {
       "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\css\\HomeIndex.css",

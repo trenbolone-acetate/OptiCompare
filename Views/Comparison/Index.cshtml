@@ -80,6 +80,9 @@
     <tr>
       <td>Price</td>
     </tr>
+    <tr>
+      <td>Removal</td>
+    </tr>
     </tbody>
   </table>
   @{
@@ -87,87 +90,7 @@
     {
       foreach (var phone in Model.phones)
       {
-        <table>
-          <tbody>
-          <tr>
-            <td rowspan="4">
-              <img width="80%" src="@phone?.image" alt="phoneImg">
-            </td>
-          </tr>
-          <tr>
-          </tr>
-          <tr>
-          </tr>
-          <tr>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.brandName)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.modelName)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.hasNetwork5GBands))</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyWidth)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyHeight)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyThickness)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BodyDimensions.bodyWeight)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displayType)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displaySize)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displayResolution)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.DisplayDetails.displayProtection)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.Cpu)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.Gpu)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.Os)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.PlatformDetails.RAM)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.CameraDetails.mainCameraDetails)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.CameraDetails.frontCameraDetails)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BatteryDetails.batteryCapacity)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BatteryDetails.chargingSpeed)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.BatteryDetails.batteryLifeTest)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.storage)).</td>
-          </tr>
-          <tr>
-            <td>@(Html.DisplayFor(modelItem => phone!.price)).</td>
-          </tr>
-          </tbody>
-        </table>
+        @await Html.PartialAsync("_ComparisonIndexPartialView", phone)
       }
     }
   }
