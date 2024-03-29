@@ -18,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -53,7 +54,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.OptiCompare.executor": "Run",
-    ".NET Launch Settings Profile.OptiCompare: IIS Express.executor": "Run",
+    ".NET Launch Settings Profile.OptiCompare: IIS Express.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
@@ -146,6 +147,8 @@
       <workItem from="1711539573505" duration="1372000" />
       <workItem from="1711551095133" duration="3110000" />
       <workItem from="1711595177058" duration="7303000" />
+      <workItem from="1711645665809" duration="726000" />
+      <workItem from="1711678612666" duration="7198000" />
     </task>
     <servers />
   </component>

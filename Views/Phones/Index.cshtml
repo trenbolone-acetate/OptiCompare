@@ -10,7 +10,7 @@
         alert("@TempData["Message"]?.ToString()");
     </script>
 }
-<h1 class="phnsLstH1">Phones list</h1>
+<h1 class="phonesListH1">Phones list</h1>
 <div class="search-create">
     <a class="creation" asp-action="Create">Create New</a>
     <form class="search-form" method="get" asp-controller="Phones" asp-action="Index" style="margin-left: auto;">
@@ -20,7 +20,7 @@
 </div>
 <table class="table">
     <thead>
-    <tr>
+    <tr class="tr1">
         <th>Phone</th>
         <th>5G?</th>
         <th>Display size</th>
@@ -31,7 +31,7 @@
         <th>Main Camera</th>
         <th>Battery capacity</th>
         <th>Price</th>
-        <th colspan="3">Utility</th>
+        <th colspan="4">Utility</th>
     </tr>
     </thead>
     <tbody>
@@ -48,10 +48,10 @@
             <td>@item.CameraDetails.mainCameraDetails</td>
             <td>@item.BatteryDetails.batteryCapacity</td>
             <td>@item.price</td>
-            <td style="background-color: #B4A947;"><a style="color:#FFF9C4;" asp-controller="Compare" asp-action="Add" asp-route-id="@item.Id">Compare</a></td>
-            <td style="background-color: #368537;"><a style="color:#C8E6C9;" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
-            <td style="background-color: #2455a7"><a style="color:lightblue" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
-            <td style="background-color: #ffb3ba"><a style="color:red" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+            <td class="utility" style="background-color: #B4A947;"><a style="color:#FFF9C4;" asp-controller="Compare" asp-action="Add" asp-route-id="@item.Id">Compare</a></td>
+            <td class="utility" style="background-color: #368537;"><a style="color:#C8E6C9;" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+            <td class="utility" style="background-color: #2455a7"><a style="color:lightblue" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+            <td class="utility" style="background-color: #ffb3ba"><a style="color:red" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
         </tr>
     }
     </tbody>

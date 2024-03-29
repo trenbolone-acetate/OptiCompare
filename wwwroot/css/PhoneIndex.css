@@ -1,31 +1,36 @@
-﻿body {
-    background: linear-gradient(180deg,#bdbdbd 10%, #686868);
-        font-family: Arial, sans-serif;
+﻿.phonesListH1{
+    margin:auto;
+    padding: 1%;
+    font-size: xxx-large;
+    text-align: center;
+    width: 21%;
+    color: ivory;
 }
-
 table {
     border-collapse: collapse;
-    background: darkgray;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .5);
+    background: #d0d0d0;
+    box-shadow: 0 5px 10px 0 rgba(136, 136, 136, 0.5);
 }
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #26242a;
     padding: 5%;
     text-align: center;
     vertical-align: middle;
 }
-tr {
-    border-bottom: 5px solid #ddd;
+
+tbody tr * {
+    transition: 0.5s;
 }
-td {
-}
-tr > th:first-child {
+    tbody tr *:hover:not(.utility){
+            transition: 0.5s;
+            background-color: #afafaf;
+    }
+thead > tr:first-child {
     text-align: center;
-    background-color: rgba(239, 239, 239, 0.4);
+    background-color: #afa1b2;
     color: rebeccapurple;
 }
 .search-create{
-    background: radial-gradient(at center, darkgray 20%,#c5c5c5 100%);
     display: flex;
     flex-direction: row;
 }
@@ -36,31 +41,12 @@ tr > th:first-child {
     color: ivory;
     transition: 0.5s;
 }
-    .search-create a:hover {
-        width:20%;
-        color:rgba(0, 182, 79);
-    }
 
 .large {
     font-size: large;
 }
 
-.rise {
-    text-shadow: 2pt 2pt -2pt 2pt #000;
-    animation: rise 1s ease-in-out 0.5s forwards;
-}
 
-@keyframes rise {
-    25% {
-        color: #a000bd;
-    }
-    50% {
-        color: #ec82ff;
-    }
-    100% {
-        color: #9c9c9c;
-    }
-}
 .btn {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .3);
 }

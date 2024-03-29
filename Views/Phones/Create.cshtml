@@ -12,23 +12,23 @@
 <div class="row">
     <form class="form" style="margin:0 0 2%;font-size:large" asp-action="CreateFromSearch" method="post">
         <input type="text" name="searchString" class="form__field" placeholder="Enter search string" />
-        <input type="submit" value="Add" class="btn btn--primary btn--inside uppercase" />
+        <input type="submit" value="Add" class="add-btn btn btn--primary btn--inside" />
         <p class="large rise" style="float:right;">Add new phone just by typing it's brand and model names!</p>
     </form>
     
 
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-controller="Phones" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @await Html.PartialAsync("_CreateFormPartial",Model)
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="bottom-actions bg-secondary bg-opacity-50">
+                <input type="submit" value="Create" class="btn btn-success" /> |
+                <a class="btn btn-info" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
 </div>
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

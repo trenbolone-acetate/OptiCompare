@@ -1,6 +1,6 @@
-﻿body {
-    background: radial-gradient(at top center, #BBBED0, #250D37);
-    font-family: Arial, sans-serif;
+﻿table{
+    margin: auto;
+    width: 60%;
 }
 th, td {
     border: 1px solid #ddd;
@@ -14,13 +14,19 @@ tr {
 }
 
 td {
-    font-size: small;
+    font-size: large;
 }
 
-tr > th:first-child {
+tr > td:first-child {
     text-align: center;
-    background-color: rgba(239, 239, 239, 0.4);
+    background-color: #353a44;
     color: #ffe2e2;
+}
+tr > td:nth-child(2) {
+    width:70%;
+}
+tr > td:nth-child(2) input{
+    width:90%;
 }
 .rise {
     animation: rise 1s ease-in-out 0.5s forwards;
@@ -36,22 +42,48 @@ tr > th:first-child {
     }
 
     100% {
-        color: #000000;
+        color: ivory;
     }
 }
 
-.btn {
-    border: 1pt solid black;
+.add-btn {
+    border: 1pt solid ivory;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .3);
+    color: ivory;
+    transition: 0.5s;
+
 }
-    .btn:hover {
+    .add-btn:hover {
         transition: 0.5s;
-        border: 1pt solid ivory;
-        color: ivory;
+        border: 1pt dashed grey;
+        color: grey;
         box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .3);
     }
 
 .form {
     box-shadow: 0 6px 40px 0 rgba(0, 0, 0, .3);
     padding:3%;
+}
+.bottom-actions{
+    border-radius: 5pt;
+    padding: 0.4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    flex-direction: row;
+    margin: 1% auto auto;
+}
+.bottom-actions a{
+    margin: 2%;
+    text-decoration: none;
+    font-size: large;
+}
+.bottom-actions input{
+    margin: 2%;
+    text-decoration: none;
+    font-size: large;
+}
+#hasNetwork5GBands {
+    height: 25pt;
 }

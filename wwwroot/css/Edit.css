@@ -1,17 +1,19 @@
-﻿body {
-    background: #BBBED0;
-    background: radial-gradient(at right center, #d0bbbc, #19125e);
-    font-family: Arial, sans-serif;
+﻿:root {
+    --main-bg-color: #282034;
 }
 
+body {
+    background-color: var(--main-bg-color);
+    ;
+}
+header{
+    background-color: var(--main-bg-color);
+}
 h1 {
     margin: 1%;
     padding: 1%;
     border-radius: 50pt;
     color: #d0bbbc;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #19125e;
-    font-family: 'Helvetica Neue', sans-serif;
     font-size: xxx-large;
     font-weight: bold;
     letter-spacing: 2px;
@@ -19,7 +21,7 @@ h1 {
 }
 table {
     font-size: medium;
-    width: 40%;
+    width: 60%;
     margin: auto;
     border-collapse: collapse;
     background-color: ivory;
@@ -29,7 +31,7 @@ table input:not(.no-style){
     width: 100%;
     padding: 2%;
     border-radius: 5pt;
-    box-shadow: 0 6px 10px 0 rgba(147, 56, 169, .3);
+    box-shadow: 0 2px 4px 0 var(--main-bg-color);
 }
 th, td {
     border: 1px solid #ddd;
@@ -41,7 +43,11 @@ th, td {
 tr {
     border-bottom: 5px solid #ddd;
 }
-
+tr>td:first-child{
+    font-size: large;
+    color: var(--main-bg-color);
+    width: 20%;
+}
 tr > th:first-child {
     text-align: center;
     background-color: rgba(239, 239, 239, 0.4);

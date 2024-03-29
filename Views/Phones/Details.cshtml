@@ -8,7 +8,7 @@
 </head>
     <hr />
     @await Html.PartialAsync("_DetailsDeletePartialView",Model)
-    <div class="actions">
-        <a style="color:lightblue" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        <a asp-action="Index">Back to List</a>
+    <div class="bottom-actions bg-secondary bg-opacity-50">
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a class="btn btn-info" asp-action="Index">Back to List</a>
     </div>
