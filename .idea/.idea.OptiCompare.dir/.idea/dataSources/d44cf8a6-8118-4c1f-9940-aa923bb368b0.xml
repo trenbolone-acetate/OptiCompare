@@ -1112,7 +1112,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="294" parent="1" name="opticompare-db">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-03-24.17:14:48</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-03-29.04:24:26</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="295" parent="1" name="academics">
@@ -1150,7 +1150,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="304" parent="294" name="phone">
+    <table id="304" parent="294" name="phones">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
@@ -1175,7 +1175,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="309" parent="304" name="Id">
-      <AutoIncrement>14</AutoIncrement>
+      <AutoIncrement>25</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1195,103 +1195,100 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="313" parent="304" name="bodyWidth">
+    <column id="313" parent="304" name="BodyDimensions_bodyWidth">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="314" parent="304" name="bodyHeight">
+    <column id="314" parent="304" name="BodyDimensions_bodyHeight">
       <DasType>longtext|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="315" parent="304" name="bodyThickness">
+    <column id="315" parent="304" name="BodyDimensions_bodyWeight">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="316" parent="304" name="bodyWeight">
+    <column id="316" parent="304" name="BodyDimensions_bodyThickness">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="317" parent="304" name="displayType">
+    <column id="317" parent="304" name="DisplayDetails_displayType">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <column id="318" parent="304" name="displaySize">
+    <column id="318" parent="304" name="DisplayDetails_displaySize">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <column id="319" parent="304" name="displayResolution">
+    <column id="319" parent="304" name="DisplayDetails_displayResolution">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>11</Position>
     </column>
-    <column id="320" parent="304" name="Cpu">
+    <column id="320" parent="304" name="DisplayDetails_displayProtection">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>12</Position>
     </column>
-    <column id="321" parent="304" name="Gpu">
+    <column id="321" parent="304" name="PlatformDetails_RAM">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>13</Position>
     </column>
-    <column id="322" parent="304" name="Os">
+    <column id="322" parent="304" name="PlatformDetails_Cpu">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>14</Position>
     </column>
-    <column id="323" parent="304" name="RAM">
+    <column id="323" parent="304" name="PlatformDetails_Gpu">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>15</Position>
     </column>
-    <column id="324" parent="304" name="storage">
+    <column id="324" parent="304" name="PlatformDetails_Os">
       <DasType>longtext|0s</DasType>
       <NotNull>1</NotNull>
       <Position>16</Position>
     </column>
-    <column id="325" parent="304" name="mainCameraDetails">
+    <column id="325" parent="304" name="storage">
       <DasType>longtext|0s</DasType>
       <Position>17</Position>
     </column>
-    <column id="326" parent="304" name="frontCameraDetails">
+    <column id="326" parent="304" name="CameraDetails_mainCameraDetails">
       <DasType>longtext|0s</DasType>
       <Position>18</Position>
     </column>
-    <column id="327" parent="304" name="batteryCapacity">
+    <column id="327" parent="304" name="CameraDetails_frontCameraDetails">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>19</Position>
     </column>
-    <column id="328" parent="304" name="chargingSpeed">
+    <column id="328" parent="304" name="BatteryDetails_batteryCapacity">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>20</Position>
     </column>
-    <column id="329" parent="304" name="batteryLifeTest">
+    <column id="329" parent="304" name="BatteryDetails_chargingSpeed">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>21</Position>
     </column>
-    <column id="330" parent="304" name="price">
+    <column id="330" parent="304" name="BatteryDetails_batteryLifeTest">
       <DasType>longtext|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>22</Position>
     </column>
-    <column id="331" parent="304" name="image">
+    <column id="331" parent="304" name="price">
       <DasType>longtext|0s</DasType>
       <Position>23</Position>
     </column>
-    <index id="332" parent="304" name="PRIMARY">
+    <column id="332" parent="304" name="image">
+      <DasType>longtext|0s</DasType>
+      <Position>24</Position>
+    </column>
+    <index id="333" parent="304" name="PRIMARY">
       <ColNames>Id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="333" parent="304" name="PRIMARY">
+    <key id="334" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

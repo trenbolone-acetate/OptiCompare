@@ -1,4 +1,6 @@
-﻿namespace OptiCompare.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OptiCompare.PhoneSpecs;
 
 public class BodyDimensions
 {
@@ -13,9 +15,12 @@ public class BodyDimensions
         this.bodyThickness = bodyThickness;
         this.bodyWeight = bodyWeight;
     }
-
-    public string? bodyWidth { get; set; }
-    public string? bodyHeight { get; set; }
-    public string? bodyWeight { get; set; }
-    public string? bodyThickness { get; set; }
+    [MaxLength(200)]
+    public string? bodyWidth { get; init; }
+    [MaxLength(200)]
+    public string? bodyHeight { get; init; }
+    [MaxLength(200)]
+    public string? bodyWeight { get; init; }
+    [MaxLength(200)]
+    public string? bodyThickness { get; init; }
 }

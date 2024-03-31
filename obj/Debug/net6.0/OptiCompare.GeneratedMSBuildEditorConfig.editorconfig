@@ -8,77 +8,97 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OptiCompare
 build_property.RootNamespace = OptiCompare
-build_property.ProjectDir = W:\OptiCompare\OptiCompare\OptiCompare\
+build_property.ProjectDir = C:\git\reps\OptiCompare\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = W:\OptiCompare\OptiCompare\OptiCompare
+build_property.MSBuildProjectDirectory = C:\git\reps\OptiCompare
 build_property._RazorSourceGeneratorDebug = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Comparison/Index.cshtml]
+[C:/git/reps/OptiCompare/Views/Comparison/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFyaXNvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Home/Error.cshtml]
+[C:/git/reps/OptiCompare/Views/Home/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Home/Index.cshtml]
+[C:/git/reps/OptiCompare/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/Create.cshtml]
+[C:/git/reps/OptiCompare/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/git/reps/OptiCompare/Views/Phones/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/Delete.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/Details.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/Edit.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/Index.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/NoPhoneFoundAPI.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/NoPhoneFoundAPI.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXE5vUGhvbmVGb3VuZEFQSS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Phones/PhoneExists.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/PhoneExists.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXFBob25lRXhpc3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Shared/_ComparisonIndexPartialView.cshtml]
+[C:/git/reps/OptiCompare/Views/Phones/PhoneIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXFBob25lSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/git/reps/OptiCompare/Views/Phones/_FormFieldPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVzXF9Gb3JtRmllbGRQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/git/reps/OptiCompare/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/git/reps/OptiCompare/Views/Shared/_ComparisonIndexPartialView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db21wYXJpc29uSW5kZXhQYXJ0aWFsVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Shared/_CreateFormPartial.cshtml]
+[C:/git/reps/OptiCompare/Views/Shared/_CreateFormPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DcmVhdGVGb3JtUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Shared/_DetailsDeletePartialView.cshtml]
+[C:/git/reps/OptiCompare/Views/Shared/_DetailsDeletePartialView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9EZXRhaWxzRGVsZXRlUGFydGlhbFZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/git/reps/OptiCompare/Views/Shared/_FormFieldPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb3JtRmllbGRQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/git/reps/OptiCompare/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/_ViewImports.cshtml]
+[C:/git/reps/OptiCompare/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/_ViewStart.cshtml]
+[C:/git/reps/OptiCompare/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[W:/OptiCompare/OptiCompare/OptiCompare/Views/Shared/_Layout.cshtml]
+[C:/git/reps/OptiCompare/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2t9oczahuo

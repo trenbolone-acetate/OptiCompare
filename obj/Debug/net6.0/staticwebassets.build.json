@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bU5GMXa/gATSSVMQXeGumRHtjoPR/vKltq5PMlwCNII=",
+  "Hash": "++S2zLg+DTxpTzRY+e4fnrBPgbbq1xUG/xCmW+wE8Ss=",
   "Source": "OptiCompare",
   "BasePath": "_content/OptiCompare",
   "Mode": "Default",
@@ -204,12 +204,12 @@
       "OriginalItemSpec": "wwwroot\\css\\PhoneIndex.css"
     },
     {
-      "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\favicon.ico",
+      "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\icon.ico",
       "SourceId": "OptiCompare",
       "SourceType": "Discovered",
       "ContentRoot": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\",
       "BasePath": "_content/OptiCompare",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "icon.ico",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,7 +218,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\icon.ico"
     },
     {
       "Identity": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\wwwroot\\js\\site.js",

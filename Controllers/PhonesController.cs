@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OptiCompare.Data;
 using OptiCompare.Models;
+using X.PagedList;
 
 namespace OptiCompare.Controllers
 {
@@ -19,30 +20,29 @@ namespace OptiCompare.Controllers
             _context = context;
         }
 
-        // GET: Phones
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(int? page, string searchString)
         {
+            const int pageSize = 7; 
+            var pageNumber = page ?? 1;
             ViewData["CurrentFilter"] = searchString;
-            var phones = from ps in _context.Phones
-                select ps;
+            var phones = from ps in _context.phones select ps;
             if (!string.IsNullOrEmpty(searchString))
             {
-                phones = phones.Where(ps => ps.brandName.Contains(searchString) || ps.modelName.Contains(searchString));
-                return View(phones);
+                phones = phones.Where(ps => ps.brandName!.Contains(searchString) || ps.modelName!.Contains(searchString));
             }
-            return View(phones);
+            var paginatedPhones = await phones.ToPagedListAsync(pageNumber, pageSize);
+            return View(paginatedPhones);
         }
 
-        // GET: Phones/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Phones == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var phone = await _context.Phones
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var phone = await _context.phones
+                .FirstOrDefaultAsync(m => m.id == id);
             if (phone == null)
             {
                 return NotFound();
@@ -51,7 +51,6 @@ namespace OptiCompare.Controllers
             return View(phone);
         }
 
-        // GET: Phones/Create
         public IActionResult Create()
         {
             var newPhone = new Phone();
@@ -61,25 +60,21 @@ namespace OptiCompare.Controllers
         [HttpPost]
         public IActionResult CreateFromSearch(string searchString)
         {
-            // Use the PhoneDetailsFetcher to create a new phone based on the search string
             searchString = searchString.Replace(" ", "%20");
             var newPhone = PhoneDetailsFetcher.CreateFromSearch(searchString);
-            // Check if the phone already exists in the database
-            if (_context.Phones.Any(p => p.modelName == newPhone.Result.modelName))
+            if (newPhone.Result == null)
             {
-                // If the phone already exists, return a view indicating this
+                return View("NoPhoneFoundAPI");
+            }
+            if (_context.phones.Any(p => p.modelName == newPhone.Result.modelName))
+            {
                 return View("PhoneExists");
             }
-            // If the phone does not exist, add it to the database and save changes
-            _context.Phones.Add(newPhone.Result);
+            _context.phones.Add(newPhone.Result);
             _context.SaveChanges();
-            // Redirect to the index view
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Phones/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,brandName,modelName,hasNetwork5GBands," +
@@ -97,7 +92,6 @@ namespace OptiCompare.Controllers
             return View(phone);
         }
 
-        // GET: Phones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -105,7 +99,7 @@ namespace OptiCompare.Controllers
                 return NotFound();
             }
 
-            var phone = await _context.Phones.FindAsync(id);
+            var phone = await _context.phones.FindAsync(id);
             if (phone == null)
             {
                 return NotFound();
@@ -113,9 +107,6 @@ namespace OptiCompare.Controllers
             return View(phone);
         }
 
-        // POST: Phones/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,brandName,modelName,hasNetwork5GBands," +
@@ -123,7 +114,7 @@ namespace OptiCompare.Controllers
                                                              "CameraDetails,BatteryDetails,price,image")] Phone phone)
         {
             Console.WriteLine("Entered Edit");
-            var oldPhone = await _context.Phones.FindAsync(id);
+            var oldPhone = await _context.phones.FindAsync(id);
             
             if (oldPhone == null) return RedirectToAction(nameof(Index));
             
@@ -132,16 +123,15 @@ namespace OptiCompare.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Phones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Phones == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var phone = await _context.Phones
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var phone = await _context.phones
+                .FirstOrDefaultAsync(m => m.id == id);
             if (phone == null)
             {
                 return NotFound();
@@ -150,29 +140,18 @@ namespace OptiCompare.Controllers
             return View(phone);
         }
 
-        // POST: Phones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Phones == null)
-            {
-                return Problem("Cannot delete null object.");
-            }
-            var phone = await _context.Phones.FindAsync(id);
+            var phone = await _context.phones.FindAsync(id);
             if (phone != null)
             {
-                _context.Phones.Remove(phone);
+                _context.phones.Remove(phone);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool PhoneExists(int id)
-        {
-          return (_context.Phones?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-
     }
 }

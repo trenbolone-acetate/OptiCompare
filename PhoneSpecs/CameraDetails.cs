@@ -1,4 +1,6 @@
-﻿namespace OptiCompare.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OptiCompare.PhoneSpecs;
 
 public class CameraDetails
 {
@@ -11,7 +13,8 @@ public class CameraDetails
         this.mainCameraDetails = mainCameraDetails;
         this.frontCameraDetails = frontCameraDetails;
     }
-
+    [MaxLength(200)]
     public string? mainCameraDetails { get; set; }
+    [MaxLength(200)]
     public string? frontCameraDetails { get; set; }
 }

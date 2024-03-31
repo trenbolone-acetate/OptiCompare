@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using OptiCompare.Models;
 using System.Net;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OptiCompare.PhoneSpecs;
 
 namespace OptiCompare;
 
@@ -10,24 +11,24 @@ public abstract class PhoneDetailsFetcher
 {
     private static string? _apiToken;
     public static void SetApiToken(string? token) => _apiToken = token;
-    public static async Task<Phone> CreateFromSearch(string searchedPhone)
+
+    public static async Task<Phone?> CreateFromSearch(string searchedPhone)
     {
         var phoneId = await GetPhoneId(searchedPhone);
         if (phoneId == null)
         {
-            throw new Exception("Could not find phone by ID.");
+            return null;
         }
 
         var result = await GetPhoneDetailsById(phoneId);
         if (result == null)
         {
-            throw new Exception("Could not fetch phone details.");
+            return null;
         }
 
         var phone = MapJsonToPhone(result);
         return await Task.FromResult(phone);
     }
-
 
 
     private static async Task<string?> GetPhoneId(string phone)
@@ -52,16 +53,15 @@ public abstract class PhoneDetailsFetcher
             JArray? items = (JArray)json["data"]?["items"]!;
             string? firstId = (string)items[0]["product"]?["id"]!;
             return firstId;
-
         }
-        catch (HttpRequestException requestException)
+        catch (HttpRequestException e)
         {
-            Console.WriteLine(requestException);
-            throw;
+            Console.WriteLine("Failed to find searched phone's id through the API");
+            return null;
         }
     }
 
-    private static async Task<string> GetPhoneDetailsById(string? phoneId)
+    private static async Task<string?> GetPhoneDetailsById(string? phoneId)
     {
         var clientHandler = new HttpClientHandler
         {
@@ -79,7 +79,16 @@ public abstract class PhoneDetailsFetcher
             },
         };
         using var response = await client.SendAsync(request);
-        response.EnsureSuccessStatusCode();
+        try
+        {
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine("Failed to find searched phone's details through the API");
+            return null;
+        }
+
         var body = await response.Content.ReadAsStringAsync();
         JObject json = JObject.Parse(body);
         JObject? firstProduct = (JObject)json["data"]?["items"]?[0]!;
@@ -103,22 +112,23 @@ public abstract class PhoneDetailsFetcher
                 brandName = productData?["brand"]?.ToString() ?? "undefined",
                 modelName = productData?["model"]?.ToString() ?? "undefined",
                 hasNetwork5GBands = keyAspects?["wireless_&_cellular"]?.ToString().Contains("5G") ?? false,
-                BodyDimensions = new BodyDimensions(design?["body"]?["width"]?.ToString() ?? "undefined",
+                bodyDimensions = new BodyDimensions(design?["body"]?["width"]?.ToString() ?? "undefined",
                     design?["body"]?["height"]?.ToString(),
                     design?["body"]?["thickness"]?.ToString() ?? "undefined",
                     design?["body"]?["weight"]?.ToString() ?? "undefined"),
-                DisplayDetails = new DisplayDetails(display?["type"]?.ToString() ?? "undefined",
+                displayDetails = new DisplayDetails(display?["type"]?.ToString() ?? "undefined",
                     display?["diagonal"]?.ToString() ?? "undefined",
                     display?["resolution_(h_x_w)"]?.ToString() ?? "undefined",
                     display?["glass"]?.ToString() ?? "undefined"),
-                PlatformDetails = new PlatformDetails(inside?["processor"]?["cpu"]?.ToString() ?? "undefined",
+                platformDetails = new PlatformDetails(inside?["processor"]?["cpu"]?.ToString() ?? "undefined",
                     inside?["processor"]?["gpu"]?.ToString() ?? "undefined",
                     inside?["software"]?["os_version"]?.ToString() ?? "undefined",
                     inside?["ram"]?["capacity"]?.ToString() ?? "undefined"),
                 storage = inside?["storage"]?["capacity"]?.ToString() ?? "undefined",
-                CameraDetails = new CameraDetails($"{camera?["back_camera"]?["resolution"]}, {camera?["back_camera"]?["resolution_(h_x_w)"]} {camera?["back_camera"]?["aperture_(w)"]}",
+                cameraDetails = new CameraDetails(
+                    $"{camera?["back_camera"]?["resolution"]}, {camera?["back_camera"]?["resolution_(h_x_w)"]} {camera?["back_camera"]?["aperture_(w)"]}",
                     $"{camera?[$"front_camera"]?["resolution"]}, {camera?["front_camera"]?["resolution_(h_x_w)"]} {camera?["front_camera"]?["aperture_(w)"]}"),
-                BatteryDetails = new BatteryDetails(inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
+                batteryDetails = new BatteryDetails(inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
                     $"{inside?["battery"]?["charging_power"]} wired, {inside?["battery"]?["wireless_charging_power"]} wireless",
                     "not tested yet"),
                 price = jsonData["price"]?["msrp"]?.ToString() ?? "undefined",

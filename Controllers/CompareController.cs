@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OptiCompare.Data;
 using OptiCompare.Models;
+using X.PagedList;
 
 namespace OptiCompare.Controllers;
 
@@ -20,9 +21,9 @@ public class CompareController : Controller
     {
         _context = context;
     }
-    public IActionResult? Add(int? id)
+    public async Task<IActionResult?> Add(int? id)
     {
-        var phone = _context.Phones.SingleOrDefault(phone1 => phone1.Id == id);
+        var phone = _context.phones.SingleOrDefault(phone1 => phone1.id == id);
         if (_phoneComparer?.phones != null && phone != null)
         {
             //check tempData content
@@ -36,12 +37,15 @@ public class CompareController : Controller
                 }
 
                 Debug.Assert(_phoneComparer.phones != null, "_phoneComparer.phones != null");
-                if (_phoneComparer.phones.Any(p => p.Id == phone.Id))
+                if (_phoneComparer.phones.Any(p => p.id == phone.id))
                 {
                     TempData["Message"] = "Trying to add a phone thats already in comparison";
                     var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
                     TempData["PhoneComparer"] = samePhoneComparerJson;
-                    return View("~/Views/Phones/Index.cshtml",_context.Phones);
+                    int pageNumber = 1;
+                    int pageSize = 7;
+                    var phonesPagedList = await _context.phones.ToPagedListAsync(pageNumber, pageSize);
+                    return View("~/Views/Phones/Index.cshtml",phonesPagedList);
                 }
             }
             _phoneComparer?.phones?.Add(phone);
@@ -53,21 +57,23 @@ public class CompareController : Controller
         return null;
     }
     
-    public IActionResult Remove(int? id)
+    public async Task<IActionResult> Remove(int? id)
     {
         _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(TempData.Peek("PhoneComparer")?.ToString() ?? string.Empty);
         if (_phoneComparer?.phones != null)
         {
-            var phoneToRemove = _phoneComparer?.phones.FirstOrDefault(phone => phone.Id == id);
+            var phoneToRemove = _phoneComparer?.phones.FirstOrDefault(phone => phone.id == id);
             Debug.Assert(phoneToRemove != null, nameof(phoneToRemove) + " != null");
             _phoneComparer?.phones.Remove(phoneToRemove);
             var phoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
             TempData["PhoneComparer"] = phoneComparerJson;
             return RedirectToAction(nameof(Index));
         }
-
+        int pageNumber = 1;
+        int pageSize = 10; // or whatever size you want
+        var phonesPagedList = await _context.phones.ToPagedListAsync(pageNumber, pageSize);
         Console.WriteLine("Cannot remove non-existing phone from comparison!");
-        return View("~/Views/Phones/Index.cshtml",_context.Phones);
+        return View("~/Views/Phones/Index.cshtml",phonesPagedList);
     }
 
     public IActionResult Index()

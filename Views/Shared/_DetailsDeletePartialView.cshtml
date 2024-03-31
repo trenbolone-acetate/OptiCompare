@@ -5,7 +5,7 @@
             <tr>
                 <td>Brand Name</td>
                 <td>@Html.DisplayFor(model => model.brandName)</td>
-                <td rowspan="6" colspan="2" style="border-left: 3px solid #26242a">
+                <td rowspan="6" colspan="2" style="max-width:400px;border-left: 3px solid #26242a">
                     <img src="@Model.image" alt="Thumbnail" width="100%"/>
                 </td>
             </tr>
@@ -19,71 +19,71 @@
             </tr>
             <tr>
                 <td>Body Width</td>
-                <td>@Html.DisplayFor(model => model.BodyDimensions.bodyWidth)</td>
+                <td>@Html.DisplayFor(model => model.bodyDimensions.bodyWidth)</td>
             </tr>
             <tr>
                 <td>Body Heights</td>
-                <td>@Html.DisplayFor(model => model.BodyDimensions.bodyHeight)</td>
+                <td>@Html.DisplayFor(model => model.bodyDimensions.bodyHeight)</td>
             </tr>
             <tr>
                 <td>Body Thickness</td>
-                <td>@Html.DisplayFor(model => model.BodyDimensions.bodyThickness)</td>
+                <td>@Html.DisplayFor(model => model.bodyDimensions.bodyThickness)</td>
             </tr>
             <tr>
                 <td>Body Weight</td>
-                <td colspan="3">@Html.DisplayFor(model => model.BodyDimensions.bodyWeight)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.bodyDimensions.bodyWeight)</td>
             </tr>
             <tr>
                 <td>Display Type</td>
-                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displayType)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displayDetails.displayType)</td>
             </tr>
             <tr>
                 <td>Display Size</td>
-                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displaySize)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displayDetails.displaySize)</td>
             </tr>
             <tr>
                 <td>Display Resolution</td>
-                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displayResolution)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displayDetails.displayResolution)</td>
             </tr>
             <tr>
                 <td>Display Protection</td>
-                <td colspan="3">@Html.DisplayFor(model => model.DisplayDetails.displayProtection)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.displayDetails.displayProtection)</td>
             </tr>
             <tr>
                 <td>CPU</td>
-                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.Cpu)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.platformDetails.cpu)</td>
             </tr>
             <tr>
                 <td>GPU</td>
-                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.Gpu)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.platformDetails.gpu)</td>
             </tr>
             <tr>
                 <td>OS</td>
-                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.Os)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.platformDetails.os)</td>
             </tr>
             <tr>
                 <td>RAM</td>
-                <td colspan="3">@Html.DisplayFor(model => model.PlatformDetails.RAM)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.platformDetails.ram)</td>
             </tr>
             <tr>
                 <td>Main Camera</td>
-                <td colspan="3">@Html.DisplayFor(model => model.CameraDetails.mainCameraDetails)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.cameraDetails.mainCameraDetails)</td>
             </tr>
             <tr>
                 <td>Front Camera</td>
-                <td colspan="3">@Html.DisplayFor(model => model.CameraDetails.frontCameraDetails)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.cameraDetails.frontCameraDetails)</td>
             </tr>
             <tr>
                 <td>Battery Capacity</td>
-                <td colspan="3">@Html.DisplayFor(model => model.BatteryDetails.batteryCapacity)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.batteryDetails.batteryCapacity)</td>
             </tr>
             <tr>
                 <td>Charging speed</td>
-                <td colspan="3">@Html.DisplayFor(model => model.BatteryDetails.chargingSpeed)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.batteryDetails.chargingSpeed)</td>
             </tr>
             <tr>
                 <td>Battery Life Test</td>
-                <td colspan="3">@Html.DisplayFor(model => model.BatteryDetails.batteryLifeTest)</td>
+                <td colspan="3">@Html.DisplayFor(model => model.batteryDetails.batteryLifeTest)</td>
             </tr>
             <tr>
                 <td>Storage</td>

@@ -1,11 +1,18 @@
-﻿@model IEnumerable<OptiCompare.Models.Phone>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@model IPagedList<Phone>
 @{
     ViewData["Title"] = "Phone's List";
 }
 <head>
-    <link rel="stylesheet" href="~/css/PhoneIndex.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/PhoneIndex.css" asp-append-version="true"/><title>Phones list</title>
 </head>
-@if(TempData["Message"] != null){
+
+
+@if (TempData["Message"] != null)
+{
     <script>
         alert("@TempData["Message"]?.ToString()");
     </script>
@@ -18,6 +25,18 @@
         <input type="submit" value="Search" class="btn btn-secondary form-control-bttn"/>
     </form>
 </div>
+<div class="paginator">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+                searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]
+            }),
+            new PagedListRenderOptions()
+            {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" }
+            })
+    </div>
 <table class="table">
     <thead>
     <tr class="tr1">
@@ -40,23 +59,30 @@
         <tr>
             <th>@item.modelName</th>
             <td>@(item.hasNetwork5GBands ? "Yes" : "No")</td>
-            <td>@item.DisplayDetails.displaySize</td>
-            <td>@item.DisplayDetails.displayResolution</td>
-            <td>@item.DisplayDetails.displayType</td>
-            <td>@item.PlatformDetails.Os</td>
+            <td>@item.displayDetails.displaySize</td>
+            <td>@item.displayDetails.displayResolution</td>
+            <td>@item.displayDetails.displayType</td>
+            <td>@item.platformDetails.os</td>
             <td>@item.storage</td>
-            <td>@item.CameraDetails.mainCameraDetails</td>
-            <td>@item.BatteryDetails.batteryCapacity</td>
+            <td>@item.cameraDetails.mainCameraDetails</td>
+            <td>@item.batteryDetails.batteryCapacity</td>
             <td>@item.price</td>
-            <td class="utility" style="background-color: #B4A947;"><a style="color:#FFF9C4;" asp-controller="Compare" asp-action="Add" asp-route-id="@item.Id">Compare</a></td>
-            <td class="utility" style="background-color: #368537;"><a style="color:#C8E6C9;" asp-action="Details" asp-route-id="@item.Id">Details</a></td>
-            <td class="utility" style="background-color: #2455a7"><a style="color:lightblue" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
-            <td class="utility" style="background-color: #ffb3ba"><a style="color:red" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+            <td class="utility" style="background-color: #B4A947;">
+                <a style="color:#FFF9C4;" asp-controller="Compare" asp-action="Add" asp-route-id="@item.id">Compare</a>
+            </td>
+            <td class="utility" style="background-color: #368537;">
+                <a style="color:#C8E6C9;" asp-action="Details" asp-route-id="@item.id">Details</a>
+            </td>
+            <td class="utility" style="background-color: #2455a7">
+                <a style="color:lightblue" asp-action="Edit" asp-route-id="@item.id">Edit</a>
+            </td>
+            <td class="utility" style="background-color: #ffb3ba">
+                <a style="color:red" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
         </tr>
     }
     </tbody>
 </table>
-
 <datalist id="phones">
     @foreach (var phone in Model)
     {

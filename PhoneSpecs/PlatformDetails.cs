@@ -1,4 +1,6 @@
-﻿namespace OptiCompare.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OptiCompare.PhoneSpecs;
 
 public class PlatformDetails
 {
@@ -6,16 +8,19 @@ public class PlatformDetails
     {
     }
 
-    public PlatformDetails(string cpu, string gpu,  string os, string ram)
+    public PlatformDetails(string? cpu, string? gpu,  string? os, string? ram)
     {
-        Cpu = cpu;
-        Gpu = gpu;
-        Os = os;
-        RAM = ram;
+        this.cpu = cpu;
+        this.gpu = gpu;
+        this.os = os;
+        this.ram = ram;
     }
-
-    public string Cpu { get; set; }
-    public string Gpu { get; set; }
-    public string Os { get; set; }
-    public string RAM { get; set; }
+    [MaxLength(200)]
+    public string? cpu { get; init; }
+    [MaxLength(200)]
+    public string? gpu { get; init; }
+    [MaxLength(200)]
+    public string? os { get; init; }
+    [MaxLength(200)]
+    public string? ram { get; init; }
 }

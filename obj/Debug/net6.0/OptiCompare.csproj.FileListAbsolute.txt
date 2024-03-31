@@ -268,3 +268,6 @@ W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\runtimes\win-x64\native\
 W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\MySqlConnector.dll
+W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\X.PagedList.dll
+W:\OptiCompare\OptiCompare\OptiCompare\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll
+W:\OptiCompare\OptiCompare\OptiCompare\obj\Debug\net6.0\OptiCompare.MvcApplicationPartsAssemblyInfo.cs

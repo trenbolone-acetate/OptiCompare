@@ -9,7 +9,7 @@
 </head>
 <h1>Are you sure you want to delete this phone?</h1>
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="id"/>
         @await Html.PartialAsync("_DetailsDeletePartialView",Model)
         <div class="bottom-actions bg-secondary bg-opacity-50">
             <input type="submit" value="Delete" class="btn btn-danger"/> |

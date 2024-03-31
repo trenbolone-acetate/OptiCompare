@@ -3976,6 +3976,30 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "X.PagedList/9.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/X.PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/X.PagedList.dll": {}
+        }
+      },
+      "X.PagedList.Mvc.Core/9.1.2": {
+        "type": "package",
+        "dependencies": {
+          "X.PagedList": "9.1.2"
+        },
+        "compile": {
+          "lib/net6.0/X.PagedList.Mvc.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/X.PagedList.Mvc.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "ZstdSharp.Port/0.7.1": {
         "type": "package",
         "compile": {
@@ -11298,6 +11322,38 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "X.PagedList/9.1.2": {
+      "sha512": "qePK/lt+Y8PeQM9E/DkWY/AIyxDVEMX0XFCU5CfLP1+Y9SUThFyaY8/QgldOg9uOJLvse1i3oAQDJOrhb3usdw==",
+      "type": "package",
+      "path": "x.pagedlist/9.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/X.PagedList.dll",
+        "lib/net8.0/X.PagedList.dll",
+        "lib/netstandard2.0/X.PagedList.dll",
+        "lib/netstandard2.1/X.PagedList.dll",
+        "x.pagedlist.9.1.2.nupkg.sha512",
+        "x.pagedlist.nuspec"
+      ]
+    },
+    "X.PagedList.Mvc.Core/9.1.2": {
+      "sha512": "+g8fJgXXVhl17BzVv8bGAkWooul23REeGNIJ4jUlA1Iqbw8Yq0OFMx/mGvjjEhIBNwDrjdhJKXGt7N7jejZWcQ==",
+      "type": "package",
+      "path": "x.pagedlist.mvc.core/9.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/X.PagedList.Mvc.Core.dll",
+        "lib/net8.0/X.PagedList.Mvc.Core.dll",
+        "x.pagedlist.mvc.core.9.1.2.nupkg.sha512",
+        "x.pagedlist.mvc.core.nuspec"
+      ]
+    },
     "ZstdSharp.Port/0.7.1": {
       "sha512": "Idgg+mJEyAujqDPzA3APy9dNoyw0YQcNA65GgYjktDRtJ+nvx/hv+J+m6Eax3JJMGEYGy04oc5YNP6ZvQ3Y1vQ==",
       "type": "package",
@@ -11326,7 +11382,8 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16",
       "MySql.Data >= 8.3.0",
       "MySql.EntityFrameworkCore >= 8.0.0",
-      "MySqlConnector >= 2.3.5"
+      "MySqlConnector >= 2.3.5",
+      "X.PagedList.Mvc.Core >= 9.1.2"
     ]
   },
   "packageFolders": {
@@ -11335,11 +11392,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\OptiCompare.csproj",
+      "projectUniqueName": "C:\\git\\reps\\OptiCompare\\OptiCompare.csproj",
       "projectName": "OptiCompare",
-      "projectPath": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\OptiCompare.csproj",
+      "projectPath": "C:\\git\\reps\\OptiCompare\\OptiCompare.csproj",
       "packagesPath": "C:\\Users\\User-PC\\.nuget\\packages\\",
-      "outputPath": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\obj\\",
+      "outputPath": "C:\\git\\reps\\OptiCompare\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11401,6 +11458,10 @@
           "MySqlConnector": {
             "target": "Package",
             "version": "[2.3.5, )"
+          },
+          "X.PagedList.Mvc.Core": {
+            "target": "Package",
+            "version": "[9.1.2, )"
           }
         },
         "imports": [

@@ -9,7 +9,7 @@
 <h1>Edit</h1>
         <form asp-controller="Phones" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="id"/>
             @await Html.PartialAsync("_CreateFormPartial",Model)
             <div class="bottom-actions bg-secondary bg-opacity-50">
                 <input type="submit" value="Save" class="btn btn-success"/> |

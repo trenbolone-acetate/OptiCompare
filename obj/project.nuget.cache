@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Zz0XCwreEzCrWqT66/iSQdzOPqo/AYyXgge4mIGssIpTtQV8ndoKdE66v/YSH7H99arTC5QrX9C80u90B11FAw==",
+  "dgSpecHash": "E/1Z+DRfJ1oSdge6zd/maPbZEz9I9vu8OnE91R/z9oPRcmVq6JiqqBTuIWF0zS8Wg3cYwyaKRTeZ3Yui+oXSFw==",
   "success": true,
-  "projectFilePath": "W:\\OptiCompare\\OptiCompare\\OptiCompare\\OptiCompare.csproj",
+  "projectFilePath": "C:\\git\\reps\\OptiCompare\\OptiCompare.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User-PC\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\User-PC\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",
@@ -232,6 +232,8 @@
     "C:\\Users\\User-PC\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\User-PC\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\User-PC\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\User-PC\\.nuget\\packages\\x.pagedlist\\9.1.2\\x.pagedlist.9.1.2.nupkg.sha512",
+    "C:\\Users\\User-PC\\.nuget\\packages\\x.pagedlist.mvc.core\\9.1.2\\x.pagedlist.mvc.core.9.1.2.nupkg.sha512",
     "C:\\Users\\User-PC\\.nuget\\packages\\zstdsharp.port\\0.7.1\\zstdsharp.port.0.7.1.nupkg.sha512"
   ],
   "logs": []
