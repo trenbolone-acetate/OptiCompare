@@ -42,7 +42,7 @@ namespace OptiCompare.Controllers
             }
 
             var phone = await _context.phones
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (phone == null)
             {
                 return NotFound();
@@ -131,7 +131,7 @@ namespace OptiCompare.Controllers
             }
 
             var phone = await _context.phones
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (phone == null)
             {
                 return NotFound();

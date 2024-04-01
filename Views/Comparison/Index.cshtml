@@ -1,8 +1,15 @@
 ﻿@model PhoneComparer?
 <head>
   <link rel="stylesheet" href="~/css/ComparerIndex.css" asp-append-version="true" />
+  <title>Comparisons</title>
 </head>
-<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]?.ToString()");
+    </script>
+}
+<div style="display: flex; flex-direction: row; flex-wrap:  wrap;">
   <table class="specName-table">
     <tbody>
     <tr>
@@ -81,7 +88,7 @@
       <td>Price</td>
     </tr>
     <tr>
-      <td>Removal</td>
+      <td style="background-color: #98686d;color:ivory">Removal</td>
     </tr>
     </tbody>
   </table>

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Diagnostics;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OptiCompare.Data;
@@ -21,9 +22,25 @@ public class CompareController : Controller
     {
         _context = context;
     }
+    public IActionResult Index()
+    {
+        if(TempData.Peek("PhoneComparer")?.ToString() is { } phoneComparerJson)
+        {
+            var phoneComparer = JsonConvert.DeserializeObject<PhoneComparer?>(phoneComparerJson);
+
+            if(phoneComparer == null)
+            {
+                Console.WriteLine("Failed to deserialize PhoneComparer object.");
+                return View(ViewPath);
+            }
+            return View(ViewPath,phoneComparer);
+        }
+
+        return View(ViewPath);
+    }
     public async Task<IActionResult?> Add(int? id)
     {
-        var phone = _context.phones.SingleOrDefault(phone1 => phone1.id == id);
+        var phone = _context.phones.SingleOrDefault(phone1 => phone1.Id == id);
         if (_phoneComparer?.phones != null && phone != null)
         {
             //check tempData content
@@ -35,9 +52,17 @@ public class CompareController : Controller
                     Console.WriteLine("Deserialization of PhoneComparer failed.");
                     return View(ViewPath);
                 }
-
+                //limit to 4 phones on comparison page
+                if (_phoneComparer.phones!.Count > 3)
+                {
+                    TempData["Message"] = "Cannot compare more than 4 phones!";
+                    var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
+                    TempData["PhoneComparer"] = samePhoneComparerJson;
+                    return RedirectToAction(nameof(Index));
+                }
+                
                 Debug.Assert(_phoneComparer.phones != null, "_phoneComparer.phones != null");
-                if (_phoneComparer.phones.Any(p => p.id == phone.id))
+                if (_phoneComparer.phones.Any(p => p.Id == phone.Id))
                 {
                     TempData["Message"] = "Trying to add a phone thats already in comparison";
                     var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
@@ -62,7 +87,7 @@ public class CompareController : Controller
         _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(TempData.Peek("PhoneComparer")?.ToString() ?? string.Empty);
         if (_phoneComparer?.phones != null)
         {
-            var phoneToRemove = _phoneComparer?.phones.FirstOrDefault(phone => phone.id == id);
+            var phoneToRemove = _phoneComparer?.phones.FirstOrDefault(phone => phone.Id == id);
             Debug.Assert(phoneToRemove != null, nameof(phoneToRemove) + " != null");
             _phoneComparer?.phones.Remove(phoneToRemove);
             var phoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
@@ -75,21 +100,5 @@ public class CompareController : Controller
         Console.WriteLine("Cannot remove non-existing phone from comparison!");
         return View("~/Views/Phones/Index.cshtml",phonesPagedList);
     }
-
-    public IActionResult Index()
-    {
-        if(TempData.Peek("PhoneComparer")?.ToString() is { } phoneComparerJson)
-        {
-            var phoneComparer = JsonConvert.DeserializeObject<PhoneComparer?>(phoneComparerJson);
-
-            if(phoneComparer == null)
-            {
-                Console.WriteLine("Failed to deserialize PhoneComparer object.");
-                return View(ViewPath);
-            }
-            return View(ViewPath,phoneComparer);
-        }
-
-        return View(ViewPath);
-    }
+    
 }

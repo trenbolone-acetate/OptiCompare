@@ -8,7 +8,7 @@ namespace OptiCompare.Models;
 public class Phone
 {
     [Key]
-    public int id { get; init; }
+    public int Id { get; init; }
     [Required]
     [MaxLength(100)]
     public string? brandName { get; init; }
