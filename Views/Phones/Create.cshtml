@@ -1,4 +1,5 @@
-﻿@model OptiCompare.Models.Phone
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model OptiCompare.DTOs.PhoneDto
 @{
     ViewData["Title"] = "Create";
 }
@@ -13,12 +14,12 @@
     <form class="form" style="margin:0 0 2%;font-size:large" asp-action="CreateFromSearch" method="post">
         <input type="text" name="searchString" class="form__field" placeholder="Enter search string" />
         <input type="submit" value="Add" class="add-btn btn btn--primary btn--inside" />
-        <p class="large rise" style="float:right;">Add new phone just by typing it's brand and model names!</p>
+        <p class="large rise" style="float:right;">Add new phone just by typing its brand and model names!</p>
     </form>
     
 
     <div class="col-md-12">
-        <form asp-controller="Phones" asp-action="Create">
+        <form asp-controller="Phones" asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @await Html.PartialAsync("_CreateFormPartial",Model)
             <div class="bottom-actions bg-secondary bg-opacity-50">

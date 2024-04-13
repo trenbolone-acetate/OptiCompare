@@ -8,25 +8,25 @@ namespace OptiCompare.Models;
 public class Phone
 {
     [Key]
-    public int Id { get; init; }
+    public int Id { get; set; }
     [Required]
     [MaxLength(100)]
-    public string? brandName { get; init; }
+    public string? brandName { get; set; }
     [Required]
     [MaxLength(100)]
-    public string? modelName { get; init; }
-    public bool hasNetwork5GBands { get; init; }
-    public BodyDimensions bodyDimensions { get; init; } = new();
-    public DisplayDetails displayDetails { get; init; } = new();
-    public PlatformDetails platformDetails { get; init; } = new();
+    public string? modelName { get; set; }
+    public bool hasNetwork5GBands { get; set; }
+    public BodyDimensions bodyDimensions { get; set; } = new();
+    public DisplayDetails displayDetails { get; set; } = new();    
+    public PlatformDetails platformDetails { get; set; } = new();
 
     [MaxLength(200)]
-    public string? storage { get; init; }
-    public CameraDetails cameraDetails { get; init; } = new();
-    public BatteryDetails batteryDetails { get; init; } = new();
+    public string? storage { get; set; }
+    public CameraDetails cameraDetails { get; set; } = new();
+    public BatteryDetails batteryDetails { get; set; } = new();
 
     [MaxLength(50)]
-    public string? price{ get; init; }
+    public string? price{ get; set; }
     [MaxLength(200)]
-    public string? image{ get; init; }
+    public string? image{ get; set; }
 }

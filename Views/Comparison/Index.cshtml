@@ -1,4 +1,5 @@
-﻿@model PhoneComparer?
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model OptiCompare.Models.PhoneComparer?
 <head>
   <link rel="stylesheet" href="~/css/ComparerIndex.css" asp-append-version="true" />
   <title>Comparisons</title>
@@ -93,9 +94,9 @@
     </tbody>
   </table>
   @{
-    if (Model?.phones != null)
+    if (Model?.dtoPhones != null)
     {
-      foreach (var phone in Model.phones)
+      foreach (var phone in Model.dtoPhones)
       {
         @await Html.PartialAsync("_ComparisonIndexPartialView", phone)
       }

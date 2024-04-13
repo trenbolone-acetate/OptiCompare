@@ -2,9 +2,14 @@
 using System.Diagnostics;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using OptiCompare.Data;
+using OptiCompare.DTOs;
+using OptiCompare.Mappers;
 using OptiCompare.Models;
+using OptiCompare.PhoneSpecs;
+using OptiCompare.Repositories;
 using X.PagedList;
 
 namespace OptiCompare.Controllers;
@@ -15,12 +20,13 @@ public class CompareController : Controller
 
     private PhoneComparer? _phoneComparer = new()
     {
-        phones = new List<Phone>()
+        dtoPhones = new List<PhoneDto>()
     };
-    private readonly OptiCompareDbContext _context;
-    public CompareController(OptiCompareDbContext context)
+    private readonly PhoneRepository _phoneRepository;
+
+    public CompareController(PhoneRepository phoneRepository)
     {
-        _context = context;
+        _phoneRepository = phoneRepository;
     }
     public IActionResult Index()
     {
@@ -40,8 +46,9 @@ public class CompareController : Controller
     }
     public async Task<IActionResult?> Add(int? id)
     {
-        var phone = _context.phones.SingleOrDefault(phone1 => phone1.Id == id);
-        if (_phoneComparer?.phones != null && phone != null)
+        var phone = _phoneRepository.GetAll()
+            .SingleOrDefault(phone1 => phone1.Id == id);
+        if (_phoneComparer?.dtoPhones != null && phone != null)
         {
             //check tempData content
             if(TempData["PhoneComparer"] != null)
@@ -53,7 +60,7 @@ public class CompareController : Controller
                     return View(ViewPath);
                 }
                 //limit to 4 phones on comparison page
-                if (_phoneComparer.phones!.Count > 3)
+                if (_phoneComparer.dtoPhones!.Count > 3)
                 {
                     TempData["Message"] = "Cannot compare more than 4 phones!";
                     var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
@@ -61,19 +68,22 @@ public class CompareController : Controller
                     return RedirectToAction(nameof(Index));
                 }
                 
-                Debug.Assert(_phoneComparer.phones != null, "_phoneComparer.phones != null");
-                if (_phoneComparer.phones.Any(p => p.Id == phone.Id))
+                Debug.Assert(_phoneComparer.dtoPhones != null, "_phoneComparer.phones != null");
+                if (_phoneComparer.dtoPhones.Any(p => p.Id == phone.Id))
                 {
                     TempData["Message"] = "Trying to add a phone thats already in comparison";
                     var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
                     TempData["PhoneComparer"] = samePhoneComparerJson;
                     int pageNumber = 1;
                     int pageSize = 7;
-                    var phonesPagedList = await _context.phones.ToPagedListAsync(pageNumber, pageSize);
+                    var phonesPagedList = await _phoneRepository.
+                        GetAll()
+                        .Select(p=>p.ToPhoneDto())
+                        .ToPagedListAsync(pageNumber, pageSize);
                     return View("~/Views/Phones/Index.cshtml",phonesPagedList);
                 }
             }
-            _phoneComparer?.phones?.Add(phone);
+            _phoneComparer?.dtoPhones?.Add(phone.ToPhoneDto());
             var phoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
             TempData["PhoneComparer"] = phoneComparerJson;
             return RedirectToAction(nameof(Index));
@@ -85,18 +95,21 @@ public class CompareController : Controller
     public async Task<IActionResult> Remove(int? id)
     {
         _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(TempData.Peek("PhoneComparer")?.ToString() ?? string.Empty);
-        if (_phoneComparer?.phones != null)
+        if (_phoneComparer?.dtoPhones != null)
         {
-            var phoneToRemove = _phoneComparer?.phones.FirstOrDefault(phone => phone.Id == id);
+            var phoneToRemove = _phoneComparer?.dtoPhones.FirstOrDefault(phone => phone.Id == id);
             Debug.Assert(phoneToRemove != null, nameof(phoneToRemove) + " != null");
-            _phoneComparer?.phones.Remove(phoneToRemove);
+            _phoneComparer?.dtoPhones.Remove(phoneToRemove);
             var phoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
             TempData["PhoneComparer"] = phoneComparerJson;
             return RedirectToAction(nameof(Index));
         }
-        int pageNumber = 1;
-        int pageSize = 10; // or whatever size you want
-        var phonesPagedList = await _context.phones.ToPagedListAsync(pageNumber, pageSize);
+        const int pageNumber = 1;
+        const int pageSize = 6;
+        var phonesPagedList = await _phoneRepository
+            .GetAll()
+            .Select(p => p.ToPhoneDto())
+            .ToPagedListAsync(pageNumber, pageSize);
         Console.WriteLine("Cannot remove non-existing phone from comparison!");
         return View("~/Views/Phones/Index.cshtml",phonesPagedList);
     }

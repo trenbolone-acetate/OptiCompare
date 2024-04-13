@@ -6,34 +6,43 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OptiCompare.Data;
+using OptiCompare.DTOs;
+using OptiCompare.Extensions;
+using OptiCompare.Mappers;
 using OptiCompare.Models;
+using OptiCompare.PhoneSpecs;
+using OptiCompare.Repositories;
 using X.PagedList;
 
 namespace OptiCompare.Controllers
 {
     public class PhonesController : Controller
     {
-        private readonly OptiCompareDbContext _context;
+        private readonly PhoneRepository _phoneRepository;
 
-        public PhonesController(OptiCompareDbContext context)
+        public PhonesController(PhoneRepository phoneRepository)
         {
-            _context = context;
+            _phoneRepository = phoneRepository;
         }
-
-        public async Task<IActionResult> Index(int? page, string searchString)
+        [Route("Phones")]
+        [HttpGet]
+        public async Task<IActionResult> Index(int? page, string? searchString)
         {
             const int pageSize = 7; 
             var pageNumber = page ?? 1;
             ViewData["CurrentFilter"] = searchString;
-            var phones = from ps in _context.phones select ps;
+            var phones = _phoneRepository.GetAll();
             if (!string.IsNullOrEmpty(searchString))
             {
-                phones = phones.Where(ps => ps.brandName!.Contains(searchString) || ps.modelName!.Contains(searchString));
+                phones = phones.Where(ps => ps!.brandName!.Contains(searchString) || ps.modelName!.Contains(searchString));
             }
-            var paginatedPhones = await phones.ToPagedListAsync(pageNumber, pageSize);
+            var paginatedPhones = await phones.ToList()
+                .Select(p => p!.ToPhoneDto())
+                .ToPagedListAsync(pageNumber, pageSize);
             return View(paginatedPhones);
         }
-
+        [Route("Details/{id:int}")]
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,56 +50,58 @@ namespace OptiCompare.Controllers
                 return NotFound();
             }
 
-            var phone = await _context.phones
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var phone = await _phoneRepository.Get(id.Value);
             if (phone == null)
             {
                 return NotFound();
             }
 
-            return View(phone);
+            return View(phone.ToPhoneDto());
         }
-
+        
         public IActionResult Create()
         {
-            var newPhone = new Phone();
-            return View(newPhone);
+            var newPhoneDto = new PhoneDto();
+            return View(newPhoneDto);
         }
-
-        [HttpPost]
-        public IActionResult CreateFromSearch(string searchString)
-        {
-            searchString = searchString.Replace(" ", "%20");
-            var newPhone = PhoneDetailsFetcher.CreateFromSearch(searchString);
-            if (newPhone.Result == null)
-            {
-                return View("NoPhoneFoundAPI");
-            }
-            if (_context.phones.Any(p => p.modelName == newPhone.Result.modelName))
-            {
-                return View("PhoneExists");
-            }
-            _context.phones.Add(newPhone.Result);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,brandName,modelName,hasNetwork5GBands," +
-                                                      "BodyDimensions,DisplayDetails,PlatformDetails,storage," +
-                                                      "CameraDetails,BatteryDetails,price,image")] Phone phone)
+        public async Task<IActionResult> Create([FromForm][Bind("brandName,modelName,hasNetwork5GBands," +
+                                                                "bodyDimensions,displayDetails,platformDetails,storage," +
+                                                                "cameraDetails,batteryDetails,price,image")] PhoneDto phoneDto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(phone);
-                await _context.SaveChangesAsync();
+                await _phoneRepository.Add(phoneDto.ToPhone());
                 return RedirectToAction(nameof(Index));
             }
-
+  
             Console.WriteLine("Model is not valid!");
-            return View(phone);
+            return View(phoneDto);
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateFromSearch(string searchString)
+        {
+            try
+            {
+                await _phoneRepository.CreateFromSearch(searchString);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                switch (ex.Message)
+                {
+                    case "1":
+                        return View("NoPhoneFoundAPI");
+                    case "2":
+                        return View("PhoneExists");
+                    default:
+                        throw;
+                }
+            }
+        }
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -99,58 +110,63 @@ namespace OptiCompare.Controllers
                 return NotFound();
             }
 
-            var phone = await _context.phones.FindAsync(id);
-            if (phone == null)
-            {
-                return NotFound();
-            }
-            return View(phone);
+            var phone = await _phoneRepository.Get(id.Value);
+            return phone == null ? NotFound() : View(phone.ToPhoneDto());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,brandName,modelName,hasNetwork5GBands," +
-                                                             "BodyDimensions,DisplayDetails,PlatformDetails,storage," +
-                                                             "CameraDetails,BatteryDetails,price,image")] Phone phone)
+        public async Task<IActionResult> Edit(int id, [FromForm][Bind("Id,brandName,modelName,hasNetwork5GBands," +
+                                                                      "bodyDimensions,displayDetails,platformDetails,storage," +
+                                                                      "cameraDetails,batteryDetails,price,image")] PhoneDto phoneDto)
         {
-            Console.WriteLine("Entered Edit");
-            var oldPhone = await _context.phones.FindAsync(id);
-            
-            if (oldPhone == null) return RedirectToAction(nameof(Index));
-            
-            _context.Entry(oldPhone).CurrentValues.SetValues(phone);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (id != phoneDto.Id)
+            {
+                return NotFound();
+            }
+
+            var phoneToUpdate = await _phoneRepository.Get(id);
+            if (phoneToUpdate == null)
+            {
+                return NotFound();
+            }
+            phoneToUpdate.CopyDtoToPhone(phoneDto);
+            try
+            {
+                await _phoneRepository.Update(phoneToUpdate);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
+            return View(phoneDto);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var phone = await _phoneRepository.Get(id.Value);
+            if(phone == null)
             {
                 return NotFound();
             }
 
-            var phone = await _context.phones
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (phone == null)
-            {
-                return NotFound();
-            }
-
-            return View(phone);
+            return View(phone.ToPhoneDto());
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var phone = await _context.phones.FindAsync(id);
+            var phone = await _phoneRepository.Get(id);
             if (phone != null)
             {
-                _context.phones.Remove(phone);
+                await _phoneRepository.Remove(phone);
             }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

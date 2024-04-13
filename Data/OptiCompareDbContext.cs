@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OptiCompare.Models;
+using OptiCompare.PhoneSpecs;
 
 namespace OptiCompare.Data
 {
@@ -22,11 +23,25 @@ namespace OptiCompare.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Phone>(builder =>
             {
-                builder.OwnsOne(e => e.batteryDetails);
-                builder.OwnsOne(e => e.bodyDimensions);
-                builder.OwnsOne(e => e.cameraDetails);
-                builder.OwnsOne(e => e.displayDetails);
-                builder.OwnsOne(e => e.platformDetails);
+                    builder.HasOne(p => p.bodyDimensions)
+                        .WithOne(e => e.Phone)
+                        .HasForeignKey<BodyDimensions>(b => b.PhoneId);
+                    
+                    builder.HasOne(p => p.displayDetails)
+                        .WithOne(e => e.Phone)
+                        .HasForeignKey<DisplayDetails>(b => b.PhoneId);
+                    
+                    builder.HasOne(p => p.platformDetails)
+                        .WithOne(e => e.Phone)
+                        .HasForeignKey<PlatformDetails>(b => b.PhoneId);
+                    
+                    builder.HasOne(p => p.cameraDetails)
+                        .WithOne(e => e.Phone)
+                        .HasForeignKey<CameraDetails>(b => b.PhoneId);
+
+                    builder.HasOne(p => p.batteryDetails)
+                        .WithOne(e => e.Phone)
+                        .HasForeignKey<BatteryDetails>(b => b.PhoneId);
             });
             
         }

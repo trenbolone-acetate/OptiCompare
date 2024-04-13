@@ -1,6 +1,8 @@
-﻿namespace OptiCompare.Models;
+﻿using OptiCompare.DTOs;
+
+namespace OptiCompare.Models;
 
 public class PhoneComparer
 {
-    public List<Phone>? phones { get; init; } = new();
+    public List<PhoneDto>? dtoPhones { get; init; } = new();
 }

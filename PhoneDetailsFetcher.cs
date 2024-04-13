@@ -26,7 +26,7 @@ public abstract class PhoneDetailsFetcher
             return null;
         }
 
-        var phone = MapJsonToPhone(result);
+        var phone = Mappers.PhoneMapper.JsonToPhone(result);
         return await Task.FromResult(phone);
     }
 
@@ -95,50 +95,5 @@ public abstract class PhoneDetailsFetcher
         return firstProduct.ToString();
     }
 
-    private static Phone MapJsonToPhone(string result)
-    {
-        try
-        {
-            var jsonData = JObject.Parse(result);
-            var productData = jsonData["product"];
-            var keyAspects = jsonData["key_aspects"];
-            var inside = jsonData["inside"];
-            var design = jsonData["design"];
-            var display = jsonData["display"];
-            var camera = jsonData["camera"];
-            var thumbnail = jsonData["image"]?["large"];
-            Phone phone = new Phone()
-            {
-                brandName = productData?["brand"]?.ToString() ?? "undefined",
-                modelName = productData?["model"]?.ToString() ?? "undefined",
-                hasNetwork5GBands = keyAspects?["wireless_&_cellular"]?.ToString().Contains("5G") ?? false,
-                bodyDimensions = new BodyDimensions(design?["body"]?["width"]?.ToString() ?? "undefined",
-                    design?["body"]?["height"]?.ToString(),
-                    design?["body"]?["thickness"]?.ToString() ?? "undefined",
-                    design?["body"]?["weight"]?.ToString() ?? "undefined"),
-                displayDetails = new DisplayDetails(display?["type"]?.ToString() ?? "undefined",
-                    display?["diagonal"]?.ToString() ?? "undefined",
-                    display?["resolution_(h_x_w)"]?.ToString() ?? "undefined",
-                    display?["glass"]?.ToString() ?? "undefined"),
-                platformDetails = new PlatformDetails(inside?["processor"]?["cpu"]?.ToString() ?? "undefined",
-                    inside?["processor"]?["gpu"]?.ToString() ?? "undefined",
-                    inside?["software"]?["os_version"]?.ToString() ?? "undefined",
-                    inside?["ram"]?["capacity"]?.ToString() ?? "undefined"),
-                storage = inside?["storage"]?["capacity"]?.ToString() ?? "undefined",
-                cameraDetails = new CameraDetails(
-                    $"{camera?["back_camera"]?["resolution"]}, {camera?["back_camera"]?["resolution_(h_x_w)"]} {camera?["back_camera"]?["aperture_(w)"]}",
-                    $"{camera?[$"front_camera"]?["resolution"]}, {camera?["front_camera"]?["resolution_(h_x_w)"]} {camera?["front_camera"]?["aperture_(w)"]}"),
-                batteryDetails = new BatteryDetails(inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
-                    $"{inside?["battery"]?["charging_power"]} wired, {inside?["battery"]?["wireless_charging_power"]} wireless",
-                    "not tested yet"),
-                price = jsonData["price"]?["msrp"]?.ToString() ?? "undefined",
-                image = thumbnail?.ToString() ?? "https://cdn-icons-png.flaticon.com/512/244/244210.png"
-            };
-            return phone;
-        }
-        catch (JsonException e)
-        {
-            throw new ApplicationException("Error mapping JSON to Phone.", e);
-        }
-    }
+    
 }
