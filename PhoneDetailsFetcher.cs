@@ -29,8 +29,7 @@ public abstract class PhoneDetailsFetcher
         var phone = Mappers.PhoneMapper.JsonToPhone(result);
         return await Task.FromResult(phone);
     }
-
-
+    
     private static async Task<string?> GetPhoneId(string phone)
     {
         var client = new HttpClient();

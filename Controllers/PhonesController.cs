@@ -130,6 +130,7 @@ namespace OptiCompare.Controllers
             {
                 return NotFound();
             }
+
             phoneToUpdate.CopyDtoToPhone(phoneDto);
             try
             {

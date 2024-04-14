@@ -7,7 +7,7 @@ namespace OptiCompare.Repositories;
 
 public class Repository<T> : IRepository<T> where T : class
 {
-    protected readonly OptiCompareDbContext _context;
+    private readonly OptiCompareDbContext _context;
     protected DbSet<T> _entities;
 
     protected Repository(OptiCompareDbContext context)

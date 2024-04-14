@@ -6,7 +6,7 @@ public class CameraDetailsDto
     {
     }
 
-    public CameraDetailsDto( string? mainCameraDetails, string? frontCameraDetails)
+    public CameraDetailsDto(string? mainCameraDetails, string? frontCameraDetails)
     {
         this.mainCameraDetails = mainCameraDetails;
         this.frontCameraDetails = frontCameraDetails;

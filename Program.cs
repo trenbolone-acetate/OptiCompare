@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Negotiate;
+﻿using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,12 +10,28 @@ using OptiCompare.Extensions;
 using OptiCompare.Models;
 using OptiCompare.Repositories;
 
-
+IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Program>()
+                .UseUrls("https://*:44335")
+                .ConfigureKestrel(serverOptions =>
+                {
+                    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+                    {
+                        listenOptions.ServerCertificate = new X509Certificate2(
+                            @"localhost.pfx",
+                            "a1r2t3e4m5"
+                        );
+                    });
+                });
+        });
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "OptiCompare API", Version = "v1" });
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

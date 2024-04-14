@@ -44,7 +44,7 @@ public class PhoneRepository : Repository<Phone>
         return await GetEntities()
             .FirstOrDefaultAsync(e => e.Id == id);
     }
-
+    //Eager-Loading
     private IQueryable<Phone> GetEntities()
     {
         return _entities
