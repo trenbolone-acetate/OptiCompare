@@ -6,4 +6,8 @@
     <h1 class="display-4">Welcome to OptiCompare</h1>
     <p class="lead">Add, Remove, Compare, Edit phones from your personal list!</p>
     <hr />
+    @if (User.IsInRole("Admin"))
+    {
+        <a style="color:#FFF9C4; font-size: x-large" asp-controller="Roles" asp-action="Index">Configure Roles</a>
+    }
 </div>

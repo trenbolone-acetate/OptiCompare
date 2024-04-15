@@ -1,0 +1,32 @@
+tr{
+    width: 40%;
+}
+.name{
+    color:whitesmoke;
+    font-size: large;
+}
+td button span{
+    width: 15%;
+    font-size: large;
+}
+div.role-controllers-div{
+    display: flex;
+    flex-direction: row;
+}
+div.role-controllers-div a{
+    margin: 1%;
+    padding: 0.8%;
+    font-size: large;
+    text-decoration: none;
+    color: ivory;
+    background: rgba(63, 255, 7, 0.3);
+    border-radius: 5pt;
+    transition: 0.2s;
+}
+div.role-controllers-div a:hover{
+    color: ivory;
+    background-color: #415b88;
+    box-shadow: black inset 2px 1px 4px;
+    text-shadow: #1a1e21 2px 2px;
+    transition: 0.2s;
+}

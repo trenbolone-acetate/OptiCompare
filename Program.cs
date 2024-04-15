@@ -1,5 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,23 +10,6 @@ using OptiCompare.Extensions;
 using OptiCompare.Models;
 using OptiCompare.Repositories;
 
-IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Program>()
-                .UseUrls("https://*:44335")
-                .ConfigureKestrel(serverOptions =>
-                {
-                    serverOptions.ConfigureHttpsDefaults(listenOptions =>
-                    {
-                        listenOptions.ServerCertificate = new X509Certificate2(
-                            @"localhost.pfx",
-                            "a1r2t3e4m5"
-                        );
-                    });
-                });
-        });
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen(c =>
@@ -41,6 +24,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.GetConnectionString();
 PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones:BearerToken"]);
 builder.Services.AddDbContext<OptiCompareDbContext>(options => { options.UseMySQL(connectionString); });
+
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 
@@ -49,6 +33,18 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<OptiCompareDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("OptiCompareDbContext") ??
                          throw new InvalidOperationException("Connection string 'OptiCompareDbContext' not found.")));
+
+builder.Services.AddIdentity<User,IdentityRole>(options =>
+    {
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 8;
+    })
+    .AddRoles<IdentityRole>()
+    .AddDefaultUI()
+    .AddEntityFrameworkStores<OptiCompareDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddSession();
 builder.Services.AddSingleton<ITempDataProvider, SessionStateTempDataProvider>();
 var app = builder.Build();
@@ -76,4 +72,26 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "Editor", "DefaultUser" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapRazorPages();
+});
+
 app.Run();

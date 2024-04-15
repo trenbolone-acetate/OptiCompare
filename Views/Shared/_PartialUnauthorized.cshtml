@@ -1,0 +1,74 @@
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IPagedList<OptiCompare.DTOs.PhoneDto>
+@{
+ViewData["Title"] = "Phone's List";
+}
+<head>
+    <link rel="stylesheet" href="~/css/PhoneIndex.css" asp-append-version="true"/><title>Phones list</title>
+</head>
+
+
+@if (TempData["Message"] != null)
+{
+<script>
+    alert("@TempData["Message"]?.ToString()");
+</script>
+}
+<h1 class="phonesListH1">Phones list</h1>
+<div class="paginator">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new
+    {
+    page,
+    searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]
+    }),
+    new PagedListRenderOptions()
+    {
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" }
+    })
+</div>
+<table class="table">
+    <thead>
+    <tr class="tr1">
+        <th>Phone</th>
+        <th>5G?</th>
+        <th>Display size</th>
+        <th>Display resolution</th>
+        <th>Display type</th>
+        <th>Operating System</th>
+        <th>Storage</th>
+        <th>Main Camera</th>
+        <th>Battery capacity</th>
+        <th>Price</th>
+        <th>Utility</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <th>@item.modelName</th>
+        <td>@(item.hasNetwork5GBands ? "Yes" : "No")</td>
+        <td>@item.displayDetails.displaySize</td>
+        <td>@item.displayDetails.displayResolution</td>
+        <td>@item.displayDetails.displayType</td>
+        <td>@item.platformDetails.os</td>
+        <td>@item.storage</td>
+        <td>@item.cameraDetails.mainCameraDetails</td>
+        <td>@item.batteryDetails.batteryCapacity</td>
+        <td>@item.price</td>
+        <td class="utility" style="background-color: #368537;">
+            <a style="color:#C8E6C9;" asp-controller="Phones" asp-action="Details" asp-route-id="@item.Id">Details</a>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
+<datalist id="phones">
+    @foreach (var phone in Model)
+    {
+    <option>@phone.modelName</option>
+    }
+</datalist>

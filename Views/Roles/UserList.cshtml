@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<OptiCompare.Models.User>
+
+<link rel="stylesheet" href="css/Roles.css"/>
+<h2>User List</h2>
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td style="color: ivory;font-size:large">@user.Email</td>
+            <td class="access-rights-td">
+                <a class="access-rights btn" asp-action="Edit" asp-route-userid="@user.Id">Access rights</a>
+            </td>
+        </tr>
+    }
+</table>
+<style>
+    .access-rights-td{
+        background-color: red;
+        border-radius: 6pt;
+    }
+    a.access-rights{
+        font-size: large;
+        text-decoration: none;
+        color: ivory;
+        background: rgba(88, 100, 243, 0.3);
+        border-radius: 5pt;
+        transition: 0.2s;
+    }
+    a.access-rights:hover{
+        color: ivory;
+        background-color: #415b88;
+        box-shadow: black inset 2px 1px 4px;
+        text-shadow: #1a1e21 2px 2px;
+        transition: 0.2s;
+    }
+</style>

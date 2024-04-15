@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OptiCompare.Models;
@@ -9,7 +10,7 @@ using OptiCompare.PhoneSpecs;
 
 namespace OptiCompare.Data
 {
-    public class OptiCompareDbContext : DbContext
+    public class OptiCompareDbContext : IdentityDbContext<User>
     {
         public OptiCompareDbContext (DbContextOptions<OptiCompareDbContext> options)
             : base(options)
@@ -17,6 +18,7 @@ namespace OptiCompare.Data
         }
 
         public DbSet<Phone> phones { get; set; } = default!;
+        public DbSet<User> users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

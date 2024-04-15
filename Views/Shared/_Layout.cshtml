@@ -7,7 +7,6 @@
     <title>@ViewData["Title"] - OptiCompare</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/HomeIndex.css"/>
-    <link rel="stylesheet" href="~/OptiCompare.styles.css"/>
     <link rel="SHORTCUT ICON" href="@Url.Content("~/icon.ico")" type="image/x-icon"/>
 </head>
 <body>
@@ -15,16 +14,22 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white mb-3" style="flex-grow: 1;">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OptiCompare</a>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between w-25">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Phones" asp-action="Index">Phones</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Compare" asp-action="Index">Compare</a>
-                        </li>
+                        @{
+                            if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("DefaultUser"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Compare" asp-action="Index">Compare</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
+                    <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>

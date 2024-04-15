@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace OptiCompare.Controllers
         {
             _phoneRepository = phoneRepository;
         }
+        [AllowAnonymous]
         [Route("Phones")]
         [HttpGet]
         public async Task<IActionResult> Index(int? page, string? searchString)
@@ -41,6 +43,7 @@ namespace OptiCompare.Controllers
                 .ToPagedListAsync(pageNumber, pageSize);
             return View(paginatedPhones);
         }
+        [AllowAnonymous]
         [Route("Details/{id:int}")]
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
@@ -58,13 +61,13 @@ namespace OptiCompare.Controllers
 
             return View(phone.ToPhoneDto());
         }
-        
+        [Authorize(Roles="Admin")]
         public IActionResult Create()
         {
             var newPhoneDto = new PhoneDto();
             return View(newPhoneDto);
         }
-        
+        [Authorize(Roles="Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm][Bind("brandName,modelName,hasNetwork5GBands," +
@@ -80,6 +83,7 @@ namespace OptiCompare.Controllers
             Console.WriteLine("Model is not valid!");
             return View(phoneDto);
         }
+        [Authorize(Roles="Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateFromSearch(string searchString)
         {
@@ -102,7 +106,7 @@ namespace OptiCompare.Controllers
             }
         }
 
-
+        [Authorize(Roles="Admin,Editor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -113,7 +117,7 @@ namespace OptiCompare.Controllers
             var phone = await _phoneRepository.Get(id.Value);
             return phone == null ? NotFound() : View(phone.ToPhoneDto());
         }
-
+        [Authorize(Roles="Admin,Editor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [FromForm][Bind("Id,brandName,modelName,hasNetwork5GBands," +
@@ -142,7 +146,7 @@ namespace OptiCompare.Controllers
             }
             return View(phoneDto);
         }
-
+        [Authorize(Roles="Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -158,7 +162,7 @@ namespace OptiCompare.Controllers
 
             return View(phone.ToPhoneDto());
         }
-
+        [Authorize(Roles="Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

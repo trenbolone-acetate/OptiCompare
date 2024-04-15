@@ -47,7 +47,7 @@ public class CompareController : Controller
     public async Task<IActionResult?> Add(int? id)
     {
         var phone = _phoneRepository.GetAll()
-            .SingleOrDefault(phone1 => phone1.Id == id);
+            .SingleOrDefault(phone1 => phone1?.Id == id);
         if (_phoneComparer?.dtoPhones != null && phone != null)
         {
             //check tempData content
