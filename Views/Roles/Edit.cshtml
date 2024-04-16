@@ -1,18 +1,31 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model OptiCompare.Models.ChangeRoleViewModel
-<link rel="stylesheet" href="css/Roles.css"/>
+@{
+    var arrowLeft = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"35\" fill=\"currentColor\" class=\"bi bi-arrow-left\" viewBox=\"0 0 16 16\">\n  <path fill-rule=\"evenodd\" d=\"M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8\"/>\n</svg>";
+}
+<link rel="stylesheet" href="~/css/Roles.css"/>
+<link rel="stylesheet" href="~/css/RoleEdit.css"/>
 
 <h2>Edit role for @Model.UserEmail</h2>
- 
+
 <form asp-action="Edit" method="post">
-    <input type="hidden" name="userId" value="@Model.UserId" />
+    <input type="hidden" name="userId" value="@Model.UserId"/>
     <div class="form-group">
+        <section class="radio-section">
         @foreach (IdentityRole role in Model.AllRoles)
         {
-            <input type="radio" name="roles" value="@role.Name"
-                   @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />@role.Name <br />
+            <div class="radio-item">
+                &emsp;<input type="radio" name="roles" value="@role.Name"
+                       @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "")/>&emsp;@role.Name
+                @if (Model.UserRoles.Contains(role.Name))
+                {
+                    @Html.Raw(arrowLeft)
+                }
+                <br/>
+            </div>
         }
+        </section>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit">Save</button>
 </form>

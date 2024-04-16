@@ -50,13 +50,13 @@ namespace OptiCompare.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("NoPhoneFound");
             }
 
             var phone = await _phoneRepository.Get(id.Value);
             if (phone == null)
             {
-                return NotFound();
+                return View("NoPhoneFound");
             }
 
             return View(phone.ToPhoneDto());

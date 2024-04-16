@@ -1,0 +1,36 @@
+.radio-item{
+    margin: 1%;
+    padding: 1%;
+    background: repeating-linear-gradient(45deg, rgba(119, 119, 119, 0.34) 2%, #26242a 4%, rgba(119, 119, 119, 0.34) 6%);
+    box-shadow: 0px 0px 2px 2px rgba(119, 119, 119, 0.34);
+    border-radius: 4pt;
+    max-width: 20%;
+    font-size: x-large;
+}
+.radio-item [type="radio"]{
+    margin: 1%;
+    transition: 1s;
+    transform: scale(2);
+}
+.radio-item [type="radio"]:checked{
+    transition: 1s;
+    transform: scale(3);
+}
+button{
+    width: 15%;
+    margin: auto auto auto 3%;
+    padding: 1%;
+    font-size: large;
+    color: initial;
+    background-color: cornflowerblue;
+    transition: 0.5s;
+    border: 0;
+    border-radius: 2pt;
+}
+button:hover{
+    box-shadow: black inset 2px 1px 4px;
+    background: rgb(38, 96, 198);
+    border-radius: 6pt;
+    transition: 0.5s;
+    color: ivory;
+}

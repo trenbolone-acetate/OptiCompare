@@ -35,7 +35,7 @@
                 <label asp-for="Input.NewEmail" class="form-label"></label>
                 <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
             </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-75">Change email</button>
         </form>
     </div>
 </div>
@@ -43,3 +43,20 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<style>
+    button{
+        padding: 2%;
+        color: initial;
+        background-color: cornflowerblue;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 2pt;
+    }
+    button:hover{
+        box-shadow: black inset 2px 1px 4px;
+        background: rgb(38, 96, 198);
+        border-radius: 6pt;
+        transition: 0.5s;
+        color: ivory;
+    }
+</style>

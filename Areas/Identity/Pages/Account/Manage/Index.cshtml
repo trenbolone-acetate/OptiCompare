@@ -13,7 +13,7 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
+                <input asp-for="Username" class="bg-dark form-control" disabled style="cursor: not-allowed;color: grey"/>
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating">
@@ -21,7 +21,7 @@
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            <button id="update-profile-button" type="submit" class="w-75">Save</button>
         </form>
     </div>
 </div>
@@ -29,3 +29,20 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<style>
+    button{
+        padding: 2%;
+        color: initial;
+        background-color: cornflowerblue;
+        transition: 0.5s;
+        border: 0;
+        border-radius: 2pt;
+    }
+    button:hover{
+        box-shadow: black inset 2px 1px 4px;
+        background: rgb(38, 96, 198);
+        border-radius: 6pt;
+        transition: 0.5s;
+        color: ivory;
+    }
+</style>

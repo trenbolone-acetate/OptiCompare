@@ -12,6 +12,7 @@ using OptiCompare.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Set up Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "OptiCompare API", Version = "v1" });
@@ -20,41 +21,44 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<PhoneRepository>();
 
+// Set up controllers and views
 builder.Services.AddControllersWithViews();
-var connectionString = builder.GetConnectionString();
+
 PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones:BearerToken"]);
-builder.Services.AddDbContext<OptiCompareDbContext>(options => { options.UseMySQL(connectionString); });
 
-builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-    .AddNegotiate();
+var connectionString = builder.GetConnectionString();
 
-builder.Services.AddAuthorization(options => { options.FallbackPolicy = options.DefaultPolicy; });
-builder.Services.AddRazorPages();
-builder.Services.AddDbContext<OptiCompareDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("OptiCompareDbContext") ??
-                         throw new InvalidOperationException("Connection string 'OptiCompareDbContext' not found.")));
-
+// Set up database and identity
+builder.Services.AddDbContext<OptiCompareDbContext>(options => options.UseMySQL(connectionString));
 builder.Services.AddIdentity<User,IdentityRole>(options =>
-    {
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequiredLength = 8;
-    })
-    .AddRoles<IdentityRole>()
-    .AddDefaultUI()
-    .AddEntityFrameworkStores<OptiCompareDbContext>()
-    .AddDefaultTokenProviders();
+{
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 8;
+})
+.AddRoles<IdentityRole>()
+.AddDefaultUI()
+.AddEntityFrameworkStores<OptiCompareDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.AddSession();
 builder.Services.AddSingleton<ITempDataProvider, SessionStateTempDataProvider>();
-var app = builder.Build();
-app.UseSession();
 
+// Set up authentication and authorization
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+.AddNegotiate();
+
+builder.Services.AddAuthorization(options => { options.FallbackPolicy = options.DefaultPolicy; });
+
+var app = builder.Build();
+
+app.UseSession();
 app.UseSwagger();
-app.UseSwaggerUI(c => 
+app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "OptiCompare API v1");
 });
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -69,15 +73,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+// Ensure roles exist
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var roles = new[] { "Admin", "Editor", "DefaultUser" };
-
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))
@@ -86,6 +86,11 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(

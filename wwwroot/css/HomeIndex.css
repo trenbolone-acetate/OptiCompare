@@ -35,24 +35,29 @@ nav {
     font-weight: bold;
     border-radius: 10pt;
 }
+a{
+    overflow: hidden;
+}
 a.nav-link.text-dark{
     margin: auto;
+}
+.nav-item{
+    margin: 0.5%;
 }
 .nav-item a, .logout-bttn{
     padding: 10%;
     font-size: large;
-    margin: 5%;
     color: #333;
     text-decoration: none;
-    transition:0.5s;
-    border-radius: 5pt;
+    border-radius: 4pt;
     background: rgba(0, 141, 201, 0.4);
+    transition:0.2s;
 }
 .nav-item a:hover, .logout-bttn:hover{
     box-shadow: black inset 2px 1px 4px;
     background: rgba(0, 141, 201, 1);
-    border-radius: 10pt;
-    transition: 0.5s;
+    border-radius: 6pt;
+    transition: 0.2s;
 }
 .navbar-brand{
     width: 14%;
@@ -60,16 +65,16 @@ a.nav-link.text-dark{
     color: #333;
     text-decoration: none;
     padding: 10px 15px;
-    transition:0.5s;
+    transition:0.2s;
     margin: 0.5%;
-    border-radius: 5pt;
+    border-radius: 4pt;
     background: rgba(0, 182, 79, 0.4);
 }
 .navbar-brand:hover {
     box-shadow: black inset 2px 1px 4px;
     background: rgba(0, 182, 27, 1);
-    border-radius: 10pt;
-    transition: 0.5s;
+    border-radius: 6pt;
+    transition: 0.2s;
 }
 .nav-item a.user-auth-element{
     width: 100%;
@@ -83,19 +88,19 @@ a.nav-link.text-dark{
     background: rgba(63, 255, 7, 0.3);
 }
 button.user-auth-element{
-    width: 100%;
-    margin: 28% auto auto 10%;
-    font-size:large;
+    width: auto;
+    margin: 14% auto auto 5%;
+    padding: 8%;
+    font-size: large;
     font-weight: bold;
     color: #333;
-    text-decoration: none;
     transition:0.5s;
     background: rgba(63, 255, 7, 0.3);
 }
 button.user-auth-element:hover{
     box-shadow: black inset 2px 1px 4px;
     background: rgb(145, 5, 5,0.3);
-    border-radius: 10pt;
+    border-radius: 6pt;
     transition: 0.5s;
 }
 ul li.user-data-element{
