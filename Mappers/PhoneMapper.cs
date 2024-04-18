@@ -109,44 +109,27 @@ public static class PhoneMapper
                 image = phoneDto.image
             };
         }
-    public  static Phone JsonToPhone(string result)
+
+    public static Phone JsonToPhone(string result)
     {
         try
         {
             var jsonData = JObject.Parse(result);
-            var productData = jsonData["product"];
-            var keyAspects = jsonData["key_aspects"];
-            var inside = jsonData["inside"];
-            var design = jsonData["design"];
-            var display = jsonData["display"];
-            var camera = jsonData["camera"];
-            var thumbnail = jsonData["image"]?["large"];
             Phone phone = new Phone()
             {
-                brandName = productData?["brand"]?.ToString() ?? "undefined",
-                modelName = productData?["model"]?.ToString() ?? "undefined",
-                hasNetwork5GBands = keyAspects?["wireless_&_cellular"]?.ToString().Contains("5G") ?? false,
-                bodyDimensions = new BodyDimensions(design?["body"]?["width"]?.ToString() ?? "undefined",
-                    design?["body"]?["height"]?.ToString(),
-                    design?["body"]?["thickness"]?.ToString() ?? "undefined",
-                    design?["body"]?["weight"]?.ToString() ?? "undefined"),
-                displayDetails = new DisplayDetails(display?["type"]?.ToString() ?? "undefined",
-                    display?["diagonal"]?.ToString() ?? "undefined",
-                    display?["resolution_(h_x_w)"]?.ToString() ?? "undefined",
-                    display?["glass"]?.ToString() ?? "undefined"),
-                platformDetails = new PlatformDetails(inside?["processor"]?["cpu"]?.ToString() ?? "undefined",
-                    inside?["processor"]?["gpu"]?.ToString() ?? "undefined",
-                    inside?["software"]?["os_version"]?.ToString() ?? "undefined",
-                    inside?["ram"]?["capacity"]?.ToString() ?? "undefined"),
-                storage = inside?["storage"]?["capacity"]?.ToString() ?? "undefined",
-                cameraDetails = new CameraDetails(
-                    $"{camera?["back_camera"]?["resolution"]}, {camera?["back_camera"]?["resolution_(h_x_w)"]} {camera?["back_camera"]?["aperture_(w)"]}",
-                    $"{camera?[$"front_camera"]?["resolution"]}, {camera?["front_camera"]?["resolution_(h_x_w)"]} {camera?["front_camera"]?["aperture_(w)"]}"),
-                batteryDetails = new BatteryDetails(inside?["battery"]?["capacity"]?.ToString() ?? "undefined",
-                    $"{inside?["battery"]?["charging_power"]} wired, {inside?["battery"]?["wireless_charging_power"]} wireless",
-                    "not tested yet"),
-                price = jsonData["price"]?["msrp"]?.ToString() ?? "undefined",
-                image = thumbnail?.ToString() ?? "https://cdn-icons-png.flaticon.com/512/244/244210.png"
+                brandName = jsonData.SelectToken("product.brand")?.ToString() ?? "undefined",
+                modelName = jsonData.SelectToken("product.model")?.ToString() ?? "undefined",
+                hasNetwork5GBands =
+                    jsonData.SelectToken("key_aspects.wireless_&_cellular")?.ToString().Contains("5G") ?? false,
+                bodyDimensions = CreateBodyDimensions(jsonData.SelectToken("design.body")),
+                displayDetails = CreateDisplayDetails(jsonData.SelectToken("display")),
+                platformDetails = CreatePlatformDetails(jsonData.SelectToken("inside")),
+                storage = jsonData.SelectToken("inside.storage.capacity")?.ToString() ?? "undefined",
+                cameraDetails = CreateCameraDetails(jsonData.SelectToken("camera")),
+                batteryDetails = CreateBatteryDetails(jsonData.SelectToken("inside.battery")),
+                price = jsonData.SelectToken("price.msrp")?.ToString() ?? "undefined",
+                image = jsonData.SelectToken("image.large")?.ToString() ??
+                        "https://cdn-icons-png.flaticon.com/512/244/244210.png"
             };
             return phone;
         }
@@ -154,5 +137,43 @@ public static class PhoneMapper
         {
             throw new ApplicationException("Error mapping JSON to Phone.", e);
         }
+    }
+
+    private static BodyDimensions CreateBodyDimensions(JToken bodyData)
+    {
+        return new BodyDimensions(bodyData?["width"]?.ToString() ?? "undefined",
+            bodyData?["height"]?.ToString(),
+            bodyData?["thickness"]?.ToString() ?? "undefined",
+            bodyData?["weight"]?.ToString() ?? "undefined");
+    }
+
+    private static DisplayDetails CreateDisplayDetails(JToken displayData)
+    {
+        return new DisplayDetails(displayData?["type"]?.ToString() ?? "undefined",
+            displayData?["diagonal"]?.ToString() ?? "undefined",
+            displayData?["resolution_(h_x_w)"]?.ToString() ?? "undefined",
+            displayData?["glass"]?.ToString() ?? "undefined");
+    }
+
+    private static PlatformDetails CreatePlatformDetails(JToken insideData)
+    {
+        return new PlatformDetails(insideData?["processor"]["cpu"]?.ToString() ?? "undefined",
+            insideData?["processor"]["gpu"]?.ToString() ?? "undefined",
+            insideData?["software"]["os_version"]?.ToString() ?? "undefined",
+            insideData?["ram"]["capacity"]?.ToString() ?? "undefined");
+    }
+
+    private static CameraDetails CreateCameraDetails(JToken cameraData)
+    {
+        return new CameraDetails(
+            $"{cameraData?["back_camera"]["resolution"]}, {cameraData?["back_camera"]["resolution_(h_x_w)"]} {cameraData?["back_camera"]["aperture_(w)"]}",
+            $"{cameraData?["front_camera"]["resolution"]}, {cameraData?["front_camera"]["resolution_(h_x_w)"]} {cameraData?["front_camera"]["aperture_(w)"]}");
+    }
+
+    private static BatteryDetails CreateBatteryDetails(JToken batteryData)
+    {
+        return new BatteryDetails(batteryData?["capacity"]?.ToString() ?? "undefined",
+            $"{batteryData?["charging_power"]} wired, {batteryData?["wireless_charging_power"]} wireless",
+            "not tested yet");
     }
 }

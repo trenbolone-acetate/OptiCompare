@@ -20,6 +20,7 @@ namespace OptiCompare.Controllers
     public class PhonesController : Controller
     {
         private readonly PhoneRepository _phoneRepository;
+        private IActionResult NoPhoneFound() => View("NoPhoneFound");
 
         public PhonesController(PhoneRepository phoneRepository)
         {
@@ -33,14 +34,10 @@ namespace OptiCompare.Controllers
             const int pageSize = 7; 
             var pageNumber = page ?? 1;
             ViewData["CurrentFilter"] = searchString;
-            var phones = _phoneRepository.GetAll();
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                phones = phones.Where(ps => ps!.brandName!.Contains(searchString) || ps.modelName!.Contains(searchString));
-            }
-            var paginatedPhones = await phones.ToList()
-                .Select(p => p!.ToPhoneDto())
-                .ToPagedListAsync(pageNumber, pageSize);
+    
+            var filteredPhones = GetFilteredPhones(searchString);
+    
+            var paginatedPhones = await filteredPhones.ToList().Select(p => p!.ToPhoneDto()).ToPagedListAsync(pageNumber, pageSize);
             return View(paginatedPhones);
         }
         [AllowAnonymous]
@@ -48,15 +45,15 @@ namespace OptiCompare.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
-                return View("NoPhoneFound");
+                return NoPhoneFound();
             }
 
             var phone = await _phoneRepository.Get(id.Value);
             if (phone == null)
             {
-                return View("NoPhoneFound");
+                return NoPhoneFound();
             }
 
             return View(phone.ToPhoneDto());
@@ -173,6 +170,15 @@ namespace OptiCompare.Controllers
                 await _phoneRepository.Remove(phone);
             }
             return RedirectToAction(nameof(Index));
+        }
+        private IEnumerable<Phone> GetFilteredPhones(string? searchString)
+        {
+            var phones = _phoneRepository.GetAll();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                phones = phones.Where(ps => ps!.brandName!.Contains(searchString) || ps.modelName!.Contains(searchString));
+            }
+            return phones;
         }
     }
 }

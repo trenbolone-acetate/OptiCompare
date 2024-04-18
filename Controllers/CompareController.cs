@@ -22,96 +22,123 @@ public class CompareController : Controller
     {
         dtoPhones = new List<PhoneDto>()
     };
+
     private readonly PhoneRepository _phoneRepository;
 
     public CompareController(PhoneRepository phoneRepository)
     {
         _phoneRepository = phoneRepository;
     }
+
     public IActionResult Index()
     {
-        if(TempData.Peek("PhoneComparer")?.ToString() is { } phoneComparerJson)
+        if (TempData.Peek("PhoneComparer")?.ToString() is { } phoneComparerJson)
         {
             var phoneComparer = JsonConvert.DeserializeObject<PhoneComparer?>(phoneComparerJson);
 
-            if(phoneComparer == null)
+            if (phoneComparer == null)
             {
                 Console.WriteLine("Failed to deserialize PhoneComparer object.");
                 return View(ViewPath);
             }
-            return View(ViewPath,phoneComparer);
+
+            return View(ViewPath, phoneComparer);
         }
 
         return View(ViewPath);
     }
+
     public async Task<IActionResult?> Add(int? id)
+{
+    var phone = _phoneRepository.GetAll().SingleOrDefault(p => p?.Id == id);
+    if (_phoneComparer?.dtoPhones != null && phone != null)
     {
-        var phone = _phoneRepository.GetAll()
-            .SingleOrDefault(phone1 => phone1?.Id == id);
-        if (_phoneComparer?.dtoPhones != null && phone != null)
+        if (TempData.TryGetValue("PhoneComparer", out var phoneComparerData))
         {
-            //check tempData content
-            if(TempData["PhoneComparer"] != null)
+            _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(phoneComparerData?.ToString() ?? string.Empty);
+            if (_phoneComparer == null)
             {
-                _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(TempData["PhoneComparer"]?.ToString() ?? string.Empty);
-                if(_phoneComparer == null)
-                {
-                    Console.WriteLine("Deserialization of PhoneComparer failed.");
-                    return View(ViewPath);
-                }
-                //limit to 4 phones on comparison page
-                if (_phoneComparer.dtoPhones!.Count > 3)
-                {
-                    TempData["Message"] = "Cannot compare more than 4 phones!";
-                    var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
-                    TempData["PhoneComparer"] = samePhoneComparerJson;
-                    return RedirectToAction(nameof(Index));
-                }
-                
-                Debug.Assert(_phoneComparer.dtoPhones != null, "_phoneComparer.phones != null");
-                if (_phoneComparer.dtoPhones.Any(p => p.Id == phone.Id))
-                {
-                    TempData["Message"] = "Trying to add a phone thats already in comparison";
-                    var samePhoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
-                    TempData["PhoneComparer"] = samePhoneComparerJson;
-                    int pageNumber = 1;
-                    int pageSize = 7;
-                    var phonesPagedList = await _phoneRepository.
-                        GetAll()
-                        .Select(p=>p.ToPhoneDto())
-                        .ToPagedListAsync(pageNumber, pageSize);
-                    return View("~/Views/Phones/Index.cshtml",phonesPagedList);
-                }
+                Console.WriteLine("Deserialization of PhoneComparer failed.");
+                return View(ViewPath);
             }
-            _phoneComparer?.dtoPhones?.Add(phone.ToPhoneDto());
-            var phoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
-            TempData["PhoneComparer"] = phoneComparerJson;
-            return RedirectToAction(nameof(Index));
+            if (_phoneComparer.dtoPhones!.Count > 3)
+            {
+                TempData["Message"] = "Cannot compare more than 4 phones!";
+                TempData["PhoneComparer"] = JsonConvert.SerializeObject(_phoneComparer);
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (_phoneComparer.dtoPhones.Any(p => p.Id == phone.Id))
+            {
+                TempData["Message"] = "Trying to add a phone that's already in comparison";
+                TempData["PhoneComparer"] = JsonConvert.SerializeObject(_phoneComparer);
+                int pageNumber = 1;
+                int pageSize = 7;
+                var phonesPagedList = await _phoneRepository.GetAll()
+                    .Select(p => p.ToPhoneDto())
+                    .ToPagedListAsync(pageNumber, pageSize);
+                return View("~/Views/Phones/Index.cshtml", phonesPagedList);
+            }
         }
-        Console.WriteLine("Trying to add null phone to comparison!");
-        return null;
+
+        // Add the phone to comparison
+        _phoneComparer?.dtoPhones?.Add(phone.ToPhoneDto());
+        TempData["PhoneComparer"] = JsonConvert.SerializeObject(_phoneComparer);
+        return RedirectToAction(nameof(Index));
     }
-    
+
+    // Log if trying to add a null phone to comparison
+    Console.WriteLine("Trying to add null phone to comparison!");
+    return null;
+}
+
+
     public async Task<IActionResult> Remove(int? id)
     {
-        _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(TempData.Peek("PhoneComparer")?.ToString() ?? string.Empty);
+        RetrievePhoneComparer();
+    
         if (_phoneComparer?.dtoPhones != null)
         {
-            var phoneToRemove = _phoneComparer?.dtoPhones.FirstOrDefault(phone => phone.Id == id);
+            var phoneToRemove = FindPhoneToRemove(id);
             Debug.Assert(phoneToRemove != null, nameof(phoneToRemove) + " != null");
             _phoneComparer?.dtoPhones.Remove(phoneToRemove);
-            var phoneComparerJson = JsonConvert.SerializeObject(_phoneComparer);
-            TempData["PhoneComparer"] = phoneComparerJson;
+            UpdatePhoneComparer();
+   
             return RedirectToAction(nameof(Index));
         }
-        const int pageNumber = 1;
-        const int pageSize = 6;
+
+        return await ReturnViewWithPagedListAndErrorMessage();
+    }
+
+    private void RetrievePhoneComparer()
+    {
+        string json = TempData.Peek("PhoneComparer")?.ToString() ?? string.Empty;
+        _phoneComparer = JsonConvert.DeserializeObject<PhoneComparer>(json);
+    }
+
+    private PhoneDto FindPhoneToRemove(int? id)
+    {
+        return _phoneComparer?.dtoPhones.FirstOrDefault(phone => phone.Id == id);
+    }
+
+    private void UpdatePhoneComparer()
+    {
+        string updatedComparerJson = JsonConvert.SerializeObject(_phoneComparer);
+        TempData["PhoneComparer"] = updatedComparerJson;
+    }
+
+    private async Task<IActionResult> ReturnViewWithPagedListAndErrorMessage()
+    {
+        const string ErrorMessage = "Cannot remove non-existing phone from comparison!";
+        const int PageNumber = 1;
+        const int PageSize = 6;
+
         var phonesPagedList = await _phoneRepository
             .GetAll()
             .Select(p => p.ToPhoneDto())
-            .ToPagedListAsync(pageNumber, pageSize);
-        Console.WriteLine("Cannot remove non-existing phone from comparison!");
-        return View("~/Views/Phones/Index.cshtml",phonesPagedList);
+            .ToPagedListAsync(PageNumber, PageSize);
+
+        Console.WriteLine(ErrorMessage);
+        return View("~/Views/Phones/Index.cshtml", phonesPagedList);
     }
-    
 }

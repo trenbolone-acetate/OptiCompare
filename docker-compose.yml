@@ -1,0 +1,9 @@
+﻿services:
+  opticompare:
+    image: opticompare-test
+    container_name: opticompare
+    ports:
+      - "44335:80"
+    build:
+      context: .
+      dockerfile: OptiCompare/Dockerfile

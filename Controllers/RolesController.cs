@@ -24,17 +24,7 @@ namespace OptiCompare.Controllers
             if (!string.IsNullOrEmpty(name))
             {
                 IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(name));
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
+                return ProcessResult(result, name);
             }
             return View(name);
         }
@@ -90,6 +80,23 @@ namespace OptiCompare.Controllers
             }
  
             return NotFound();
+        }
+        private IActionResult ProcessResult(IdentityResult result, string name)
+        {
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+    
+            AddErrorsToModelState(result);
+            return View(name);
+        }
+        private void AddErrorsToModelState(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
     }
 }

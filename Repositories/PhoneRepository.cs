@@ -8,31 +8,30 @@ namespace OptiCompare.Repositories;
 
 public class PhoneRepository : Repository<Phone>
 {
+    private Func<string, string> NormalizeSearchString = searchString => searchString.Replace(" ", "%20");
     public PhoneRepository(OptiCompareDbContext context) : base(context)
     {
         
     }
-    public async Task<Phone?> CreateFromSearch(string searchString)
+    public async Task CreateFromSearch(string searchString)
     {
-        searchString = searchString.Replace(" ", "%20");
-        Phone? newPhone = await PhoneDetailsFetcher.CreateFromSearch(searchString);
-    
-        if (newPhone == null)
+        string normalizedSearchString = NormalizeSearchString(searchString);
+        Phone? newPhone = await PhoneDetailsFetcher.CreateFromSearch(normalizedSearchString);
+
+        if (newPhone is null)
         {
-            Console.WriteLine("No phone found with your search");
-            throw new Exception("1");
+            Console.WriteLine($"No phone found with your search: {searchString}");
+            throw new InvalidOperationException(searchString);
         }
-    
+
         bool phoneExists = GetEntities().Any(p => p.modelName == newPhone.modelName);
         if(phoneExists)
         {
-            Console.WriteLine("Such phone already exists!");
-            throw new Exception("2");
+            Console.WriteLine($"Phone model {newPhone.modelName} already exists!");
+            throw new InvalidOperationException(newPhone.modelName);
         }
-    
+
         await Add(newPhone);
-    
-        return newPhone;
     }
     public override IEnumerable<Phone?> GetAll()
     {
