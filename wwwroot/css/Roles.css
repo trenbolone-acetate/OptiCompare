@@ -1,5 +1,27 @@
+.access-rights-td{
+    background-color: red;
+    border-radius: 6pt;
+}
+a.access-rights{
+    font-size: large;
+    text-decoration: none;
+    color: ivory;
+    background: rgba(88, 100, 243, 0.3);
+    border-radius: 5pt;
+    transition: 0.2s;
+}
+a.access-rights:hover{
+    color: ivory;
+    background-color: #415b88;
+    box-shadow: black inset 2px 1px 4px;
+    text-shadow: #1a1e21 2px 2px;
+    transition: 0.2s;
+}
+table{
+    width: 30%;
+}
 tr{
-    width: 40%;
+    width: 20%;
 }
 .name{
     color:whitesmoke;

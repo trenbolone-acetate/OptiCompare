@@ -1,0 +1,36 @@
+.login-form{
+    margin:auto;
+}
+button{
+    padding: 2%;
+    color: initial;
+    background-color: cornflowerblue;
+    font-size: large;
+    transition: 0.5s;
+    border: 0;
+    border-radius: 2pt;
+}
+button:hover{
+    box-shadow: black inset 2px 1px 4px;
+    background: rgb(109, 237, 111);
+    border-radius: 6pt;
+    transition: 0.5s;
+    text-shadow: cornflowerblue 1px 1px;
+}
+.form-floating{
+    margin-bottom:5%;
+}
+.form-floating input{
+    border: 2px solid #1a1e21;
+    transition: 0.5s;
+    background-color: #b3cdfb;
+}
+.form-floating input:active{
+    transition: 0.5s;
+    background-color: #2dff00;
+}
+.form-floating input:focus{
+    transition: 0.5s;
+    background-color: #c0fbb3;
+    border: 3px solid #79c567;
+}
