@@ -27,8 +27,6 @@ namespace OptiCompare.Controllers
             _phoneRepository = phoneRepository;
         }
         [AllowAnonymous]
-        [Route("Phones")]
-        [HttpGet]
         public async Task<IActionResult> Index(int? page, string? searchString)
         {
             const int pageSize = 7; 
@@ -41,24 +39,19 @@ namespace OptiCompare.Controllers
             return View(paginatedPhones);
         }
         [AllowAnonymous]
-        [Route("Details/{id:int}")]
-        [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        public Task<IActionResult> Details(int? id)
         {
             if (!id.HasValue)
             {
-                return NoPhoneFound();
+                return Task.FromResult(NoPhoneFound());
             }
 
-            var phone = await _phoneRepository.Get(id.Value);
-            if (phone == null)
-            {
-                return NoPhoneFound();
-            }
+            var phone = GetPhoneById(id.Value).Result;
 
-            return View(phone.ToPhoneDto());
+            return Task.FromResult<IActionResult>(View(phone.ToPhoneDto()));
         }
         [Authorize(Roles="Admin")]
+        [HttpPost]
         public IActionResult Create()
         {
             var newPhoneDto = new PhoneDto();
@@ -89,14 +82,14 @@ namespace OptiCompare.Controllers
                 await _phoneRepository.CreateFromSearch(searchString);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 switch (ex.Message)
                 {
                     case "1":
-                        return View("NoPhoneFoundAPI");
+                        return View("NoPhoneFound",searchString);
                     case "2":
-                        return View("PhoneExists");
+                        return View("PhoneExists",searchString);
                     default:
                         throw;
                 }
@@ -104,15 +97,15 @@ namespace OptiCompare.Controllers
         }
 
         [Authorize(Roles="Admin,Editor")]
-        public async Task<IActionResult> Edit(int? id)
+        public Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return Task.FromResult<IActionResult>(NotFound());
             }
 
-            var phone = await _phoneRepository.Get(id.Value);
-            return phone == null ? NotFound() : View(phone.ToPhoneDto());
+            var phone = GetPhoneById(id.Value).Result;
+            return Task.FromResult<IActionResult>(View(phone.ToPhoneDto()));
         }
         [Authorize(Roles="Admin,Editor")]
         [HttpPost]
@@ -126,11 +119,7 @@ namespace OptiCompare.Controllers
                 return NotFound();
             }
 
-            var phoneToUpdate = await _phoneRepository.Get(id);
-            if (phoneToUpdate == null)
-            {
-                return NotFound();
-            }
+            var phoneToUpdate = GetPhoneById(id).Result;
 
             phoneToUpdate.CopyDtoToPhone(phoneDto);
             try
@@ -151,11 +140,7 @@ namespace OptiCompare.Controllers
             {
                 return NotFound();
             }
-            var phone = await _phoneRepository.Get(id.Value);
-            if(phone == null)
-            {
-                return NotFound();
-            }
+            var phone = GetPhoneById(id.Value).Result;
 
             return View(phone.ToPhoneDto());
         }
@@ -164,14 +149,11 @@ namespace OptiCompare.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var phone = await _phoneRepository.Get(id);
-            if (phone != null)
-            {
-                await _phoneRepository.Remove(phone);
-            }
+            var phone = GetPhoneById(id).Result;
+            await _phoneRepository.Remove(phone);
             return RedirectToAction(nameof(Index));
         }
-        private IEnumerable<Phone> GetFilteredPhones(string? searchString)
+        private IEnumerable<Phone?> GetFilteredPhones(string? searchString)
         {
             var phones = _phoneRepository.GetAll();
             if (!string.IsNullOrEmpty(searchString))
@@ -179,6 +161,13 @@ namespace OptiCompare.Controllers
                 phones = phones.Where(ps => ps!.brandName!.Contains(searchString) || ps.modelName!.Contains(searchString));
             }
             return phones;
+        }
+        [Route("GetPhoneById/{id:int}")]
+        [Authorize]
+        [HttpGet]
+        public async Task<Phone> GetPhoneById(int id)
+        {
+            return await _phoneRepository.Get(id) ?? new Phone();
         }
     }
 }

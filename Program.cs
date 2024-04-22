@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.Authentication.Negotiate;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.Negotiate;    
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,15 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "OptiCompare API", Version = "v1" });
 });
+//Prevent infinity loop of references during de-/serialization
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<PhoneRepository>();
 
-// Set up controllers and views
 builder.Services.AddControllersWithViews();
 
 PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones:BearerToken"]);

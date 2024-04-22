@@ -1,98 +1,88 @@
 ﻿using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
 using OptiCompare.Models;
-using System.Net;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using OptiCompare.PhoneSpecs;
 
-namespace OptiCompare;
-
-public abstract class PhoneDetailsFetcher
+namespace OptiCompare
 {
-    private static string? _apiToken;
-    public static void SetApiToken(string? token) => _apiToken = token;
-
-    public static async Task<Phone?> CreateFromSearch(string searchedPhone)
+    public abstract class PhoneDetailsFetcher
     {
-        var phoneId = await GetPhoneId(searchedPhone);
-        if (phoneId == null)
-        {
-            return null;
-        }
+        private static string? _apiToken;
 
-        var result = await GetPhoneDetailsById(phoneId);
-        if (result == null)
-        {
-            return null;
-        }
+        public static void SetApiToken(string? token) => _apiToken = token;
 
-        var phone = Mappers.PhoneMapper.JsonToPhone(result);
-        return await Task.FromResult(phone);
-    }
-    
-    private static async Task<string?> GetPhoneId(string phone)
-    {
-        var client = new HttpClient();
-        var request = new HttpRequestMessage
+        public static async Task<Phone?> CreateFromSearch(string searchedPhone)
         {
-            Method = HttpMethod.Post,
-            RequestUri = new Uri($"https://api.techspecs.io/v4/product/search?query={phone}"),
-            Headers =
+            var phoneId = await GetPhoneId(searchedPhone);
+            if (phoneId == null)
             {
-                { "accept", "application/json" },
-                { "Authorization", $"Bearer {_apiToken}" },
-            },
-        };
-        try
-        {
-            using var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var body = await response.Content.ReadAsStringAsync();
-            JObject json = JObject.Parse(body);
-            JArray? items = (JArray)json["data"]?["items"]!;
-            string? firstId = (string)items[0]["product"]?["id"]!;
-            return firstId;
-        }
-        catch (HttpRequestException e)
-        {
-            Console.WriteLine("Failed to find searched phone's id through the API");
-            return null;
-        }
-    }
+                return null;
+            }
 
-    private static async Task<string?> GetPhoneDetailsById(string? phoneId)
-    {
-        var clientHandler = new HttpClientHandler
-        {
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-        };
-        var client = new HttpClient(clientHandler);
-        var request = new HttpRequestMessage
-        {
-            Method = HttpMethod.Get,
-            RequestUri = new Uri($"https://api.techspecs.io/v4/product/detail?productId={phoneId}"),
-            Headers =
+            var result = await GetPhoneDetailsById(phoneId);
+            if (result == null)
             {
-                { "accept", "application/json" },
-                { "Authorization", $"Bearer {_apiToken}" },
-            },
-        };
-        using var response = await client.SendAsync(request);
-        try
-        {
-            response.EnsureSuccessStatusCode();
-        }
-        catch (HttpRequestException e)
-        {
-            Console.WriteLine("Failed to find searched phone's details through the API");
-            return null;
+                return null;
+            }
+
+            var phone = Mappers.PhoneMapper.JsonToPhone(result);
+            return phone;
         }
 
-        var body = await response.Content.ReadAsStringAsync();
-        JObject json = JObject.Parse(body);
-        JObject? firstProduct = (JObject)json["data"]?["items"]?[0]!;
-        return firstProduct.ToString();
+        private static async Task<string?> GetPhoneId(string phone)
+        {
+            using var client = new HttpClient();
+            var requestUri = $"https://api.techspecs.io/v4/product/search?query={phone}";
+            try
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("accept", "application/json");
+                if (!string.IsNullOrEmpty(_apiToken))
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiToken}");
+                }
+
+                var response = await client.PostAsync(requestUri, null);
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                var json = JObject.Parse(body);
+                var items = (JArray?)json["data"]?["items"];
+                var firstId = items?[0]?["product"]?["id"]?.ToString();
+                return firstId;
+            }
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("Failed to find searched phone's id through the API");
+                return null;
+            }
+        }
+
+        private static async Task<string?> GetPhoneDetailsById(string? phoneId)
+        {
+            using var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate });
+            var requestUri = $"https://api.techspecs.io/v4/product/detail?productId={phoneId}";
+            try
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("accept", "application/json");
+                if (!string.IsNullOrEmpty(_apiToken))
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiToken}");
+                }
+
+                var response = await client.GetAsync(requestUri);
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                var json = JObject.Parse(body);
+                var firstProduct = (JObject?)json["data"]?["items"]?[0];
+                return firstProduct?.ToString();
+            }
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("Failed to find searched phone's details through the API");
+                return null;
+            }
+        }
     }
-
-    
 }
