@@ -33,7 +33,6 @@ nav {
     background: linear-gradient(#6a6a6a,#838383,#6a6a6a);
     box-shadow: 1px 1px 10px black;
     font-weight: bold;
-    border-radius: 10pt;
 }
 a{
     overflow: hidden;
