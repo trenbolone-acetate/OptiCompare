@@ -51,7 +51,6 @@ namespace OptiCompare.Controllers
             return Task.FromResult<IActionResult>(View(phone.ToPhoneDto()));
         }
         [Authorize(Roles="Admin")]
-        [HttpPost]
         public IActionResult Create()
         {
             var newPhoneDto = new PhoneDto();
