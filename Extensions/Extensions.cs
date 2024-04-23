@@ -1,4 +1,5 @@
-﻿using OptiCompare.DTOs;
+﻿using System.Text.RegularExpressions;
+using OptiCompare.DTOs;
 using OptiCompare.Models;
 using OptiCompare.PhoneSpecs;
 
@@ -9,6 +10,13 @@ public static class Extensions
     public static string GetConnectionString(this WebApplicationBuilder builder)
     {
         return builder.Configuration["phoneDB:ConStr"];
+    }
+    public static IEnumerable<int> GetNumbers(this string str)
+    {
+        var numbers = Regex
+            .Matches(str, @"-?\d+")
+            .Select(m => Int32.Parse(m.Value));
+        return numbers;
     }
     public static void CopyDtoToPhone(this Phone target, PhoneDto phoneDto) {
         target.Id = phoneDto.Id;

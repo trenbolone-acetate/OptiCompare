@@ -10,6 +10,7 @@ using OptiCompare.Data;
 using OptiCompare.Extensions;
 using OptiCompare.Models;
 using OptiCompare.Repositories;
+using OptiCompare.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +24,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<PhoneRepository>();
+builder.Services.AddScoped<PhoneRepository, PhoneRepository>();
+builder.Services.AddScoped(typeof(IRepository<Phone>), typeof(PhoneRepository));
+builder.Services.AddScoped<IRepository<Phone>>(provider => provider.GetRequiredService<PhoneRepository>());
+builder.Services.AddScoped<IPhoneService, PhoneService>();
 
 builder.Services.AddControllersWithViews();
 

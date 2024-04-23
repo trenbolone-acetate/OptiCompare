@@ -19,12 +19,12 @@ public class Phone
     public BodyDimensions bodyDimensions { get; set; } = new();
     public DisplayDetails displayDetails { get; set; } = new();    
     public PlatformDetails platformDetails { get; set; } = new();
-
+    [Required]
     [MaxLength(200)]
     public string? storage { get; set; }
     public CameraDetails cameraDetails { get; set; } = new();
     public BatteryDetails batteryDetails { get; set; } = new();
-
+    [Required]
     [MaxLength(50)]
     public string? price{ get; set; }
     [MaxLength(200)]

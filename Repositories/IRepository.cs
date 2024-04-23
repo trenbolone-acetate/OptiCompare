@@ -1,10 +1,15 @@
+using OptiCompare.Models;
+
 namespace OptiCompare.Repositories;
 
 public interface IRepository<T> where T : class
 {
-    Task<T?> Get(int id);
+    Task CreateFromSearch(string searchString);
+    Task<T?> Get(int? id);
     IEnumerable<T?> GetAll();
-    Task Add(T? entity);
-    Task Update(T? entity);
-    Task Remove(T obj);
+    Task<bool> Add(T? entity);
+    Task<bool> Update(T? entity);
+    Task<bool> Remove(T obj);
+    IQueryable<T> GetEntities();
+
 }

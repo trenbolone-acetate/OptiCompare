@@ -1,3 +1,5 @@
+using OptiCompare.Models;
+
 namespace OptiCompare.DTOs;
 
 public class PhoneDto
