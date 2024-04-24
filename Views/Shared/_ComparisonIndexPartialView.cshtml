@@ -42,7 +42,7 @@
     <td>@(Html.DisplayFor(modelItem => Model!.displayDetails.displaySize)).</td>
   </tr>
   <tr>
-    <td>@(Html.DisplayFor(modelItem => Model!.displayDetails.displayResolution)).</td>
+    <td class="resolution">@(Html.DisplayFor(modelItem => Model!.displayDetails.displayResolution)).</td>
   </tr>
   <tr>
     <td>@(Html.DisplayFor(modelItem => Model!.displayDetails.displayProtection)).</td>
@@ -57,7 +57,7 @@
     <td>@(Html.DisplayFor(modelItem => Model!.platformDetails.os)).</td>
   </tr>
   <tr>
-    <td>@(Html.DisplayFor(modelItem => Model!.platformDetails.ram)).</td>
+    <td class="ram">@(Html.DisplayFor(modelItem => Model!.platformDetails.ram)).</td>
   </tr>
   <tr>
     <td>@(Html.DisplayFor(modelItem => Model!.cameraDetails.mainCameraDetails)).</td>
@@ -66,10 +66,10 @@
     <td>@(Html.DisplayFor(modelItem => Model!.cameraDetails.frontCameraDetails)).</td>
   </tr>
   <tr>
-    <td>@(Html.DisplayFor(modelItem => Model!.batteryDetails.batteryCapacity)).</td>
+    <td class="battery-capacity">@(Html.DisplayFor(modelItem => Model!.batteryDetails.batteryCapacity)).</td>
   </tr>
   <tr>
-    <td>@(Html.DisplayFor(modelItem => Model!.batteryDetails.chargingSpeed)).</td>
+    <td class="charging-speed">@(Html.DisplayFor(modelItem => Model!.batteryDetails.chargingSpeed)).</td>
   </tr>
   <tr>
     <td>@(Html.DisplayFor(modelItem => Model!.batteryDetails.batteryLifeTest)).</td>
