@@ -48,26 +48,27 @@ function setColor(className) {
         const num = getNumbers($(this).text())[0];
         if(num === minNum){
             //red
-            backgroundColor = '#fc8080';
+            backgroundColor = '#FC8080';
         }
         if(num > minNum && num <= minAvgAvg){
             //lightred
-            backgroundColor = '#eea9a9';
+            backgroundColor = '#F7ACAC';
         }
         if(num >= maxAvgAvg && num < maxNum){
             //lightgreen
-            backgroundColor = '#b4fbbb';
+            backgroundColor = '#B8ECB0';
         }
         if(num === maxNum){
             //green
-            backgroundColor = '#9dea90';
+            backgroundColor = '#9DEA90';
         }
         if(num > minAvgAvg && num < maxAvgAvg){
             //yellow
-            backgroundColor = '#dbc4af';
+            backgroundColor = '#F4E09F';
         }
         $(this).css('background-color', backgroundColor);
-        $(this).css('box-shadow', 'inset 0 2px 4px 0 rgba(0, 0, 0, .5)')
+        $(this).css('color', 'black');
+        $(this).css('box-shadow', 'inset 0px 4px 3px rgba(50, 50, 50, 0.75)')
     });
 }
 function setColor5G(){
@@ -90,13 +91,15 @@ function setColor5G(){
             const td = el.parentNode;
             //green
             if(el.checked){
-                td.style.backgroundColor = "#b4fbbb";
-                td.style.boxShadow = "inset 0 2px 4px 0 rgba(0, 0, 0, .5)";
+                td.style.backgroundColor = "#9DEA90";
+                td.style.color = "black";
+                td.style.boxShadow = "inset 0px 4px 3px rgba(50, 50, 50, 0.75)";
             }
             //red
             if(!el.checked){
-                td.style.backgroundColor = "#eea9a9";
-                td.style.boxShadow = "inset 0 2px 4px 0 rgba(0, 0, 0, .5)";
+                td.style.backgroundColor = "#FC8080";
+                td.style.color = "black";
+                td.style.boxShadow = "inset 0px 4px 3px rgba(50, 50, 50, 0.75)";
             }
         });
     }

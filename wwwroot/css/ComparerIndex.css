@@ -1,9 +1,10 @@
 ﻿table {
-    margin: 1% 0 1% 0;
+    color: black;
     width: 20%;
+    border:2px solid #26242a;
     border-collapse: collapse;
     background: darkgray;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .5);
+    box-shadow:inset 0 1px 10px 0 rgba(0, 0, 0, .5);
 }
 .specName-table tr > td:first-child {
     text-align: center;
@@ -15,15 +16,20 @@ tbody > tr:first-child {
     height: 100pt;
     background-color: rgba(239, 239, 239, 0.4);
     color: rebeccapurple;
-}
+} 
 tr{
     font-size: medium;
     height: 40pt;
 }
 td {
+    transition: 0.5s;
     border: 1px solid black;
-    margin: 2%;
     text-align: center;
+}
+td:hover{
+    transition: 0.5s;
+    background: #676666;
+    color: ivory;
 }
 img{
     border:1px solid black;
