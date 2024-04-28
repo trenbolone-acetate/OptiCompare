@@ -8,6 +8,7 @@ namespace OptiCompare;
 
 public class CustomLogger
 {
+    private bool _isFirst = true;
     private readonly string _path;
     private readonly Logger _logger;
 
@@ -15,9 +16,9 @@ public class CustomLogger
     {
         _path = path;
         _logger = new LoggerConfiguration()
-            .WriteTo.File(new RenderedCompactJsonFormatter(),
+            .WriteTo.File(new JsonFormatter(),
                 path, 
-                rollingInterval:RollingInterval.Day,
+                rollingInterval:RollingInterval.Hour,
                 fileSizeLimitBytes: 50000000)
             .CreateLogger();
     }
