@@ -15,7 +15,7 @@ This intuitive platform empowers users to make informed decisions by providing a
 ![image](https://github.com/trenbolone-acetate/OptiCompare/assets/117907678/32476a78-7d8f-4dba-881e-c1ba544d60a8)
 
 ## Side-by-side comparison🔀
-![image](https://github.com/trenbolone-acetate/OptiCompare/assets/117907678/e393edd8-d267-4e9d-bd30-a091cb7b6126)
+![firefox_OHCi8A0XPY](https://github.com/trenbolone-acetate/OptiCompare/assets/117907678/41647a8c-2fb7-4fc6-a94a-6d46079b5175)
 
 ## Admin and Editor can add smartphones to the List➕
 ![image](https://github.com/trenbolone-acetate/OptiCompare/assets/117907678/0b6fc184-1841-495f-8e86-a68f8c9ddf6d)
