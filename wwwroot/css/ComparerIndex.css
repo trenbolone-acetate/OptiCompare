@@ -6,10 +6,32 @@
     background: darkgray;
     box-shadow:inset 0 1px 10px 0 rgba(0, 0, 0, .5);
 }
+.specName-table{
+    width: 12%;
+    float:left;
+}
 .specName-table tr > td:first-child {
     text-align: center;
     background-color: rgba(239, 239, 239, 0.4);
     color: rebeccapurple;
+}
+#phones{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+#phones{
+    max-width: 100%;
+}
+#phones:active {
+}
+#phones img{
+    max-width: 200px;
+}
+#phones table{
+    max-width: 20%;
+    white-space: nowrap;
 }
 tbody > tr:first-child {
     font-size: xx-large;
@@ -33,4 +55,120 @@ td:hover{
 }
 img{
     border:1px solid black;
+}
+a{
+    color:white;
+}
+a.disabled {
+    text-decoration: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}
+#right-bttn{
+    position: fixed;
+    right: 4%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    cursor:pointer;
+    transition:0.5s;
+    overflow:hidden;
+}
+#left-bttn{
+    position: fixed;
+    left: 4%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    cursor:pointer;
+    transition:0.5s;
+    overflow:hidden;
+}
+#left-bttn:hover, #right-bttn:hover {
+    border-radius:50%;
+}
+
+#left-bttn:before{
+    position:absolute;
+    display:block;
+    content:"";
+    color:white;
+    width: 20px;
+    height: 20px;
+    border-top:solid 2px;
+    border-left:solid 2px;
+    top:50%;
+    left:50%;
+    transform-origin:0% 0%;
+    transform:rotatez(-45deg);
+}
+#right-bttn:before{
+    position:absolute;
+    display:block;
+    content:"";
+    color:white;
+    width: 20px;
+    height: 20px;
+    border-top:solid 2px;
+    border-left:solid 2px;
+    top:50%;
+    left:50%;
+    transform-origin:0% 0%;
+    transform:rotatez(135deg);
+}
+#left-bttn:hover:before{
+    animation: aniArrowLeft 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.1s;
+}
+#left-bttn:hover:after{
+    animation: aniArrowLeft2 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.1s;
+}
+#right-bttn:hover:before{
+    animation: aniArrowRight 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+#right-bttn:hover:after{
+    animation: aniArrowRight2 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+@keyframes aniArrowLeft {
+    0% {
+        transform:rotatez(-45deg) translateY(30px) translateX(30px);
+    }
+    100% {
+        transform: rotatez(-45deg) translateY(-35px) translateX(-35px);
+    }
+}
+@keyframes aniArrowRight {
+    0% {
+        transform:rotatez(135deg) translateY(30px) translateX(30px);
+    }
+    100% {
+        transform: rotatez(135deg) translateY(-35px) translateX(-35px);
+    }
+}
+
+
+@keyframes aniArrowLeft2 {
+    0% {
+        transform:translateX(45px);
+    }
+    100% {
+        transform:translateX(-44px);
+    }
+}
+@keyframes aniArrowRight2 {
+    0% {
+        transform:translateX(45px);
+    }
+    100% {
+        transform:translateX(-44px);
+    }
+}
+
+@keyframes borderAni{
+    0% {
+        border:solid 2px white;
+    }
+    100% {
+        border:solid 2px white;
+    }
 }

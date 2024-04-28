@@ -16,6 +16,7 @@ namespace OptiCompare.Controllers;
 
 public class CompareController : Controller
 {
+    private const int MaxPhonesToCompare = 6;
     private const string ViewPath = "~/Views/Comparison/Index.cshtml";
 
     private PhoneComparer? _phoneComparer = new()
@@ -61,9 +62,9 @@ public class CompareController : Controller
                 Console.WriteLine("Deserialization of PhoneComparer failed.");
                 return View(ViewPath);
             }
-            if (_phoneComparer.dtoPhones!.Count > 3)
+            if (_phoneComparer.dtoPhones!.Count > MaxPhonesToCompare)
             {
-                TempData["Message"] = "Cannot compare more than 4 phones!";
+                TempData["Message"] = $"Cannot compare more than {MaxPhonesToCompare} phones!";
                 TempData["PhoneComparer"] = JsonConvert.SerializeObject(_phoneComparer);
                 return RedirectToAction(nameof(Index));
             }

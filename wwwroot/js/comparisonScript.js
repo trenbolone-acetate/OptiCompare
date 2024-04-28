@@ -19,6 +19,51 @@ $(document).ready(function() {
         setColor("resolution");
         setColor("charging-speed");
     }
+    //scrolling section
+    const phonesDiv = document.getElementById('phones');
+    const leftBttn = document.getElementById('left-bttn');
+    const rightBttn = document.getElementById('right-bttn');
+
+    //scroll to beginning
+    leftBttn.onclick = function(e) {
+        if(leftBttn.classList.contains('disabled')) {
+            e.preventDefault();  // Prevent the default action
+        } else {
+            phonesDiv.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+    }
+
+    //scroll to end
+    rightBttn.onclick = function(e) {
+        if(rightBttn.classList.contains('disabled')) {
+            e.preventDefault();  // Prevent the default action
+        } else {
+            phonesDiv.scrollTo({ left: phonesDiv.scrollWidth - phonesDiv.clientWidth, behavior: 'smooth' });
+        }
+    }
+
+    //scroll behavior
+    phonesDiv.onscroll = function() {
+        // start-scroll check
+        if (phonesDiv.scrollLeft === 0) {
+            leftBttn.classList.add('disabled');
+            phonesDiv.classList.remove('boxShadowLeft');
+        } else {
+            leftBttn.classList.remove('disabled');
+            phonesDiv.classList.add('boxShadowLeft');
+        }
+
+        // end-scroll check
+        if (phonesDiv.scrollLeft + phonesDiv.clientWidth >= phonesDiv.scrollWidth) {
+            rightBttn.classList.add('disabled');
+            phonesDiv.classList.remove('boxShadowRight');
+        } else {
+            rightBttn.classList.remove('disabled');
+            phonesDiv.classList.add('boxShadowRight');
+        }
+    }
+
+    phonesDiv.onscroll(undefined);
 });
 
 function getNumbers(str) {

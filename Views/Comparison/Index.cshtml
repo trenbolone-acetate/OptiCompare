@@ -14,7 +14,7 @@
         alert("@TempData["Message"]?.ToString()");
     </script>
 }
-<div style="display: flex; flex-direction: row; flex-wrap:  wrap;">
+<a id="left-bttn"></a>
   <table class="specName-table">
     <tbody>
     <tr>
@@ -97,6 +97,7 @@
     </tr>
     </tbody>
   </table>
+<div id="phones">
   @{
     if (Model?.dtoPhones != null)
     {
@@ -107,3 +108,4 @@
     }
   }
 </div>
+<a id="right-bttn"></a>
