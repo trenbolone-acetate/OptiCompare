@@ -7,7 +7,7 @@ using Microsoft.Playwright;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class Tests : PageTest
+public class OptiCompareTests : PageTest
 {
     [Test]
     public async Task HomeToPhonesListCheckFirstPhone()
