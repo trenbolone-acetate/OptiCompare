@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptiCompareTests", "..\OptiCompareTests\OptiCompareTests.csproj", "{470DC9A7-8CF9-413E-9201-896DB3EC6FBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{25F3A7FF-F63D-4411-B305-4C2D438A60DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25F3A7FF-F63D-4411-B305-4C2D438A60DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25F3A7FF-F63D-4411-B305-4C2D438A60DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{470DC9A7-8CF9-413E-9201-896DB3EC6FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{470DC9A7-8CF9-413E-9201-896DB3EC6FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{470DC9A7-8CF9-413E-9201-896DB3EC6FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{470DC9A7-8CF9-413E-9201-896DB3EC6FBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

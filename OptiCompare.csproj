@@ -71,7 +71,6 @@
     <Content Include="obj\Debug\net6.0\staticwebassets.development.json" />
     <Content Include="obj\rider.project.model.nuget.info" />
     <Content Include="obj\staticwebassets.pack.sentinel" />
-    <Content Include="OptiCompare.csproj.DotSettings.user" />
     <Content Remove="obj\**" />
   </ItemGroup>
 

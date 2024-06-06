@@ -67,7 +67,8 @@ $(document).ready(function() {
 });
 
 function getNumbers(str) {
-    return str.match(/-?\d+/g).map(Number);
+    const numbers = str.match(/-?\d+/g);
+    return numbers ? numbers.map(Number) : [0];
 }
 
 function setColor(className) {

@@ -31,7 +31,7 @@ builder.Services.AddScoped<IPhoneService, PhoneService>();
 
 builder.Services.AddControllersWithViews();
 
-PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones:BearerToken"]);
+PhoneDetailsFetcher.SetApiToken(builder.Configuration["phones_BearerToken"]);
 
 var connectionString = builder.GetConnectionString();
 

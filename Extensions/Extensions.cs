@@ -9,7 +9,7 @@ public static class Extensions
 {
     public static string GetConnectionString(this WebApplicationBuilder builder)
     {
-        return builder.Configuration["phoneDB:ConStr"];
+        return builder.Configuration["phoneDB_Con_Str"];
     }
     public static IEnumerable<int> GetNumbers(this string str)
     {
