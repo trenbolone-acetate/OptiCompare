@@ -1,6 +1,9 @@
-using Microsoft.Playwright;
+using System.Text.RegularExpressions;
+using Microsoft.Playwright.NUnit;
+using NUnit.Framework;
 
-namespace OptiCompareTests;
+namespace OptiCompare.OptiCompareTests;
+using Microsoft.Playwright;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
